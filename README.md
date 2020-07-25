@@ -8,13 +8,13 @@ This product requires Linux. We use RH based distributions (RedHat Enterprise Li
 We are using the /usr/local/src/omnissiah directory for the sources. You can use any other directory, but then you have to change the commands.\
 If you have git on your system, then use the commands to download:
 ```
-mkdir /usr/local/src/omnissiah\
-git clone https://github.com/DeusMechanicus/Omnissiah /usr/local/src/omnissiah\
+mkdir /usr/local/src/omnissiah
+git clone https://github.com/DeusMechanicus/Omnissiah /usr/local/src/omnissiah
 ```
 or you can use wget:
 ```
-mkdir /usr/local/src/omnissiah\
-cd /usr/local/src/omnissiah\
-wget -O - https://github.com/DeusMechanicus/Omnissiah/archive/master.tar.gz | tar xz --strip-components=1\
+mkdir /usr/local/src/omnissiah
+cd /usr/local/src/omnissiah
+wget -O - https://github.com/DeusMechanicus/Omnissiah/archive/master.tar.gz | tar xz --strip-components=1
 ```
 ## Installation
