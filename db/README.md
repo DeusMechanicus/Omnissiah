@@ -1,4 +1,1 @@
-# Omnissiah
-This project was born out of a real working system that is responsible for monitoring a large network of more than one hundred thousand devices. Zabbix is used as a monitoring system, but this project is not about Zabbix, or rather, not only about Zabbix.
-We had a problem how to collect and enter information about such a number of hosts into the chosen monitoring platform. And this must be done more than once. It is necessary to keep it up to date and make changes. We get information about hosts from different sources - from network scans, from various APIs, from manually filled tables.	The received data is saved to the database. Further, using SQL, small programs and neural networks, they are filtered and processed. The ultimate goal is to understand what a particular host is - type, manufacturer, model, and so on.
-The resulting database is valuable in itself. But the ultimate goal is to automatically create and update hosts in Zabbix along with group memberships and group/statistical hosts.
+# Database
