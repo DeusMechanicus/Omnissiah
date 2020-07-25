@@ -13,20 +13,20 @@ The files are listed in the order you should run them:
 No database or tables are dropped in these files. If you have not a new installation, then you need to delete the old tables, the old database or use a different database.
 ## Database creation
 run command
-'''
+```
 mysql -h <host> -u <username> -p<password> < db.sql
-'''
+```
 example for local server
-'''
+```
 mysql -h localhost -u root -p < db.sql
-'''
+```
 ## Tables creation
 run coomand
-'''
+```
 mysql -h <host> -u <username> -p<password> <database> < <filename>
-'''
+```
 for every filename. Example for local server and omnissiah database
-'''
+```
 mysql -h localhost -u root -p omnissiah < ref.sql
 mysql -h localhost -u root -p omnissiah < raw.sql
 mysql -h localhost -u root -p omnissiah < src.sql
@@ -35,4 +35,4 @@ mysql -h localhost -u root -p omnissiah < main.sql
 mysql -h localhost -u root -p omnissiah < hist.sql
 mysql -h localhost -u root -p omnissiah < zbx.sql
 mysql -h localhost -u root -p omnissiah < ref_data.sql
-'''
+```
