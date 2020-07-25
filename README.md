@@ -20,8 +20,8 @@ wget -O - https://github.com/DeusMechanicus/Omnissiah/archive/master.tar.gz | ta
 ## Installation
 
 ## Directories
-*code - project code
-*db - SQL commands for creating the structure of the database and filling the reference tables.
-*docs - documentation and manuals
+* code - project code
+* db - SQL commands for creating the structure of the database and filling the reference tables.
+* docs - documentation and manuals
 ## Documentation
 The documentation and manuals are located in the docs directory.
