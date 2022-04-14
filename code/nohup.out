@@ -1,0 +1,948 @@
+124235
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+-n -T4 --host-timeout 120s -Pn -sS -p554,9998,8000,8080,7000,5000,9100,3910,23,18301,41794,41795,53,9010,9000,445,9090,2121,3283,7262,502,7070,9761,10001,389,902,2002,1723,9001,9999,636,5001,1689,25,593,49156,2103,4001,1801,6000,113,79,943,587,6002,647,2003,5353
+-n -T4 --host-timeout 120s -Pn -sS -p443,9997,8200,5443,2000,880,515,1100,179,5900,9164,322,4352,6783,843,1702,5061,8888,49153,61451,10000,67,2001,427,623,111,5432,49155,548,514,1023,8009,5009,464,2105,161,90,215,2049,22022,4522,81,2005,873,8002,830,2869
+-n -T4 --host-timeout 120s -Pn -sU -p53,67,68,69,111,123,137,161,389,427,443,500,623,2049,3283,3702,5002,5353,8611,8612,445
+124235
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+-n -T5 --host-timeout 780s -Pn -sS --script ssl-cert,ssl-date,ssl-enum-ciphers,sslv2 -pT:443,631,5443,5061,8443,9997,9998,49152,322
+-n -T4 --host-timeout 420s -Pn -sS --script ssh-auth-methods,ssh-hostkey,ssh2-enum-algos,sshv1 --script-args ssh_hostkey=visual -pT:22
+-n -T5 --host-timeout 1200s -Pn -sS --script rtsp-url-brute -pT:554,322
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+-n -T4 --host-timeout 120s -Pn -sS -sU --script upnp-info -pT:5000,U:1900
+-n -T4 --host-timeout 120s -Pn -sS --script pjl-ready-message -pT:9100
+-n -T4 --host-timeout 120s -Pn -sS --script banner --script-args banner.timeout=4s -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script telnet-encryption -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script vnc-info,vnc-title -pT:5900
+-n -T4 --host-timeout 120s -Pn -sS --script ftp-anon,ftp-bounce,ftp-syst -pT:21
+-n -T4 --host-timeout 120s -Pn -sS -sU --script dns-nsid,dns-recursion,dns-service-discovery -pT:53,5353,U:53,5353
+-n -T5 --host-timeout 720s -Pn -sS -sU --script nbstat,smb-enum-shares,smb-mbenum,smb-os-discovery,smb-protocols,smb-security-mode,smb2-capabilities,smb2-security-mode -pT:137,139,445,U:137,139,445
+-n -T4 --host-timeout 840s -Pn -sS --script modbus-discover -pT:502
+-n -T4 --host-timeout 120s -Pn -sS --script afp-serverinfo -pT:548
+-n -T4 --host-timeout 240s -Pn -sS --script rsync-list-modules -pT:873
+-n -T4 --host-timeout 240s -Pn -sU --script ntp-info -pU:123
+-n -T4 --host-timeout 120s -Pn -sS -sU --script rpcinfo,rpc-grind -pT:111,U:111
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ldap-rootdse -pT:389,636,U:389,636
+-n -T5 --host-timeout 1500s -Pn -sU --script snmp-brute,snmp-info,snmp-sysdescr,snmp-netstat,snmp-processes,snmp-interfaces --script-args brute.firstonly=true,snmp-brute.communitiesdb=/usr/local/share/omnissiah/communities.nmap -pU:161
+Traceback (most recent call last):
+  File "/usr/local/lib/omnissiah/./raw_map.py", line 219, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/omnissiah/./raw_map.py", line 209, in main
+    save_scripts(omnidb, ips, scans, program.log)
+  File "/usr/local/lib/omnissiah/./raw_map.py", line 179, in save_scripts
+    cur.executemany(insert_scan_scripts_sql, vallist)
+mariadb.InterfaceError
+124235
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+-n -T5 --host-timeout 780s -Pn -sS --script ssl-cert,ssl-date,ssl-enum-ciphers,sslv2 -pT:443,631,5443,5061,8443,9997,9998,49152,322
+-n -T4 --host-timeout 420s -Pn -sS --script ssh-auth-methods,ssh-hostkey,ssh2-enum-algos,sshv1 --script-args ssh_hostkey=visual -pT:22
+-n -T5 --host-timeout 1200s -Pn -sS --script rtsp-url-brute -pT:554,322
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+-n -T4 --host-timeout 120s -Pn -sS -sU --script upnp-info -pT:5000,U:1900
+-n -T4 --host-timeout 120s -Pn -sS --script pjl-ready-message -pT:9100
+-n -T4 --host-timeout 120s -Pn -sS --script banner --script-args banner.timeout=4s -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script telnet-encryption -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script vnc-info,vnc-title -pT:5900
+-n -T4 --host-timeout 120s -Pn -sS --script ftp-anon,ftp-bounce,ftp-syst -pT:21
+-n -T4 --host-timeout 120s -Pn -sS -sU --script dns-nsid,dns-recursion,dns-service-discovery -pT:53,5353,U:53,5353
+-n -T5 --host-timeout 720s -Pn -sS -sU --script nbstat,smb-enum-shares,smb-mbenum,smb-os-discovery,smb-protocols,smb-security-mode,smb2-capabilities,smb2-security-mode -pT:137,139,445,U:137,139,445
+-n -T4 --host-timeout 840s -Pn -sS --script modbus-discover -pT:502
+-n -T4 --host-timeout 120s -Pn -sS --script afp-serverinfo -pT:548
+-n -T4 --host-timeout 240s -Pn -sS --script rsync-list-modules -pT:873
+-n -T4 --host-timeout 240s -Pn -sU --script ntp-info -pU:123
+-n -T4 --host-timeout 120s -Pn -sS -sU --script rpcinfo,rpc-grind -pT:111,U:111
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ldap-rootdse -pT:389,636,U:389,636
+-n -T5 --host-timeout 1500s -Pn -sU --script snmp-brute,snmp-info,snmp-sysdescr,snmp-netstat,snmp-processes,snmp-interfaces --script-args brute.firstonly=true,snmp-brute.communitiesdb=/usr/local/share/omnissiah/communities.nmap -pU:161
+124235
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+Traceback (most recent call last):
+  File "/usr/local/lib/omnissiah/./raw_map.py", line 4, in <module>
+    import omni_config
+  File "/usr/local/lib/omnissiah/omni_config.py", line 140
+    ]
+    ^
+SyntaxError: unmatched ']'
+124235
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+-n -T5 --host-timeout 780s -Pn -sS --script ssl-cert,ssl-date,ssl-enum-ciphers,sslv2 -pT:443,631,5443,5061,8443,9997,9998,49152,322
+-n -T4 --host-timeout 420s -Pn -sS --script ssh-auth-methods,ssh-hostkey,ssh2-enum-algos,sshv1 --script-args ssh_hostkey=visual -pT:22
+-n -T5 --host-timeout 1200s -Pn -sS --script rtsp-url-brute -pT:554,322
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+-n -T4 --host-timeout 120s -Pn -sS -sU --script upnp-info -pT:5000,U:1900
+-n -T4 --host-timeout 120s -Pn -sS --script pjl-ready-message -pT:9100
+-n -T4 --host-timeout 120s -Pn -sS --script banner --script-args banner.timeout=4s -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script telnet-encryption -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script vnc-info,vnc-title -pT:5900
+-n -T4 --host-timeout 120s -Pn -sS --script ftp-anon,ftp-bounce,ftp-syst -pT:21
+-n -T4 --host-timeout 240s -Pn -sS -sU --script dns-nsid,dns-recursion,dns-service-discovery,mdns-service-discovery -pT:53,5353,U:53,5353
+-n -T5 --host-timeout 720s -Pn -sS -sU --script nbstat,smb-enum-shares,smb-mbenum,smb-os-discovery,smb-protocols,smb-security-mode,smb2-capabilities,smb2-security-mode -pT:137,139,445,U:137,139,445
+-n -T4 --host-timeout 840s -Pn -sS --script modbus-discover -pT:502
+-n -T4 --host-timeout 120s -Pn -sS --script afp-serverinfo -pT:548
+-n -T4 --host-timeout 240s -Pn -sS --script rsync-list-modules -pT:873
+-n -T4 --host-timeout 240s -Pn -sU --script ntp-info -pU:123
+-n -T4 --host-timeout 120s -Pn -sS -sU --script rpcinfo,rpc-grind -pT:111,U:111
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ldap-rootdse -pT:389,636,U:389,636
+-n -T5 --host-timeout 1500s -Pn -sU --script snmp-brute,snmp-info,snmp-sysdescr,snmp-netstat,snmp-processes,snmp-interfaces --script-args brute.firstonly=true,snmp-brute.communitiesdb=/usr/local/share/omnissiah/communities.nmap -pU:161
+77103
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+Traceback (most recent call last):
+  File "/usr/local/lib/omnissiah/./raw_map.py", line 4, in <module>
+    import omni_config
+  File "/usr/local/lib/omnissiah/omni_config.py", line 111
+    max_script_value_len = 16000
+                         ^
+SyntaxError: invalid syntax
+77103
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+-n -T4 --host-timeout 120s -Pn -sS -p554,9998,8000,8080,7000,5000,9100,3910,23,18301,41794,41795,53,9010,9000,445,9090,2121,3283,7262,502,7070,9761,10001,389,902,2002,1723,9001,9999,636,5001,1689,25,593,49156,2103,4001,1801,6000,113,79,943,587,6002,647,2003,5353
+-n -T4 --host-timeout 120s -Pn -sS -p443,9997,8200,5443,2000,880,515,1100,179,5900,9164,322,4352,6783,843,1702,5061,8888,49153,61451,10000,67,2001,427,623,111,5432,49155,548,514,1023,8009,5009,464,2105,161,90,215,2049,22022,4522,81,2005,873,8002,830,2869
+-n -T4 --host-timeout 120s -Pn -sU -p53,67,68,69,111,123,137,161,389,427,443,500,623,1900,2049,3283,3702,5002,5353,8611,8612,445
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+77103
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+-n -T5 --host-timeout 780s -Pn -sS --script ssl-cert,ssl-date,ssl-enum-ciphers,sslv2 -pT:443,631,5443,5061,8443,9997,9998,49152,322
+-n -T4 --host-timeout 420s -Pn -sS --script ssh-auth-methods,ssh-hostkey,ssh2-enum-algos,sshv1 --script-args ssh_hostkey=visual -pT:22
+-n -T5 --host-timeout 1200s -Pn -sS --script rtsp-url-brute -pT:554,322
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+-n -T4 --host-timeout 120s -Pn -sS -sU --script upnp-info -pT:5000,U:1900
+-n -T4 --host-timeout 120s -Pn -sS --script pjl-ready-message -pT:9100
+-n -T4 --host-timeout 120s -Pn -sS --script banner --script-args banner.timeout=4s -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script telnet-encryption -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script vnc-info,vnc-title -pT:5900
+-n -T4 --host-timeout 120s -Pn -sS --script ftp-anon,ftp-bounce,ftp-syst -pT:21
+-n -T4 --host-timeout 240s -Pn -sS -sU --script dns-nsid,dns-recursion,dns-service-discovery,mdns-service-discovery -pT:53,5353,U:53,5353
+-n -T5 --host-timeout 720s -Pn -sS -sU --script nbstat,smb-enum-shares,smb-mbenum,smb-os-discovery,smb-protocols,smb-security-mode,smb2-capabilities,smb2-security-mode -pT:137,139,445,U:137,139,445
+-n -T4 --host-timeout 840s -Pn -sS --script modbus-discover -pT:502
+-n -T4 --host-timeout 120s -Pn -sS --script afp-serverinfo -pT:548
+-n -T4 --host-timeout 240s -Pn -sS --script rsync-list-modules -pT:873
+-n -T4 --host-timeout 240s -Pn -sU --script ntp-info -pU:123
+-n -T4 --host-timeout 120s -Pn -sS -sU --script rpcinfo,rpc-grind -pT:111,U:111
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ldap-rootdse -pT:389,636,U:389,636
+-n -T5 --host-timeout 1500s -Pn -sU --script snmp-brute,snmp-info,snmp-sysdescr,snmp-netstat,snmp-processes,snmp-interfaces --script-args brute.firstonly=true,snmp-brute.communitiesdb=/usr/local/share/omnissiah/communities.nmap -pU:161
+77300
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+-n -T4 --host-timeout 120s -Pn -sS -p554,9998,8000,8080,7000,5000,9100,3910,23,18301,41794,41795,53,9010,9000,445,9090,2121,3283,7262,502,7070,9761,10001,389,902,2002,1723,9001,9999,636,5001,1689,25,593,49156,2103,4001,1801,6000,113,79,943,587,6002,647,2003,5353
+-n -T4 --host-timeout 120s -Pn -sS -p443,9997,8200,5443,2000,880,515,1100,179,5900,9164,322,4352,6783,843,1702,5061,8888,49153,61451,10000,67,2001,427,623,111,5432,49155,548,514,1023,8009,5009,464,2105,161,90,215,2049,22022,4522,81,2005,873,8002,830,2869
+-n -T4 --host-timeout 120s -Pn -sU -p53,67,68,69,111,123,137,161,389,427,443,500,623,1900,2049,3283,3702,5002,5353,8611,8612,445,5060
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+-n -T5 --host-timeout 780s -Pn -sS --script ssl-cert,ssl-date,ssl-enum-ciphers,sslv2 -pT:443,631,5443,5061,8443,9997,9998,49152,322
+-n -T4 --host-timeout 420s -Pn -sS --script ssh-auth-methods,ssh-hostkey,ssh2-enum-algos,sshv1 --script-args ssh_hostkey=visual -pT:22
+-n -T5 --host-timeout 1200s -Pn -sS --script rtsp-url-brute -pT:554,322
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+-n -T4 --host-timeout 120s -Pn -sS -sU --script upnp-info -pT:5000,U:1900
+-n -T4 --host-timeout 120s -Pn -sS --script pjl-ready-message -pT:9100
+-n -T4 --host-timeout 120s -Pn -sS --script banner --script-args banner.timeout=4s -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script telnet-encryption -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script vnc-info,vnc-title -pT:5900
+-n -T4 --host-timeout 120s -Pn -sS --script ftp-anon,ftp-bounce,ftp-syst -pT:21
+-n -T4 --host-timeout 240s -Pn -sS -sU --script dns-nsid,dns-recursion,dns-service-discovery,mdns-service-discovery -pT:53,5353,U:53,5353
+-n -T5 --host-timeout 720s -Pn -sS -sU --script nbstat,smb-enum-shares,smb-mbenum,smb-os-discovery,smb-protocols,smb-security-mode,smb2-capabilities,smb2-security-mode -pT:137,139,445,U:137,139,445
+-n -T4 --host-timeout 840s -Pn -sS --script modbus-discover -pT:502
+-n -T4 --host-timeout 120s -Pn -sS --script afp-serverinfo -pT:548
+-n -T4 --host-timeout 240s -Pn -sS --script rsync-list-modules -pT:873
+-n -T4 --host-timeout 240s -Pn -sU --script ntp-info -pU:123
+-n -T4 --host-timeout 120s -Pn -sS -sU --script rpcinfo,rpc-grind -pT:111,U:111
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ldap-rootdse -pT:389,636,U:389,636
+-n -T5 --host-timeout 1500s -Pn -sU --script snmp-brute,snmp-info,snmp-sysdescr,snmp-netstat,snmp-processes,snmp-interfaces --script-args brute.firstonly=true,snmp-brute.communitiesdb=/usr/local/share/omnissiah/communities.nmap -pU:161
+77300
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+-n -T4 --host-timeout 120s -Pn -sS -p554,9998,8000,8080,7000,5000,9100,3910,23,18301,41794,41795,53,9010,9000,445,9090,2121,3283,7262,502,7070,9761,10001,389,902,2002,1723,9001,9999,636,5001,1689,25,593,49156,2103,4001,1801,6000,113,79,943,587,6002,647,2003,5353
+-n -T4 --host-timeout 120s -Pn -sS -p443,9997,8200,5443,2000,880,515,1100,179,5900,9164,322,4352,6783,843,1702,5061,8888,49153,61451,10000,67,2001,427,623,111,5432,49155,548,514,1023,8009,5009,464,2105,161,90,215,2049,22022,4522,81,2005,873,8002,830,2869
+-n -T4 --host-timeout 120s -Pn -sU -p53,67,68,69,111,123,137,161,389,427,443,500,623,1900,2049,3283,3702,5002,5353,8611,8612,445,5060
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+77300
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+-n -T4 --host-timeout 120s -Pn -sS -p554,9998,8000,8080,7000,5000,9100,3910,23,18301,41794,41795,53,9010,9000,445,9090,2121,3283,7262,502,7070,9761,10001,389,902,2002,1723,9001,9999,636,5001,1689,25,593,49156,2103,4001,1801,6000,113,79,943,587,6002,647,2003,5353
+-n -T4 --host-timeout 120s -Pn -sS -p443,9997,8200,5443,2000,880,515,1100,179,5900,9164,322,4352,6783,843,1702,5061,8888,49153,61451,10000,67,2001,427,623,111,5432,49155,548,514,1023,8009,5009,464,2105,161,90,215,2049,22022,4522,81,2005,873,8002,830,2869
+-n -T4 --host-timeout 120s -Pn -sU -p5060,5061 --script sip-methods
+-n -T4 --host-timeout 120s -Pn -sU -p53,67,68,69,111,123,137,161,389,427,443,500,623,1900,2049,3283,3702,5002,5353,8611,8612,445
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+Traceback (most recent call last):
+  File "/usr/local/lib/omnissiah/./raw_map.py", line 4, in <module>
+    import omni_config
+  File "/usr/local/lib/omnissiah/omni_config.py", line 155
+    #nmap_script_part_size = 10000
+                                  ^
+SyntaxError: unexpected EOF while parsing
+77300
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+-n -T4 --host-timeout 120s -Pn -sS -p554,9998,8000,8080,7000,5000,9100,3910,23,18301,41794,41795,53,9010,9000,445,9090,2121,3283,7262,502,7070,9761,10001,389,902,2002,1723,9001,9999,636,5001,1689,25,593,49156,2103,4001,1801,6000,113,79,943,587,6002,647,2003,5353
+-n -T4 --host-timeout 120s -Pn -sS -p443,9997,8200,5443,2000,880,515,1100,179,5900,9164,322,4352,6783,843,1702,5061,8888,49153,61451,10000,67,2001,427,623,111,5432,49155,548,514,1023,8009,5009,464,2105,161,90,215,2049,22022,4522,81,2005,873,8002,830,2869
+-n -T4 --host-timeout 120s -Pn -sU -p5060,5061 --script sip-methods
+-n -T4 --host-timeout 120s -Pn -sU -p53,67,68,69,111,123,137,161,389,427,443,500,623,1900,2049,3283,3702,5002,5353,8611,8612,445
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+-n -T5 --host-timeout 780s -Pn -sS --script ssl-cert,ssl-date,ssl-enum-ciphers,sslv2 -pT:443,631,5443,5061,8443,9997,9998,49152,322
+-n -T4 --host-timeout 420s -Pn -sS --script ssh-auth-methods,ssh-hostkey,ssh2-enum-algos,sshv1 --script-args ssh_hostkey=visual -pT:22
+-n -T5 --host-timeout 1200s -Pn -sS --script rtsp-url-brute -pT:554,322
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+-n -T4 --host-timeout 120s -Pn -sS -sU --script upnp-info -pT:5000,U:1900
+-n -T4 --host-timeout 120s -Pn -sS --script cups-info,cups-queue-info -pT:631
+-n -T4 --host-timeout 120s -Pn -sS --script pjl-ready-message -pT:9100
+-n -T4 --host-timeout 120s -Pn -sS --script banner --script-args banner.timeout=4s -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script telnet-encryption -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script vnc-info,vnc-title -pT:5900
+-n -T4 --host-timeout 120s -Pn -sS --script ftp-anon,ftp-bounce,ftp-syst -pT:21
+-n -T4 --host-timeout 240s -Pn -sS -sU --script dns-nsid,dns-recursion,dns-service-discovery,mdns-service-discovery -pT:53,5353,U:53,5353
+-n -T5 --host-timeout 720s -Pn -sS -sU --script nbstat,smb-enum-shares,smb-mbenum,smb-os-discovery,smb-protocols,smb-security-mode,smb2-capabilities,smb2-security-mode -pT:137,139,445,U:137,139,445
+-n -T4 --host-timeout 840s -Pn -sS --script modbus-discover -pT:502
+-n -T4 --host-timeout 120s -Pn -sS --script afp-serverinfo -pT:548
+-n -T4 --host-timeout 240s -Pn -sS --script rsync-list-modules -pT:873
+-n -T4 --host-timeout 240s -Pn -sU --script ntp-info -pU:123
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ike-version -pT:500,U:500
+-n -T4 --host-timeout 120s -Pn -sS -sU --script rpcinfo,rpc-grind -pT:111,U:111
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ldap-rootdse -pT:389,636,U:389,636
+-n -T5 --host-timeout 1500s -Pn -sU --script snmp-brute,snmp-info,snmp-sysdescr,snmp-netstat,snmp-processes,snmp-interfaces #--script-args brute.firstonly=true,snmp-brute.communitiesdb=/usr/local/share/omnissiah/communities.nmap -pU:161
+77300
+-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn
+-n -T4 --host-timeout 120s -Pn -sS -p80,22,49152,8443,5060,8008,631,10010,18000,1700,21,9163,7001,3100,88,3389,8081,5357,5002,541,135,3001,139,3268,49154,5555,4045,1688,3000,1080,646,1433,31865,19996,513,2107,900,2601,500,1720,4000,49157,444,82,3306,91,993,6646
+-n -T4 --host-timeout 120s -Pn -sS -p554,9998,8000,8080,7000,5000,9100,3910,23,18301,41794,41795,53,9010,9000,445,9090,2121,3283,7262,502,7070,9761,10001,389,902,2002,1723,9001,9999,636,5001,1689,25,593,49156,2103,4001,1801,6000,113,79,943,587,6002,647,2003,5353
+-n -T4 --host-timeout 120s -Pn -sS -p443,9997,8200,5443,2000,880,515,1100,179,5900,9164,322,4352,6783,843,1702,5061,8888,49153,61451,10000,67,2001,427,623,111,5432,49155,548,514,1023,8009,5009,464,2105,161,90,215,2049,22022,4522,81,2005,873,8002,830,2869
+-n -T4 --host-timeout 120s -Pn -sU -p5060,5061 --script sip-methods
+-n -T4 --host-timeout 120s -Pn -sU -p53,67,68,69,111,123,137,161,389,427,443,500,623,1900,2049,3283,3702,5002,5353,8611,8612,445
+-n -T5 --host-timeout 3000s -Pn -sS --script http-title,http-headers,http-methods,http-robots.txt,http-date,http-comments-displayer,http-enum,http-errors,http-favicon,http-security-headers,http-server-header,https-redirect -pT:80,81,880,8000,8008,8080,8200,443,5443,7000,8443,9997,9998,49152,322
+-n -T5 --host-timeout 780s -Pn -sS --script ssl-cert,ssl-date,ssl-enum-ciphers,sslv2 -pT:443,631,5443,5061,8443,9997,9998,49152,322
+-n -T4 --host-timeout 420s -Pn -sS --script ssh-auth-methods,ssh-hostkey,ssh2-enum-algos,sshv1 --script-args ssh_hostkey=visual -pT:22
+-n -T5 --host-timeout 1200s -Pn -sS --script rtsp-url-brute -pT:554,322
+-n -T4 --host-timeout 120s -Pn -sS -sU --script sip-methods -pT:5060,5061,U:5060,5061
+-n -T4 --host-timeout 120s -Pn -sS -sU --script upnp-info -pT:5000,U:1900
+-n -T4 --host-timeout 120s -Pn -sS --script cups-info,cups-queue-info -pT:631
+-n -T4 --host-timeout 120s -Pn -sS --script pjl-ready-message -pT:9100
+-n -T4 --host-timeout 120s -Pn -sS --script banner --script-args banner.timeout=4s -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script telnet-encryption -pT:23,25,513,514
+-n -T4 --host-timeout 120s -Pn -sS --script vnc-info,vnc-title -pT:5900
+-n -T4 --host-timeout 120s -Pn -sS --script ftp-anon,ftp-bounce,ftp-syst -pT:21
+-n -T4 --host-timeout 240s -Pn -sS -sU --script dns-nsid,dns-recursion,dns-service-discovery,mdns-service-discovery -pT:53,5353,U:53,5353
+-n -T5 --host-timeout 720s -Pn -sS -sU --script nbstat,smb-enum-shares,smb-mbenum,smb-os-discovery,smb-protocols,smb-security-mode,smb2-capabilities,smb2-security-mode -pT:137,139,445,U:137,139,445
+-n -T4 --host-timeout 840s -Pn -sS --script modbus-discover -pT:502
+-n -T4 --host-timeout 120s -Pn -sS --script afp-serverinfo -pT:548
+-n -T4 --host-timeout 240s -Pn -sS --script rsync-list-modules -pT:873
+-n -T4 --host-timeout 240s -Pn -sU --script ntp-info -pU:123
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ike-version -pT:500,U:500
+-n -T4 --host-timeout 120s -Pn -sS -sU --script rpcinfo,rpc-grind -pT:111,U:111
+-n -T4 --host-timeout 120s -Pn -sS -sU --script ldap-rootdse -pT:389,636,U:389,636
+-n -T5 --host-timeout 1500s -Pn -sU --script snmp-brute,snmp-info,snmp-sysdescr,snmp-netstat,snmp-processes,snmp-interfaces #--script-args brute.firstonly=true,snmp-brute.communitiesdb=/usr/local/share/omnissiah/communities.nmap -pU:161
+77300
+77300
+77300
+72570
+72570
+77300
+77300
+77300
+72911
+77300
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '90', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 2.6.18', '87', '49233')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '90', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 2.6.18', '87', '49233')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '89', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '89', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '89', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Tomato 1.28 (Linux 2.4.20)', '87', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Tomato firmware (Linux 2.6.22)', '87', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '92', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '89', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '89', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '87', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Tomato 1.28 (Linux 2.4.20)', '87', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Tomato firmware (Linux 2.6.22)', '87', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 2.4.18', '87', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '93', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 3.2.0', '93', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '93', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 2.6.18', '89', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 2.6.31 - 2.6.32', '89', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'D-Link DWL-624+ or DWL-2000AP, or TRENDnet TEW-432BRP WAP', '89', '20848')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '89', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '89', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '89', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Tomato 1.28 (Linux 2.4.20)', '87', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Tomato firmware (Linux 2.6.22)', '87', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Linux 2.6.18', '87', '49233')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'FreeBSD 6.2-RELEASE', '87', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'FreeBSD 6.2-RELEASE', '87', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'D-Link DGS-1210 switch', '97', '20313')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Linux 2.4.20', '97', '45116')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Linux 2.6.9', '97', '58654')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'AVM FRITZ!Box FON WLAN 7170 WAP', '96', '8806')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Cymphonix EX550 firewall', '96', '19703')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'D-Link DIR-300 WAP', '96', '20713')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Dell Integrated Remote Access Controller (iDRAC)', '96', '21804')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Dell Integrated Remote Access Controller (iDRAC9)', '96', '21981')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Dell Remote Access Controller 5/I (DRAC 5/I)', '96', '22143')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Dell DR4100 backup appliance', '96', '22179')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '98', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 3.2.0', '98', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '98', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 2.6.18', '94', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 2.6.31 - 2.6.32', '94', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Nokia E70 or N86 mobile phone (Symbian OS)', '92', '88887')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '89', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '89', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '89', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Tomato 1.28 (Linux 2.4.20)', '87', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Tomato firmware (Linux 2.6.22)', '87', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Linux 2.6.18', '87', '49233')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '91', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '98', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 3.2.0', '98', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '98', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 2.6.18', '94', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 2.6.31 - 2.6.32', '94', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Nokia E70 or N86 mobile phone (Symbian OS)', '92', '88887')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '90', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '98', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Linux 3.2.0', '98', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '98', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Linux 2.6.18', '94', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Linux 2.6.31 - 2.6.32', '94', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Nokia E70 or N86 mobile phone (Symbian OS)', '92', '88887')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '91', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(57017, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '91', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10115, 'Linux 3.0', '87', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '91', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '88', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1051, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '91', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '90', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '90', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Tomato 1.28 (Linux 2.4.20)', '88', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '88', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37223, 'Linux 2.4.18', '88', '44872')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'Mitsubishi Q06UDEH CPU PLC module', '87', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(40519, 'Blue Coat PacketShaper appliance', '85', '10091')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20580, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '98', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 3.2.0', '98', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '98', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 2.6.18', '94', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Linux 2.6.31 - 2.6.32', '94', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Nokia E70 or N86 mobile phone (Symbian OS)', '92', '88887')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49754, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(9381, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20496, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '91', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '89', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '89', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '87', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Tomato 1.28 (Linux 2.4.20)', '87', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(29548, 'Tomato firmware (Linux 2.6.22)', '87', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(39978, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'FreeBSD 6.2-RELEASE', '87', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(398, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '89', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '89', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '89', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Linux 3.0', '88', '62215')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Tomato 1.28 (Linux 2.4.20)', '87', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Tomato firmware (Linux 2.6.22)', '87', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49340, 'Linux 2.6.18', '87', '49233')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '98', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 3.2.0', '98', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '98', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 2.6.18', '94', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Linux 2.6.31 - 2.6.32', '94', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Nokia E70 or N86 mobile phone (Symbian OS)', '92', '88887')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49806, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Linux 2.6.18 - 2.6.22', '93', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'OpenWrt Kamikaze 7.09 (Linux 2.6.22)', '91', '61315')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'OpenWrt 0.9 - 7.09 (Linux 2.4.30 - 2.4.34)', '89', '46532')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'OpenWrt White Russian 0.9 (Linux 2.4.30)', '89', '46571')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Linux 2.6.32', '88', '55264')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '88', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Linux 3.2.0', '88', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '87', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Tomato 1.28 (Linux 2.4.20)', '87', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(37255, 'Tomato firmware (Linux 2.6.22)', '87', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(1204, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'FreeBSD 6.2-RELEASE', '89', '27364')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Linux 2.6.18 - 2.6.22', '88', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'AVtech Room Alert 26W environmental monitor', '86', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Avaya G350 Media Gateway VoIP adapter', '85', '8672')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Mitsubishi Q06UDEH CPU PLC module', '85', '85843')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(2, 'Juniper Networks SSG 20 firewall', '85', '40683')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '93', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Siemens Simatic 300 programmable logic controller', '91', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'AVtech Room Alert 26W environmental monitor', '90', '9077')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Linksys BEFSR41 EtherFast router', '90', '43471')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'D-Link DWL-624+ or DWL-2000AP, or TRENDnet TEW-432BRP WAP', '89', '20848')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'DD-WRT (Linux 2.4.36)', '89', '46163')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(49796, 'Linux 3.2.0', '89', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '98', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 3.2.0', '98', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '98', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 2.6.18', '94', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Linux 2.6.31 - 2.6.32', '94', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Nokia E70 or N86 mobile phone (Symbian OS)', '92', '88887')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(20971, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '98', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 3.2.0', '98', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '98', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 2.6.18', '94', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Linux 2.6.31 - 2.6.32', '94', '53921')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Tomato 1.28 (Linux 2.4.20)', '94', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Nokia E70 or N86 mobile phone (Symbian OS)', '92', '88887')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(41581, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 2.6.18 - 2.6.22', '98', '49721')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Tomato 1.28 (Linux 2.4.20)', '93', '46662')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Tomato firmware (Linux 2.6.22)', '93', '61430')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Tomato 1.27 - 1.28 (Linux 2.4.20)', '93', '46644')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 3.2.0', '93', '65125')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'MikroTik RouterOS 6.15 (Linux 3.3.5)', '93', '85317')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Siemens Simatic 300 programmable logic controller', '90', '97115')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'D-Link DWL-624+ or DWL-2000AP, or TRENDnet TEW-432BRP WAP', '89', '20848')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 2.6.18', '89', '49178')
+INSERT INTO raw_scan_osmatch (ipid, name, accuracy, line) VALUES (%s, %s, %s, %s) RETURNING osmatchid;
+(10756, 'Linux 2.6.31 - 2.6.32', '89', '53921')
+TRUNCATE TABLE raw_ruckussz;
+TRUNCATE TABLE raw_snmp;
+TRUNCATE TABLE raw_snmp;
+TRUNCATE TABLE raw_snmp;
+TRUNCATE TABLE raw_snmp;
+TRUNCATE TABLE raw_snmp;
