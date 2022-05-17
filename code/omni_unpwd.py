@@ -7,6 +7,8 @@ db_ref_user = 'ref'
 db_ref_password = 'ref'
 db_src_user = 'src'
 db_src_password = 'src'
+db_nnml_user = 'nnml'
+db_nnml_password = 'nnml'
 
 #netbox
 netbox_token = ''

@@ -1,8 +1,7 @@
 CREATE TABLE IF NOT EXISTS cfg_parameter ( 
   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   parameter VARCHAR(256) NOT NULL, 
-  tablename VARCHAR(256) DEFAULT NULL, 
+  tablename VARCHAR(256) NOT NULL DEFAULT '', 
   value VARCHAR(256) DEFAULT NULL, 
   UNIQUE KEY pt (parameter, tablename) 
 ) ENGINE=InnoDB;
-

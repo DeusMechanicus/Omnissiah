@@ -9,7 +9,7 @@ code_program_query.nrepeat FROM code_program_query INNER JOIN code_program ON co
 WHERE code_program_query.enabled<>0 AND {0} \
 ORDER BY code_program_query.stage, code_program_query.priority;'
 select_cfg_parameter_table = "SELECT value FROM cfg_parameter WHERE parameter='{0}' AND tablename='{1}'"
-select_cfg_parameter_null = "SELECT value FROM cfg_parameter WHERE parameter='{0}' AND tablename is NULL"
+select_cfg_parameter_null = "SELECT value FROM cfg_parameter WHERE parameter='{0}' AND tablename=''"
 insert_log_program_sql = "INSERT INTO log_program (programid, actionid) SELECT code_program.programid, {1} FROM code_program WHERE program='{0}';"
 insert_log_query_sql = "INSERT INTO log_program (programid, actionid, queryid) SELECT code_program.programid, {1}, {2} FROM code_program WHERE program='{0}';"
 action_cycle_started = 1

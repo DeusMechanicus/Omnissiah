@@ -28,7 +28,7 @@ WHERE ref_scan_ip_info.info='snmp_community';"
 select_ping_ipprefix_sql = 'SELECT DISTINCT ref_ipprefix.siteid, ref_ipprefix.startip, ref_ipprefix.netnum FROM raw_scan_ip \
 LEFT JOIN ref_ipprefix ON raw_scan_ip.refid=ref_ipprefix.ipprefixid WHERE raw_scan_ip.sourceid=1 ORDER BY ref_ipprefix.siteid;'
 select_oids_sql = 'SELECT oidid, name, oid, command, prescan FROM ref_scan_snmp_oid;'
-insert_snmp_sql = 'INSERT INTO raw_snmp(ipid, oidid, oid, oid_index, snmp_type, value, value_hex, vlan) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)';
+insert_snmp_sql = 'INSERT INTO raw_snmp(ipid, oidid, oid, snmp_type, value, value_hex, vlan) VALUES (%s, %s, %s, %s, %s, %s, %s)';
 select_vlan_oid_sql = "SELECT raw_scan_ip.ip, raw_snmp.oid FROM raw_snmp \
 INNER JOIN ref_scan_snmp_oid ON raw_snmp.oidid=ref_scan_snmp_oid.oidid \
 INNER JOIN raw_scan_ip ON raw_snmp.ipid=raw_scan_ip.ipid \
@@ -151,11 +151,12 @@ def save_walks(db, ips, oids, walks, log):
         for snmp in walk['snmp']:
             value = str(snmp.value)
             value_hex = hex_from_octets(snmp.value)
-            oid_index = snmp.oid_index if snmp.oid_index else None
+            oid = snmp.oid + '.' + snmp.oid_index if snmp.oid_index else snmp.oid
             value = value.replace('\x00', '')
             value = value[:omni_config.snmp_max_value_len]
+            value_hex = value_hex[:omni_config.snmp_max_value_len*2]
             if value:
-                vallist.append((ips[walk['ip']]['ipid'], walk['oidid'], snmp.oid, oid_index, snmp.snmp_type, value, value_hex, walk['vlan']))
+                vallist.append((ips[walk['ip']]['ipid'], walk['oidid'], oid, snmp.snmp_type, value, value_hex, walk['vlan']))
     if vallist:
         cur.executemany(insert_snmp_sql, vallist)
         db.commit()
@@ -194,7 +195,7 @@ def main():
         omnidb.run_program_queries(stage=2)
         ips_vlan = select_vlan_ips(omnidb, ips, program.log)
         omnidb.close()
-        oids_vlan = {k:v for k,v in oids.items() if v['name']==omni_const.oid_macaddrtable_name}
+        oids_vlan = {k:v for k,v in oids.items() if v['name'] in [omni_const.oid_macaddrtable_name, omni_const.oid_macporttable_name]}
         if oids_vlan:
             walks = snmp_walk(ips_vlan, oids_vlan, cpusnum, program.log)
         else:

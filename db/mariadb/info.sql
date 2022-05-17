@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS info_mac (
+  assignmentid INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
   assignment VARCHAR(12) NOT NULL PRIMARY KEY, 
   registry VARCHAR(16) NOT NULL, 
   organization VARCHAR(256) NOT NULL, 
@@ -462,4 +463,104 @@ CREATE TABLE IF NOT EXISTS info_netbox_ipam_ipaddress (
   KEY vrf_id (vrf_id), 
   KEY tenant_id (tenant_id), 
   KEY status (status) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_script_exists (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  type VARCHAR(20) NOT NULL, 
+  port INT UNSIGNED NOT NULL,
+  script VARCHAR(100) NOT NULL, 
+  UNIQUE KEY typeportscript (type, port, script), 
+  KEY type (type), 
+  KEY port (port), 
+  KEY script (script) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_osmatch_exists (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  name varchar(256) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_script_value_exists (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  script VARCHAR(100) NOT NULL, 
+  value varchar(700) NOT NULL,  
+  UNIQUE KEY scriptvalue (script, value), 
+  KEY script (script), 
+  KEY value (value) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_service_product (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  type VARCHAR(20) NOT NULL, 
+  port INT UNSIGNED NOT NULL,
+  product varchar(100) NOT NULL, 
+  UNIQUE KEY typeportproduct (type, port, product), 
+  KEY type (type), 
+  KEY port (port), 
+  KEY product (product) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_service_extrainfo (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  type VARCHAR(20) NOT NULL, 
+  port INT UNSIGNED NOT NULL,
+  extrainfo varchar(256) NOT NULL, 
+  UNIQUE KEY typeportextrainfo (type, port, extrainfo), 
+  KEY type (type), 
+  KEY port (port), 
+  KEY extrainfo (extrainfo) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_service_cpe (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  type VARCHAR(20) NOT NULL, 
+  port INT UNSIGNED NOT NULL,
+  cpe varchar(100) NOT NULL, 
+  UNIQUE KEY typeportcpe (type, port, cpe), 
+  KEY type (type), 
+  KEY port (port), 
+  KEY product (cpe) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_type (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  type varchar(50) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_vendor (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  vendor varchar(50) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_osfamily (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  osfamily varchar(50) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_cpe (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  cpe varchar(100) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_word_source (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  srcid INT UNSIGNED NOT NULL,
+  groupname VARCHAR(100) NOT NULL, 
+  UNIQUE KEY srcgroup (srcid, groupname), 
+  KEY srcid (srcid), 
+  KEY groupname (groupname) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS info_nnml_word (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  srcid INT UNSIGNED NOT NULL,
+  groupname VARCHAR(100) NOT NULL, 
+  word VARCHAR(256) NOT NULL, 
+  UNIQUE KEY srcgroupword (srcid, groupname, word), 
+  KEY srcgroup (srcid, groupname), 
+  KEY srcid (srcid), 
+  KEY groupname (groupname), 
+  KEY word (word), 
+  CONSTRAINT srcid_inw FOREIGN KEY (srcid) REFERENCES ref_nnml_word_source (srcid) ON DELETE CASCADE ON UPDATE CASCADE 
 ) ENGINE=InnoDB;

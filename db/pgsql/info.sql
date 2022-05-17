@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS info_mac (
-  assignment VARCHAR(12) NOT NULL PRIMARY KEY, 
+  assignmentid SERIAL NOT NULL PRIMARY KEY, 
+  assignment VARCHAR(12) NOT NULL UNIQUE, 
   registry VARCHAR(16) NOT NULL, 
   organization VARCHAR(256) NOT NULL, 
   address VARCHAR(256) DEFAULT NULL, 
@@ -462,3 +463,95 @@ CREATE INDEX ON info_netbox_ipam_ipaddress (LOWER(address));
 CREATE INDEX ON info_netbox_ipam_ipaddress (vrf_id);
 CREATE INDEX ON info_netbox_ipam_ipaddress (tenant_id);
 CREATE INDEX ON info_netbox_ipam_ipaddress (status);
+
+CREATE TABLE IF NOT EXISTS info_nnml_script_exists (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  type VARCHAR(20) NOT NULL, 
+  port INT NOT NULL CHECK (port>=0),
+  script VARCHAR(100) NOT NULL 
+);
+CREATE UNIQUE INDEX ON info_nnml_script_exists (type, port, script); 
+CREATE INDEX ON info_nnml_script_exists (type); 
+CREATE INDEX ON info_nnml_script_exists (port); 
+CREATE INDEX ON info_nnml_script_exists (script); 
+
+CREATE TABLE IF NOT EXISTS info_nnml_osmatch_exists (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  name varchar(256) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS info_nnml_service_product (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  type VARCHAR(20) NOT NULL, 
+  port INT NOT NULL CHECK (port>=0),
+  product varchar(100) NOT NULL 
+);
+CREATE UNIQUE INDEX ON info_nnml_service_product (type, port, product);
+CREATE INDEX ON info_nnml_service_product (type);
+CREATE INDEX ON info_nnml_service_product (port);
+CREATE INDEX ON info_nnml_service_product (product);
+
+CREATE TABLE IF NOT EXISTS info_nnml_service_extrainfo (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  type VARCHAR(20) NOT NULL, 
+  port INT NOT NULL CHECK (port>=0),
+  extrainfo varchar(256) NOT NULL 
+);
+CREATE UNIQUE INDEX ON info_nnml_service_extrainfo (type, port, extrainfo);
+CREATE INDEX ON info_nnml_service_extrainfo (type);
+CREATE INDEX ON info_nnml_service_extrainfo (port);
+CREATE INDEX ON info_nnml_service_extrainfo (extrainfo);
+
+CREATE TABLE IF NOT EXISTS info_nnml_service_cpe (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  type VARCHAR(20) NOT NULL, 
+  port INT NOT NULL CHECK (port>=0),
+  cpe varchar(100) NOT NULL 
+);
+CREATE UNIQUE INDEX ON info_nnml_service_cpe (type, port, cpe);
+CREATE INDEX ON info_nnml_service_cpe (type);
+CREATE INDEX ON info_nnml_service_cpe (port);
+CREATE INDEX ON info_nnml_service_cpe (cpe);
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_type (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  type varchar(50) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_vendor (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  vendor varchar(50) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_osfamily (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  osfamily varchar(50) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS info_nnml_osclass_cpe (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  cpe varchar(100) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS info_nnml_word_source (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  srcid INT NOT NULL CHECK (srcid>=0),
+  groupname VARCHAR(100) NOT NULL 
+);
+CREATE UNIQUE INDEX ON info_nnml_word_source (srcid, groupname);
+CREATE INDEX ON info_nnml_word_source (srcid);
+CREATE INDEX ON info_nnml_word_source (groupname);
+
+CREATE TABLE IF NOT EXISTS info_nnml_word (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  srcid INT NOT NULL CHECK (srcid>=0),
+  groupname VARCHAR(100) NOT NULL, 
+  word VARCHAR(256) NOT NULL, 
+  CONSTRAINT srcid_inw FOREIGN KEY (srcid) REFERENCES ref_nnml_word_source (srcid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE UNIQUE INDEX ON info_nnml_word (srcid, groupname, word);
+CREATE INDEX ON info_nnml_word (srcid, groupname);
+CREATE INDEX ON info_nnml_word (srcid);
+CREATE INDEX ON info_nnml_word (groupname);
+CREATE INDEX ON info_nnml_word (word);
+

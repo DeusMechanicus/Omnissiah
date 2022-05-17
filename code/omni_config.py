@@ -9,8 +9,8 @@ log_format = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'
 log_date_format = '%Y%m%d:%H%M%S'
 
 #database
-#dbtype = 'mariadb'
-dbtype = 'pgsql'
+dbtype = 'mariadb'
+#dbtype = 'pgsql'
 dbhost = '127.0.0.1'
 dbname = 'omnissiah'
 dbssl = True
@@ -127,3 +127,11 @@ snmp_max_value_len = 1000
 
 #ruckussz
 ruckussz_threadsnum = 20
+
+#src_addr
+mgmt_roles = ['mgmt']
+
+#nnml_prepare
+input_ip_bits = 'ip_bits'
+input_netnum_bits = 'netnum'
+input_word = 'word'

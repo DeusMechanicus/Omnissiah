@@ -37,3 +37,12 @@ ruckussz_login_headers = {'Content-Type':'application/json','Accept':'applicatio
 ruckussz_login_body = '{{"username":"{0}","password":"{1}"}}'
 ruckussz_sessionid_cookie = 'JSESSIONID'
 #ruckussz_cookie_headers = {'Cookie':'{0}={1}'}
+
+min_nnml_word_length = 2
+max_nnml_word_length = 256
+nnml_preprocess_regex = ['[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]',
+'[0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]',
+'[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+',
+'\d+d\d+h\d+m\d+s', '\d+h\d+m\d+s', '\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d', '\d\d\d\d-\d\d-\d\dT', '\d\d\d\d-\d\d-\d\d', '\d+\.\d+\.\d+\.\d+', '\d\d:\d\d:\d\d', '\d\d:\d\d',
+'\d\d-\d\d-\d\d', 'node_session=[^\;]+;,', 
+'([0-9,A-F,a-f]+:+){2,7}[0-9,A-F,a-f]+', '([0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f] ){2,9}[0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]']

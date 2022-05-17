@@ -10,3 +10,5 @@ dhcp_oids = ['.1.3.6.1.4.1.2636.3.61.61.1.2.1.1.2']
 
 #raw_snmp
 oid_macaddrtable_name = 'dot1dTpFdbDestPortIfIndex'
+oid_macporttable_name = 'dot1dBasePortIfIndex'
+

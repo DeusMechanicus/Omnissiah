@@ -50,3 +50,21 @@ def list_of_dicts_to_single_layer(src_list, delimiter='_'):
                dst_item[k.lower()] = v
         dst_list.append(dst_item)
     return dst_list
+
+def union_list_of_sets(l):
+    result = l.copy()
+    changed = True
+    while changed:
+        i = 0
+        changed = False
+        while i<len(result):
+            j = i + 1
+            while j<len(result):
+                if result[i] & result[j]:
+                   changed = True
+                   result[i] = result[i] | result[j]
+                   del result[j]
+                else:
+                    j += 1
+            i += 1
+    return result

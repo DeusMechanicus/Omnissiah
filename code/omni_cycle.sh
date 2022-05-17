@@ -16,14 +16,21 @@ fi
 fi /usr/local/lib/omnissiah/raw_activaire.py; then
   /usr/local/lib/omnissiah/src_activaire.py
 fi
-/usr/local/lib/omnissiah/raw_mist.py
+fi /usr/local/lib/omnissiah/raw_mist.py; then
+  /usr/local/lib/omnissiah/src_mist.py
+fi
 if /usr/local/lib/omnissiah/raw_scan.py; then
   if /usr/local/lib/omnissiah/raw_map.py; then
     /usr/local/lib/omnissiah/raw_snmp.py
     /usr/local/lib/omnissiah/raw_ruckussz.py
     if /usr/local/lib/omnissiah/src_scan.py; then
-      /usr/local/lib/omnissiah/src_snmp.py
+      if /usr/local/lib/omnissiah/src_snmp.py; then
+        /usr/local/lib/omnissiah/src_ruckussz.py
+      fi
     fi
   fi
+fi
+/usr/local/lib/omnissiah/src_addr.py
+if /usr/local/lib/omnissiah/nnml_prepare.py; then
 fi
 deactivate

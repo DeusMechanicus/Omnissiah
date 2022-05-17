@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS ref_ipprefix (
   familyid INT UNSIGNED NOT NULL, 
   prefix VARCHAR(43) NOT NULL COLLATE utf8mb4_unicode_ci, 
   siteid INT UNSIGNED DEFAULT NULL, 
-  vrfid INT UNSIGNED DEFAULT NULL, 
+  vrfid INT UNSIGNED NOT NULL DEFAULT 0, 
   tenantid INT UNSIGNED DEFAULT NULL, 
   vlanid INT UNSIGNED DEFAULT NULL, 
   active BOOLEAN DEFAULT TRUE, 
@@ -219,7 +219,7 @@ CREATE TABLE IF NOT EXISTS ref_iprange (
   startipnum BIGINT UNSIGNED NOT NULL, 
   endipnum BIGINT UNSIGNED NOT NULL, 
   size INT NOT NULL, 
-  vrfid INT UNSIGNED DEFAULT NULL, 
+  vrfid INT UNSIGNED NOT NULL DEFAULT 0, 
   tenantid INT UNSIGNED DEFAULT NULL, 
   active BOOLEAN DEFAULT TRUE, 
   roleid INT UNSIGNED DEFAULT NULL,   
@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS ref_ipaddress (
   netnum SMALLINT NOT NULL, 
   ip VARCHAR(39) NOT NULL COLLATE utf8mb4_unicode_ci, 
   ipnum BIGINT UNSIGNED NOT NULL, 
-  vrfid INT UNSIGNED DEFAULT NULL, 
+  vrfid INT UNSIGNED NOT NULL DEFAULT 0, 
   tenantid INT UNSIGNED DEFAULT NULL, 
   active BOOLEAN DEFAULT TRUE, 
   iproleid INT UNSIGNED DEFAULT NULL, 
@@ -294,4 +294,39 @@ CREATE TABLE IF NOT EXISTS ref_wlc_type (
   wlcid INT NOT NULL PRIMARY KEY, 
   wlc_type VARCHAR(50) NOT NULL UNIQUE, 
   wlc_name VARCHAR(256) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_mac_manufacturer_map (
+  mapid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  organization VARCHAR(256) NOT NULL, 
+  manufacturerid INT UNSIGNED NOT NULL, 
+  UNIQUE KEY macmanufacturer (organization, manufacturerid), 
+  KEY organization (organization), 
+  KEY manufacturerid (manufacturerid), 
+  CONSTRAINT manufacturerid_rmmm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_nnml_input_type (
+  typeid INT UNSIGNED NOT NULL PRIMARY KEY, 
+  input_type VARCHAR(50) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_nnml_ip_exists_table (
+  id INT UNSIGNED NOT NULL PRIMARY KEY, 
+  tablename VARCHAR(50) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_nnml_mac_exists_table (
+  id INT UNSIGNED NOT NULL PRIMARY KEY, 
+  tablename VARCHAR(50) NOT NULL UNIQUE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_nnml_word_source ( 
+  srcid INT UNSIGNED NOT NULL PRIMARY KEY, 
+  src_name VARCHAR(50) NOT NULL UNIQUE, 
+  query VARCHAR(1000) NOT NULL, 
+  min_word_num SMALLINT NOT NULL DEFAULT 3,
+  min_word_percent FLOAT NOT NULL DEFAULT 0.5,
+  max_word_percent FLOAT NOT NULL DEFAULT 95.0
 ) ENGINE=InnoDB;

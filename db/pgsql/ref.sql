@@ -1,3 +1,9 @@
+CREATE TABLE IF NOT EXISTS ref_nnml_script_exists_table (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  type VARCHAR(20) NOT NULL, 
+  port INT NOT NULL CHECK (port>=0),
+  script VARCHAR(100) NOT NULL 
+);
 CREATE TABLE IF NOT EXISTS ref_tenantgroup ( 
   tenantgroupid SERIAL NOT NULL PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
@@ -142,7 +148,7 @@ CREATE TABLE IF NOT EXISTS ref_vlangroup (
   vlangroup VARCHAR(100) NOT NULL UNIQUE, 
   vlangroup_alias VARCHAR(100) NOT NULL UNIQUE, 
   description VARCHAR(200) DEFAULT NULL,
-  siteid INT DEFAULT NULL CHECK (siteid>=0), 
+  siteid INT NOT NULL DEFAULT 0 CHECK (siteid>=0), 
   CONSTRAINT siteid_rvg FOREIGN KEY (siteid) REFERENCES ref_site (siteid) ON DELETE CASCADE ON UPDATE CASCADE 
 );
 
@@ -178,8 +184,8 @@ CREATE TABLE IF NOT EXISTS ref_ipprefix (
   description VARCHAR(200) DEFAULT NULL, 
   familyid INT NOT NULL CHECK (familyid>=0), 
   prefix VARCHAR(43) NOT NULL, 
-  siteid INT DEFAULT NULL CHECK (siteid>=0), 
-  vrfid INT DEFAULT NULL CHECK (vrfid>=0), 
+  siteid INT NOT NULL DEFAULT 0 CHECK (siteid>=0), 
+  vrfid INT NOT NULL DEFAULT 0 CHECK (vrfid>=0), 
   tenantid INT DEFAULT NULL CHECK (tenantid>=0), 
   vlanid INT DEFAULT NULL CHECK (vlanid>=0), 
   active SMALLINT DEFAULT 1, 
@@ -219,7 +225,7 @@ CREATE TABLE IF NOT EXISTS ref_iprange (
   startipnum BIGINT NOT NULL, 
   endipnum BIGINT NOT NULL, 
   size INT NOT NULL, 
-  vrfid INT DEFAULT NULL CHECK (vrfid>=0), 
+  vrfid INT NOT NULL DEFAULT 0 CHECK (vrfid>=0), 
   tenantid INT DEFAULT NULL CHECK (tenantid>=0), 
   active SMALLINT DEFAULT 1, 
   roleid INT DEFAULT NULL CHECK (roleid>=0), 
@@ -249,7 +255,7 @@ CREATE TABLE IF NOT EXISTS ref_ipaddress (
   netnum SMALLINT NOT NULL, 
   ip VARCHAR(39) NOT NULL, 
   ipnum BIGINT NOT NULL, 
-  vrfid INT DEFAULT NULL CHECK (vrfid>=0), 
+  vrfid INT NOT NULL DEFAULT 0 CHECK (vrfid>=0), 
   tenantid INT DEFAULT NULL CHECK (tenantid>=0), 
   active SMALLINT DEFAULT 1, 
   iproleid INT DEFAULT NULL CHECK (iproleid>=0), 
@@ -294,4 +300,39 @@ CREATE TABLE IF NOT EXISTS ref_wlc_type (
   wlcid INT NOT NULL PRIMARY KEY, 
   wlc_type VARCHAR(50) NOT NULL UNIQUE, 
   wlc_name VARCHAR(256) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS ref_mac_manufacturer_map (
+  mapid SERIAL NOT NULL PRIMARY KEY, 
+  organization VARCHAR(256) NOT NULL, 
+  manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
+  CONSTRAINT manufacturerid_rmmm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE UNIQUE INDEX ON ref_mac_manufacturer_map (organization, manufacturerid); 
+CREATE INDEX ON ref_mac_manufacturer_map (organization); 
+CREATE INDEX ON ref_mac_manufacturer_map (manufacturerid); 
+
+CREATE TABLE IF NOT EXISTS ref_nnml_input_type (
+  typeid INT NOT NULL PRIMARY KEY CHECK (typeid>=0), 
+  input_type VARCHAR(50) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS ref_nnml_ip_exists_table (
+  id INT NOT NULL PRIMARY KEY CHECK (id>=0), 
+  tablename VARCHAR(50) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS ref_nnml_mac_exists_table (
+  id INT NOT NULL PRIMARY KEY CHECK (id>=0), 
+  tablename VARCHAR(50) NOT NULL UNIQUE 
+);
+
+CREATE TABLE IF NOT EXISTS ref_nnml_word_source ( 
+  srcid INT NOT NULL PRIMARY KEY CHECK (srcid>=0), 
+  src_name VARCHAR(50) NOT NULL UNIQUE, 
+  query VARCHAR(1000) NOT NULL, 
+  min_word_num SMALLINT NOT NULL DEFAULT 3,
+  min_word_percent FLOAT NOT NULL DEFAULT 0.5,
+  max_word_percent FLOAT NOT NULL DEFAULT 95.0
 );
