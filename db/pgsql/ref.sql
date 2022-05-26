@@ -108,20 +108,25 @@ CREATE TABLE IF NOT EXISTS ref_subdevice_role (
 CREATE TABLE IF NOT EXISTS ref_devicetype ( 
   devicetypeid INT NOT NULL PRIMARY KEY CHECK (devicetypeid>=0), 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
-  model VARCHAR(100) NOT NULL UNIQUE, 
-  model_alias VARCHAR(100) NOT NULL UNIQUE, 
+  model VARCHAR(100) NOT NULL, 
+  model_alias VARCHAR(100) NOT NULL, 
+  devicetype_alias VARCHAR(256) NOT NULL UNIQUE, 
   manufacturerid INT DEFAULT NULL CHECK (manufacturerid>=0), 
-  subdevice_roleid INT DEFAULT NULL CHECK (subdevice_roleid>=0), 
   part_number VARCHAR(50) DEFAULT NULL, 
   u_height SMALLINT DEFAULT NULL, 
   is_full_depth SMALLINT DEFAULT NULL, 
   airflow VARCHAR(50) DEFAULT NULL, 
   comments TEXT DEFAULT NULL, 
-  parentid INT DEFAULT NULL CHECK (parentid>=0), 
+  parentid INT NOT NULL DEFAULT 0 CHECK(parentid>=0), 
   CONSTRAINT parentid_rd FOREIGN KEY (parentid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE, 
-  CONSTRAINT manufacturerid_rd FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE SET NULL ON UPDATE CASCADE, 
-  CONSTRAINT subdevice_roleid_rd FOREIGN KEY (subdevice_roleid) REFERENCES ref_subdevice_role (subdevice_roleid) ON DELETE SET NULL ON UPDATE CASCADE 
+  CONSTRAINT manufacturerid_rd FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE SET NULL ON UPDATE CASCADE 
 );
+CREATE UNIQUE INDEX ON ref_devicetype (model, parentid);
+CREATE UNIQUE INDEX ON ref_devicetype (model_alias, parentid);
+CREATE INDEX ON ref_devicetype (model);
+CREATE INDEX ON ref_devicetype (model_alias);
+CREATE INDEX ON ref_devicetype (manufacturerid);
+CREATE INDEX ON ref_devicetype (parentid);
 
 CREATE TABLE IF NOT EXISTS ref_vrf ( 
   vrfid SERIAL NOT NULL PRIMARY KEY, 
@@ -304,12 +309,10 @@ CREATE TABLE IF NOT EXISTS ref_wlc_type (
 
 CREATE TABLE IF NOT EXISTS ref_mac_manufacturer_map (
   mapid SERIAL NOT NULL PRIMARY KEY, 
-  organization VARCHAR(256) NOT NULL, 
+  organization VARCHAR(256) NOT NULL UNIQUE, 
   manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
   CONSTRAINT manufacturerid_rmmm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
 );
-CREATE UNIQUE INDEX ON ref_mac_manufacturer_map (organization, manufacturerid); 
-CREATE INDEX ON ref_mac_manufacturer_map (organization); 
 CREATE INDEX ON ref_mac_manufacturer_map (manufacturerid); 
 
 CREATE TABLE IF NOT EXISTS ref_nnml_input_type (
@@ -336,3 +339,11 @@ CREATE TABLE IF NOT EXISTS ref_nnml_word_source (
   min_word_percent FLOAT NOT NULL DEFAULT 0.5,
   max_word_percent FLOAT NOT NULL DEFAULT 95.0
 );
+
+CREATE TABLE IF NOT EXISTS ref_osclass_manufacturer_map (
+  mapid SERIAL NOT NULL PRIMARY KEY, 
+  vendor VARCHAR(50) NOT NULL UNIQUE, 
+  manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
+  CONSTRAINT manufacturerid_romm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE INDEX ON ref_osclass_manufacturer_map (manufacturerid); 

@@ -116,9 +116,10 @@ class NNMLParser:
             if group=='name' or group=='hostname':
                 result = value.replace('.', ' ')
         elif src_name=='src_scan_osclass_cpe':
-            find_list = re.findall(r'^(cpe:/.+:\d+)\.*.*$', value)
+            find_list = re.findall(r'^(cpe:/.+:\d+)\.*[^:]*$', value)
             if find_list:
                 result = find_list[0]
+            result = result.replace(':', ' ')
         elif src_name=='src_scan_osmatch':
             result = self.regex_sub([r'(\d+\.)\d+-[A-Z,a-z]+', r'(\d+\.)\d+[A-Z,a-z]+\d+\.\d+', r'(\d+\.)\d+[A-Z,a-z]+\d+', r'(\d+\.)\d+\.\d+', r'(\d+\.)\d+'], value, newvalue=r'\1')
         elif src_name=='src_scan_service_extrainfo':
@@ -126,6 +127,7 @@ class NNMLParser:
         elif src_name=='src_scan_service_cpe':
             result = re.sub(r'(\d+\.)\d+(\.\d+)*', r'\1', result)
             result = re.sub(r'_\d\d[A-Z,a-z]{3}\d{4}', '', result)
+            result = result.replace(':', ' ')
             result = result.replace(':', ' ')
         elif src_name=='src_snmp_sysor':
             result = re.sub(r'LAST-UPDATED \d+Z', '', value)

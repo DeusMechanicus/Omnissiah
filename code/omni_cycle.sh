@@ -32,5 +32,7 @@ if /usr/local/lib/omnissiah/raw_scan.py; then
 fi
 /usr/local/lib/omnissiah/src_addr.py
 if /usr/local/lib/omnissiah/nnml_prepare.py; then
+  if /usr/local/lib/omnissiah/nnml_label.py; then
+  fi
 fi
 deactivate

@@ -75,7 +75,7 @@ def load_words(db, log):
             if r[1] is not None:
                 if r[2] not in src['records']:
                     src['records'][r[2]] = []
-                src['records'][r[2]].append({'ipid':r[0], 'value':r[1]})
+                src['records'][r[2]].append({'ipid':r[0], 'value':r[1].lower()})
     cur.close()
     return words
 

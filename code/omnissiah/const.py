@@ -45,4 +45,5 @@ nnml_preprocess_regex = ['[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:
 '[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+:[0-9,A-F,a-f]+',
 '\d+d\d+h\d+m\d+s', '\d+h\d+m\d+s', '\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d', '\d\d\d\d-\d\d-\d\dT', '\d\d\d\d-\d\d-\d\d', '\d+\.\d+\.\d+\.\d+', '\d\d:\d\d:\d\d', '\d\d:\d\d',
 '\d\d-\d\d-\d\d', 'node_session=[^\;]+;,', 
-'([0-9,A-F,a-f]+:+){2,7}[0-9,A-F,a-f]+', '([0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f] ){2,9}[0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]']
+'([0-9,A-F,a-f]+:+){2,7}[0-9,A-F,a-f]+', '([0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f] ){2,9}[0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]',
+'\d{10,11}z']
