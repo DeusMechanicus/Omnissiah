@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS nnml_ip (
   label_devicetypeid INT UNSIGNED DEFAULT NULL, 
   predict_devicetypeid INT UNSIGNED DEFAULT NULL, 
   ipprefixid INT UNSIGNED DEFAULT NULL, 
+  predict_manufacturerid_prob FLOAT UNSIGNED DEFAULT NULL,
+  predict_devicetypeid_prob FLOAT UNSIGNED DEFAULT NULL, 
   KEY mac (mac), 
   KEY macvendorid (macvendorid), 
   KEY roleid (roleid), 
@@ -23,6 +25,8 @@ CREATE TABLE IF NOT EXISTS nnml_ip (
   KEY label_devicetypeid (label_devicetypeid), 
   KEY predict_devicetypeid (predict_devicetypeid), 
   KEY ipprefixid (ipprefixid), 
+  KEY predict_manufacturerid_prob (predict_manufacturerid_prob), 
+  KEY predict_devicetypeid_prob (predict_devicetypeid_prob), 
   CONSTRAINT roleid_ni FOREIGN KEY (roleid) REFERENCES ref_subnet_role (subnet_roleid) ON DELETE SET NULL ON UPDATE CASCADE, 
   CONSTRAINT macvendorid_ni FOREIGN KEY (macvendorid) REFERENCES info_mac (assignment) ON DELETE SET NULL ON UPDATE CASCADE, 
   CONSTRAINT label_manufacturerid_ni FOREIGN KEY (label_manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE SET NULL ON UPDATE CASCADE, 
@@ -112,4 +116,58 @@ CREATE TABLE IF NOT EXISTS nnml_train_ip_input (
   KEY inputid (inputid), 
   CONSTRAINT ipid_ntii FOREIGN KEY (ipid) REFERENCES nnml_train_ip (ipid) ON DELETE CASCADE ON UPDATE CASCADE, 
   CONSTRAINT inputid_ntii FOREIGN KEY (inputid) REFERENCES nnml_train_input (inputid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS nnml_model (
+  modelid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  created DATETIME NOT NULL DEFAULT NOW() UNIQUE,
+  modeltypeid INT UNSIGNED NOT NULL, 
+  model_filename VARCHAR(256) NOT NULL,
+  KEY modeltypeid (modeltypeid),
+  CONSTRAINT modeltypeid_nm FOREIGN KEY (modeltypeid) REFERENCES ref_nnml_modeltype (modeltypeid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS nnml_model_devicetype_map (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  modelid INT NOT NULL, 
+  outputnum INT UNSIGNED NOT NULL,
+  devicetypeid INT UNSIGNED NOT NULL, 
+  UNIQUE KEY modeloutput (modelid, outputnum), 
+  UNIQUE KEY modeldevicetype (modelid, devicetypeid), 
+  KEY modelid (modelid),
+  KEY outputnum (outputnum),
+  KEY devicetypeid (devicetypeid),
+  CONSTRAINT devicetypeid_nmdt FOREIGN KEY (devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT modelid_nmdt FOREIGN KEY (modelid) REFERENCES nnml_model (modelid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS nnml_model_manufacturer_map (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  modelid INT NOT NULL, 
+  outputnum INT UNSIGNED NOT NULL,
+  manufacturerid INT UNSIGNED NOT NULL, 
+  UNIQUE KEY modeloutput (modelid, outputnum), 
+  UNIQUE KEY modelmanufacturer (modelid, manufacturerid), 
+  KEY modelid (modelid),
+  KEY outputnum (outputnum),
+  KEY manufacturerid (manufacturerid),
+  CONSTRAINT manufacturerid_nmmm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT modelid_nmmm FOREIGN KEY (modelid) REFERENCES nnml_model (modelid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS nnml_model_input_map (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  modelid INT NOT NULL, 
+  inputnum INT UNSIGNED NOT NULL,
+  input_typeid INT UNSIGNED NOT NULL, 
+  typeid INT NOT NULL, 
+  UNIQUE KEY modelinput (modelid, inputnum), 
+  UNIQUE KEY modelinputtype (modelid, input_typeid, typeid), 
+  KEY inputtype (input_typeid, typeid),   
+  KEY modelid (modelid),
+  KEY inputnum (inputnum),
+  KEY input_typeid (input_typeid),
+  KEY typeid (typeid),  
+  CONSTRAINT modelid_nmim FOREIGN KEY (modelid) REFERENCES nnml_model (modelid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT input_typeid_nmim FOREIGN KEY (input_typeid) REFERENCES ref_nnml_input_type (typeid) ON DELETE CASCADE ON UPDATE CASCADE 
 ) ENGINE=InnoDB;

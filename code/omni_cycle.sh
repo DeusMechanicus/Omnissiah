@@ -33,6 +33,8 @@ fi
 /usr/local/lib/omnissiah/src_addr.py
 if /usr/local/lib/omnissiah/nnml_prepare.py; then
   if /usr/local/lib/omnissiah/nnml_label.py; then
+    /usr/local/lib/omnissiah/nnml_train.py
   fi
+  /usr/local/lib/omnissiah/nnml_predict.py
 fi
 deactivate

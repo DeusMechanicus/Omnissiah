@@ -26,17 +26,14 @@ mist_host = 'api.mist.com'
 mist_devices_url = 'https://{0}/api/v1/sites/{1}/stats/devices'
 
 ruckussz_login_url = 'https://{0}:8443/wsg/api/public/v6_1/session'
-#ruckussz_logout_url = 'https://{0}:8443/wsg/api/public/v6_1/session'
 ruckussz_wap_url = 'https://{0}:8443/wsg/api/public/v6_1/aps?listSize={1}'
 ruckussz_client_url = 'https://{0}:8443/wsg/api/public/v6_1/aps/{1}/operational/client?listSize=1000'
 ruckussz_wap_oper_url = 'https://{0}:8443/wsg/api/public/v6_1/aps/{1}/operational/summary'
 ruckussz_timeout_connection = 10
 ruckussz_timeout_getpost = 90
-#ruckussz_threadnum = 50
 ruckussz_login_headers = {'Content-Type':'application/json','Accept':'application/json'}
 ruckussz_login_body = '{{"username":"{0}","password":"{1}"}}'
 ruckussz_sessionid_cookie = 'JSESSIONID'
-#ruckussz_cookie_headers = {'Cookie':'{0}={1}'}
 
 min_nnml_word_length = 2
 max_nnml_word_length = 256
@@ -47,3 +44,9 @@ nnml_preprocess_regex = ['[0-9,A-F,a-f][0-9,A-F,a-f]:[0-9,A-F,a-f][0-9,A-F,a-f]:
 '\d\d-\d\d-\d\d', 'node_session=[^\;]+;,', 
 '([0-9,A-F,a-f]+:+){2,7}[0-9,A-F,a-f]+', '([0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f] ){2,9}[0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f][0-9,A-F,a-f]',
 '\d{10,11}z']
+nnml_manufacturers_dropout = 0.05
+nnml_manufacturers_trains = [{'epochs':128, 'batches':128, 'lr':0.0005}, {'epochs':8, 'batches':0, 'lr':0.0005},
+{'epochs':32, 'batches':128, 'lr':0.0002}, {'epochs':8, 'batches':0, 'lr':0.0002}]
+nnml_devicetypes_dropout = 0.05
+nnml_devicetypes_trains = [{'epochs':64, 'batches':256, 'lr':0.0005}, {'epochs':8, 'batches':0, 'lr':0.0005},
+{'epochs':32, 'batches':128, 'lr':0.0002}, {'epochs':8, 'batches':0, 'lr':0.0002}]

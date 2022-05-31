@@ -9,8 +9,8 @@ log_format = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'
 log_date_format = '%Y%m%d:%H%M%S'
 
 #database
-dbtype = 'mariadb'
-#dbtype = 'pgsql'
+#dbtype = 'mariadb'
+dbtype = 'pgsql'
 dbhost = '127.0.0.1'
 dbname = 'omnissiah'
 dbssl = True
@@ -135,3 +135,9 @@ mgmt_roles = ['mgmt']
 input_ip_bits = 'ip_bits'
 input_netnum_bits = 'netnum'
 input_word = 'word'
+
+#nnml_train
+nnml_model_manufacturer = 'manufacturer'
+nnml_model_devicetype = 'devicetype'
+nnml_models_path = '/usr/local/lib/omnissiah/models'
+nnml_model_filename = '{0}/{1}_{2}'

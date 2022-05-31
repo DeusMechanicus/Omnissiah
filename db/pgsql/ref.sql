@@ -347,3 +347,9 @@ CREATE TABLE IF NOT EXISTS ref_osclass_manufacturer_map (
   CONSTRAINT manufacturerid_romm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
 );
 CREATE INDEX ON ref_osclass_manufacturer_map (manufacturerid); 
+
+CREATE TABLE IF NOT EXISTS ref_nnml_modeltype (
+  modeltypeid INT NOT NULL PRIMARY KEY CHECK (modeltypeid>=0), 
+  modeltype VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+);

@@ -1,6 +1,10 @@
 import pyparsing as pp
 import re
-from .const import min_nnml_word_length, max_nnml_word_length, nnml_preprocess_regex
+import torch
+from torch.autograd import Variable
+import numpy as np
+from .const import min_nnml_word_length, max_nnml_word_length, nnml_preprocess_regex, nnml_manufacturers_dropout, \
+    nnml_manufacturers_trains, nnml_devicetypes_dropout, nnml_devicetypes_trains
 
 
 class NNMLParser:
@@ -156,3 +160,104 @@ class NNMLParser:
         words = self.dbparse(src_name, group, v)
         words = self.postprocess_set(words)
         return words
+
+class Manufacturers_NNet(torch.nn.Module):
+    def __init__(self, input_size, output_size, trains=nnml_manufacturers_trains):
+        super(Manufacturers_NNet, self).__init__()
+        self.input_size = input_size
+        self.output_size = output_size
+        self.trains = trains
+        hidden_size = int(np.sqrt(self.input_size/self.output_size)*self.output_size)
+        self.layers = torch.nn.Sequential(
+            torch.nn.Dropout(p=nnml_manufacturers_dropout),
+            torch.nn.Linear(self.input_size, hidden_size),
+            torch.nn.ReLU(),
+            torch.nn.Linear(hidden_size, self.output_size),
+            torch.nn.Softmax(dim=-1))
+
+    def forward(self, x):
+        return self.layers(x)
+
+    def calc_accuracy(self, y, labels):
+        pred_arr = y.detach().numpy()
+        orig_arr = labels.numpy()
+        count = 0
+        for i in range(0, len(pred_arr)):
+            if np.argmax(pred_arr[i])==np.argmax(orig_arr[i]):
+                count += 1
+        return count/len(pred_arr)
+
+    def train_model(self, data, labels):
+        criterion = torch.nn.CrossEntropyLoss()
+        for train in self.trains:
+            data_size = data.size()[0]
+            optimizer = torch.optim.Adam(self.parameters(), lr = train['lr'])
+            for epoch in range(0,train['epochs']):
+                permutation = torch.randperm(data_size)
+                if train['batches']<2:
+                    batch_size = data_size
+                else:
+                    batch_size = data_size//train['batches']
+                    if data_size % train['batches']:
+                        batch_size += 1
+                for i in range(0,data_size, batch_size):
+                    indices = permutation[i:i+batch_size]
+                    batch_data = data[indices]
+                    batch_labels = labels[indices]
+                    optimizer.zero_grad()
+                    y = self.forward(batch_data)
+                    loss = criterion(y, batch_labels)
+                    loss.backward()
+                    optimizer.step()
+#                print('epoch {}, batch {}, lr {}, loss {}, accuracy {}'.format(epoch, i, train['lr'], loss.item(), self.calc_accuracy(y, batch_labels)))
+
+class Devicetypes_NNet(torch.nn.Module):
+    def __init__(self, input_size, output_size, trains=nnml_devicetypes_trains):
+        super(Devicetypes_NNet, self).__init__()
+        self.input_size = input_size
+        self.output_size = output_size
+        self.trains = trains
+        hidden_size = int(np.sqrt(self.input_size/self.output_size)*self.output_size)
+        self.layers = torch.nn.Sequential(
+            torch.nn.Dropout(p=nnml_devicetypes_dropout),
+            torch.nn.Linear(self.input_size, hidden_size),
+            torch.nn.ReLU(),
+            torch.nn.Linear(hidden_size, self.output_size),
+            torch.nn.Softmax(dim=-1))
+
+    def forward(self, x):
+        return self.layers(x)
+
+    def calc_accuracy(self, y, labels):
+        pred_arr = y.detach().numpy()
+        orig_arr = labels.numpy()
+        count = 0
+        for i in range(0, len(pred_arr)):
+            if np.argmax(pred_arr[i])==np.argmax(orig_arr[i]):
+                count += 1
+        return count/len(pred_arr)
+
+    def train_model(self, data, labels):
+        criterion = torch.nn.CrossEntropyLoss()
+        for train in self.trains:
+            data_size = data.size()[0]
+            optimizer = torch.optim.Adam(self.parameters(), lr = train['lr'])
+            for epoch in range(0,train['epochs']):
+                permutation = torch.randperm(data_size)
+                if train['batches']<2:
+                    batch_size = data_size
+                else:
+                    batch_size = data_size//train['batches']
+                    if data_size % train['batches']:
+                        batch_size += 1
+                for i in range(0,data_size, batch_size):
+                    indices = permutation[i:i+batch_size]
+                    batch_data = data[indices]
+                    batch_labels = labels[indices]
+                    optimizer.zero_grad()
+                    y = self.forward(batch_data)
+                    loss = criterion(y, batch_labels)
+                    loss.backward()
+                    optimizer.step()
+#                print('epoch {}, batch {}, lr {}, loss {}, accuracy {}'.format(epoch, i, train['lr'], loss.item(), self.calc_accuracy(y, batch_labels)))
+

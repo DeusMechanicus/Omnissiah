@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS nnml_ip (
   label_devicetypeid INT DEFAULT NULL CHECK (label_devicetypeid>=0), 
   predict_devicetypeid INT DEFAULT NULL CHECK (predict_devicetypeid>=0),
   ipprefixid INT DEFAULT NULL CHECK (ipprefixid>=0), 
+  predict_manufacturerid_prob FLOAT DEFAULT NULL CHECK (predict_manufacturerid_prob>=0), 
+  predict_devicetypeid_prob FLOAT DEFAULT NULL CHECK (predict_devicetypeid_prob>=0), 
   CONSTRAINT roleid_ni FOREIGN KEY (roleid) REFERENCES ref_subnet_role (subnet_roleid) ON DELETE SET NULL ON UPDATE CASCADE, 
   CONSTRAINT macvendorid_ni FOREIGN KEY (macvendorid) REFERENCES info_mac (assignment) ON DELETE SET NULL ON UPDATE CASCADE, 
   CONSTRAINT label_manufacturerid_ni FOREIGN KEY (label_manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE SET NULL ON UPDATE CASCADE, 
@@ -31,6 +33,8 @@ CREATE INDEX ON nnml_ip (predict_manufacturerid);
 CREATE INDEX ON nnml_ip (label_devicetypeid);
 CREATE INDEX ON nnml_ip (predict_devicetypeid);
 CREATE INDEX ON nnml_ip (ipprefixid);
+CREATE INDEX ON nnml_ip (predict_manufacturerid_prob);
+CREATE INDEX ON nnml_ip (predict_devicetypeid_prob);
 
 CREATE TABLE IF NOT EXISTS nnml_input (
   inputid SERIAL NOT NULL PRIMARY KEY, 
@@ -113,3 +117,58 @@ CREATE TABLE IF NOT EXISTS nnml_train_ip_input (
 CREATE UNIQUE INDEX ON nnml_train_ip_input (ipid, inputid);
 CREATE INDEX ON nnml_train_ip_input (ipid);
 CREATE INDEX ON nnml_train_ip_input (inputid);
+
+CREATE TABLE IF NOT EXISTS nnml_model (
+  modelid SERIAL NOT NULL PRIMARY KEY, 
+  created TIMESTAMP NOT NULL DEFAULT NOW() UNIQUE,
+  modeltypeid INT NOT NULL CHECK (modeltypeid>=0), 
+  model_filename VARCHAR(256) NOT NULL,
+  CONSTRAINT modeltypeid_nm FOREIGN KEY (modeltypeid) REFERENCES ref_nnml_modeltype (modeltypeid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE INDEX ON nnml_model (modeltypeid);
+
+CREATE TABLE IF NOT EXISTS nnml_model_devicetype_map (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  modelid INT NOT NULL, 
+  outputnum INT NOT NULL CHECK (outputnum>=0),
+  devicetypeid INT NOT NULL CHECK (devicetypeid>=0), 
+  CONSTRAINT devicetypeid_nmdt FOREIGN KEY (devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT modelid_nmdt FOREIGN KEY (modelid) REFERENCES nnml_model (modelid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE UNIQUE INDEX ON nnml_model_devicetype_map (modelid, outputnum);
+CREATE UNIQUE INDEX ON nnml_model_devicetype_map (modelid, devicetypeid);
+CREATE INDEX ON nnml_model_devicetype_map (modelid);
+CREATE INDEX ON nnml_model_devicetype_map (outputnum);
+CREATE INDEX ON nnml_model_devicetype_map (devicetypeid);
+
+CREATE TABLE IF NOT EXISTS nnml_model_manufacturer_map (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  modelid INT NOT NULL, 
+  outputnum INT NOT NULL CHECK (outputnum>=0),
+  manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
+  CONSTRAINT manufacturerid_nmmm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT modelid_nmmm FOREIGN KEY (modelid) REFERENCES nnml_model (modelid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE UNIQUE INDEX ON nnml_model_manufacturer_map (modelid, outputnum);
+CREATE UNIQUE INDEX ON nnml_model_manufacturer_map (modelid, manufacturerid);
+CREATE INDEX ON nnml_model_manufacturer_map (modelid);
+CREATE INDEX ON nnml_model_manufacturer_map (outputnum);
+CREATE INDEX ON nnml_model_manufacturer_map (manufacturerid);
+
+CREATE TABLE IF NOT EXISTS nnml_model_input_map (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  modelid INT NOT NULL, 
+  inputnum INT NOT NULL CHECK (inputnum>=0),
+  input_typeid INT NOT NULL CHECK (input_typeid>=0), 
+  typeid INT NOT NULL, 
+  CONSTRAINT modelid_nmim FOREIGN KEY (modelid) REFERENCES nnml_model (modelid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT input_typeid_nmim FOREIGN KEY (input_typeid) REFERENCES ref_nnml_input_type (typeid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE UNIQUE INDEX ON nnml_model_input_map (modelid, inputnum);
+CREATE UNIQUE INDEX ON nnml_model_input_map (modelid, input_typeid, typeid);
+CREATE INDEX ON nnml_model_input_map (input_typeid, typeid);
+CREATE INDEX ON nnml_model_input_map (modelid);
+CREATE INDEX ON nnml_model_input_map (inputnum);
+CREATE INDEX ON nnml_model_input_map (input_typeid);
+CREATE INDEX ON nnml_model_input_map (typeid);
+

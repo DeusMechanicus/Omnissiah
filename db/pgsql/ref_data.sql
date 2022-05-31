@@ -639,10 +639,11 @@ INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWE
 INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('Verkada Inc'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='verkada';
 INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('MITEL CORPORATION'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='mitel';
 INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('Fanvil Technology Co., Ltd.'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='Fanvil';
-INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('Nest Labs Inc.'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='';
-INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('Lutron Electronics Co., Inc.'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='nest-labs';
+INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('Nest Labs Inc.'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='nest-labs';
+INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('Lutron Electronics Co., Inc.'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='lutron';
 INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('AutomatedLogic Corporation'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='automatedlogic';
 
+INSERT INTO ref_nnml_input_type (typeid, input_type, description) VALUES (0, '', 'for constraints');
 INSERT INTO ref_nnml_input_type (typeid, input_type, description) VALUES (1, 'ip_bits', 'bits in ip address');
 INSERT INTO ref_nnml_input_type (typeid, input_type, description) VALUES (2, 'macvendorid', 'assignmentid field of info_mac table');
 INSERT INTO ref_nnml_input_type (typeid, input_type, description) VALUES (3, 'roleid', 'subnet_roleid field of ref_subnet_role table');
@@ -712,4 +713,7 @@ INSERT INTO ref_nnml_word_source(srcid, src_name, query, min_word_num, min_word_
 INSERT INTO ref_nnml_word_source(srcid, src_name, query, min_word_num, min_word_percent, max_word_percent) VALUES (26, 'src_snmp_system', 'SELECT tmp_nnml_ip.ipid, src_snmp_system.sysdescr, '''' FROM tmp_nnml_ip INNER JOIN src_scan_ip ON tmp_nnml_ip.ip=src_scan_ip.ip INNER JOIN src_snmp_system ON src_scan_ip.ipid=src_snmp_system.ipid;', 3, 0.5, 95.0);
 
 INSERT INTO ref_osclass_manufacturer_map (vendor, manufacturerid) VALUES ('sony ericsson', 65);
+
+INSERT INTO ref_nnml_modeltype (modeltypeid, modeltype, description) VALUES (1, 'manufacturer', 'neural network to detect the manufacturer');
+INSERT INTO ref_nnml_modeltype (modeltypeid, modeltype, description) VALUES (2, 'devicetype', 'neural network to detect the device type');
 

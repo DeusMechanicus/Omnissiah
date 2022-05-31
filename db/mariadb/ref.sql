@@ -275,9 +275,9 @@ CREATE TABLE IF NOT EXISTS ref_ipaddress_source (
   tablename VARCHAR(100) DEFAULT NULL 
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `ref_scan_ip_info` (
-  `infoid` int unsigned NOT NULL PRIMARY KEY,
-  `info` varchar(256) NOT NULL UNIQUE 
+CREATE TABLE IF NOT EXISTS ref_scan_ip_info (
+  infoid int unsigned NOT NULL PRIMARY KEY,
+  info varchar(256) NOT NULL UNIQUE 
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS ref_scan_snmp_oid (
@@ -341,3 +341,10 @@ CREATE TABLE IF NOT EXISTS ref_osclass_manufacturer_map (
   KEY manufacturerid (manufacturerid), 
   CONSTRAINT manufacturerid_romm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_nnml_modeltype (
+  modeltypeid INT UNSIGNED NOT NULL PRIMARY KEY, 
+  modeltype VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+) ENGINE=InnoDB;
+
