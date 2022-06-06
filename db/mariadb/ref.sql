@@ -122,6 +122,21 @@ CREATE TABLE IF NOT EXISTS ref_devicetype (
   CONSTRAINT manufacturerid_rd FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE SET NULL ON UPDATE CASCADE 
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS ref_wlc_type (
+  wlcid INT NOT NULL PRIMARY KEY, 
+  wlc_type VARCHAR(50) NOT NULL UNIQUE, 
+  wlc_name VARCHAR(256) NOT NULL UNIQUE,
+  manufacturerid INT UNSIGNED NOT NULL, 
+  wlc_devicetypeid INT UNSIGNED NOT NULL, 
+  wap_devicetypeid INT UNSIGNED NOT NULL, 
+  KEY manufacturerid (manufacturerid), 
+  KEY wlc_devicetypeid (wlc_devicetypeid), 
+  KEY wap_devicetypeid (wap_devicetypeid), 
+  CONSTRAINT manufacturerid_rwt FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT wlc_devicetypeid_rwt FOREIGN KEY (wlc_devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT wap_devicetypeid_rwt FOREIGN KEY (wap_devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS ref_vrf ( 
   vrfid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
@@ -295,12 +310,6 @@ CREATE TABLE IF NOT EXISTS ref_static_device (
   snmp_community VARCHAR(256) DEFAULT NULL 
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS ref_wlc_type (
-  wlcid INT NOT NULL PRIMARY KEY, 
-  wlc_type VARCHAR(50) NOT NULL UNIQUE, 
-  wlc_name VARCHAR(256) NOT NULL UNIQUE 
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS ref_mac_manufacturer_map (
   mapid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
   organization VARCHAR(256) NOT NULL UNIQUE, 
@@ -348,3 +357,27 @@ CREATE TABLE IF NOT EXISTS ref_nnml_modeltype (
   description VARCHAR(256) DEFAULT NULL 
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS ref_host_uuid(
+  id INT UNSIGNED NOT NULL PRIMARY KEY, 
+  uuid VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_host_link(
+  linkid INT UNSIGNED NOT NULL PRIMARY KEY, 
+  link VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_host_option(
+  optionid INT UNSIGNED NOT NULL PRIMARY KEY, 
+  option VARCHAR(20) NOT NULL UNIQUE, 
+  weight FLOAT NOT NULL, 
+  description VARCHAR(256) DEFAULT NULL 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_host_idtype(
+  id INT UNSIGNED NOT NULL PRIMARY KEY, 
+  idtype VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+) ENGINE=InnoDB;

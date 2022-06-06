@@ -466,11 +466,11 @@ INSERT INTO ref_scan_snmp_oid (oidid, command, prescan, name, oid) VALUES (33, '
 
 INSERT INTO ref_static_device (deviceid, ip, active, snmp_community) VALUES (1, '52.9.8.62', TRUE, NULL);
 
-INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name) VALUES (1, 'mist', 'MIST Controller');
-INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name) VALUES (2, 'cisco_wlc', 'Cisco WLC');
-INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name) VALUES (3, 'ruckus_zd_wlc', 'Ruckus ZD WLC');
-INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name) VALUES (4, 'ruckus_scg_wlc', 'Ruckus SCG WLC');
-INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name) VALUES (5, 'ruckus_sz_wlc', 'Ruckus SZ WLC');
+INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name, manufacturerid, wlc_devicetypeid, wap_devicetypeid) VALUES (1, 'mist', 'MIST Controller', 35, 1506, 519);
+INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name, manufacturerid, wlc_devicetypeid, wap_devicetypeid) VALUES (2, 'cisco_wlc', 'Cisco WLC', 17, 552, 517);
+INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name, manufacturerid, wlc_devicetypeid, wap_devicetypeid) VALUES (3, 'ruckus_zd_wlc', 'Ruckus ZD WLC', 58, 1500, 1503);
+INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name, manufacturerid, wlc_devicetypeid, wap_devicetypeid) VALUES (4, 'ruckus_scg_wlc', 'Ruckus SCG WLC', 58, 1501, 1504);
+INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name, manufacturerid, wlc_devicetypeid, wap_devicetypeid) VALUES (5, 'ruckus_sz_wlc', 'Ruckus SZ WLC', 58, 1502, 1505);
 
 INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('panasonic communications co., ltd.'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='panasonic';
 INSERT INTO ref_mac_manufacturer_map (organization , manufacturerid) SELECT LOWER('ruckus wireless'), manufacturerid FROM ref_manufacturer WHERE LOWER(manufacturer_alias)='ruckus';
@@ -716,3 +716,23 @@ INSERT INTO ref_osclass_manufacturer_map (vendor, manufacturerid) VALUES ('sony 
 
 INSERT INTO ref_nnml_modeltype (modeltypeid, modeltype, description) VALUES (1, 'manufacturer', 'neural network to detect the manufacturer');
 INSERT INTO ref_nnml_modeltype (modeltypeid, modeltype, description) VALUES (2, 'devicetype', 'neural network to detect the device type');
+
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (1, 'nnml_label', 2.0, 'nnml_ip table manual labels');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (2, 'nnml_predict', 1.0, 'nnml_ip table predicted labels');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (3, 'enplug', 5.0, 'src_enplug table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (4, 'activaire', 5.0, 'src_activaire table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (5, 'mist', 4.0, 'src_mist table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (6, 'ruckussz', 4.0, 'src_ruckussz table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (7, 'wap', 3.0, 'wap from src_snmp_wap table');
+
+INSERT INTO ref_host_uuid (id, uuid, description) VALUES (1, 'enplug_eduid', 'Enplug edu uuid');
+INSERT INTO ref_host_uuid (id, uuid, description) VALUES (2, 'activaire_uuid', 'Activaire uuid');
+
+INSERT INTO ref_host_idtype (id, idtype, description) VALUES (1, 'mac', 'MAC address');
+INSERT INTO ref_host_idtype (id, idtype, description) VALUES (2, 'ip', 'IP address');
+INSERT INTO ref_host_idtype (id, idtype, description) VALUES (3, 'serial', 'Serial number');
+INSERT INTO ref_host_idtype (id, idtype, description) VALUES (4, 'enplug_eduid', 'Enplug edu uuid');
+INSERT INTO ref_host_idtype (id, idtype, description) VALUES (5, 'activaire_uuid', 'Activaire uuid');
+INSERT INTO ref_host_idtype (id, idtype, description) VALUES (6, 'asset', 'Asset number');
+
+INSERT INTO ref_host_link (linkid, link, description) VALUES (1, 'enplug_venue', 'VenueID for enplug device');

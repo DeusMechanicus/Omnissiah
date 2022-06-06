@@ -37,4 +37,13 @@ if /usr/local/lib/omnissiah/nnml_prepare.py; then
   fi
   /usr/local/lib/omnissiah/nnml_predict.py
 fi
+/usr/local/lib/omnissiah/shot_enplug.py
+/usr/local/lib/omnissiah/shot_activaire.py
+/usr/local/lib/omnissiah/shot_mist.py
+/usr/local/lib/omnissiah/shot_ruckussz.py
+/usr/local/lib/omnissiah/shot_wap.py
+/usr/local/lib/omnissiah/shot_nnml.py
+/usr/local/lib/omnissiah/shot_router.py
+/usr/local/lib/omnissiah/shot_host.py
+/usr/local/lib/omnissiah/main_host.py
 deactivate

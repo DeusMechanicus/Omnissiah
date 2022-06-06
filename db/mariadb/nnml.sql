@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS nnml_ip (
   ispublic BOOLEAN NOT NULL DEFAULT FALSE, 
   vlan INT UNSIGNED NOT NULL DEFAULT 0, 
   roleid INT UNSIGNED DEFAULT NULL, 
-  netnum smallint(6) NOT NULL DEFAULT 32,  
+  netnum SMALLINT NOT NULL DEFAULT 32,  
   label_manufacturerid INT UNSIGNED DEFAULT NULL, 
   predict_manufacturerid INT UNSIGNED DEFAULT NULL,
   label_devicetypeid INT UNSIGNED DEFAULT NULL, 

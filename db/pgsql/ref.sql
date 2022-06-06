@@ -128,6 +128,21 @@ CREATE INDEX ON ref_devicetype (model_alias);
 CREATE INDEX ON ref_devicetype (manufacturerid);
 CREATE INDEX ON ref_devicetype (parentid);
 
+CREATE TABLE IF NOT EXISTS ref_wlc_type (
+  wlcid INT NOT NULL PRIMARY KEY, 
+  wlc_type VARCHAR(50) NOT NULL UNIQUE, 
+  wlc_name VARCHAR(256) NOT NULL UNIQUE, 
+  manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
+  wlc_devicetypeid INT NOT NULL CHECK (wlc_devicetypeid>=0), 
+  wap_devicetypeid INT NOT NULL CHECK (wap_devicetypeid>=0), 
+  CONSTRAINT manufacturerid_rwt FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT wlc_devicetypeid_rwt FOREIGN KEY (wlc_devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE, 
+  CONSTRAINT wap_devicetypeid_rwt FOREIGN KEY (wap_devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE INDEX ON ref_wlc_type (manufacturerid);
+CREATE INDEX ON ref_wlc_type (wlc_devicetypeid);
+CREATE INDEX ON ref_wlc_type (wap_devicetypeid);
+
 CREATE TABLE IF NOT EXISTS ref_vrf ( 
   vrfid SERIAL NOT NULL PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
@@ -301,12 +316,6 @@ CREATE TABLE IF NOT EXISTS ref_static_device (
   snmp_community VARCHAR(256) DEFAULT NULL 
 );
 
-CREATE TABLE IF NOT EXISTS ref_wlc_type (
-  wlcid INT NOT NULL PRIMARY KEY, 
-  wlc_type VARCHAR(50) NOT NULL UNIQUE, 
-  wlc_name VARCHAR(256) NOT NULL UNIQUE 
-);
-
 CREATE TABLE IF NOT EXISTS ref_mac_manufacturer_map (
   mapid SERIAL NOT NULL PRIMARY KEY, 
   organization VARCHAR(256) NOT NULL UNIQUE, 
@@ -351,5 +360,30 @@ CREATE INDEX ON ref_osclass_manufacturer_map (manufacturerid);
 CREATE TABLE IF NOT EXISTS ref_nnml_modeltype (
   modeltypeid INT NOT NULL PRIMARY KEY CHECK (modeltypeid>=0), 
   modeltype VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS ref_host_uuid(
+  id INT NOT NULL PRIMARY KEY CHECK (id>=0), 
+  uuid VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS ref_host_link(
+  linkid INT NOT NULL PRIMARY KEY CHECK (linkid>=0), 
+  link VARCHAR(20) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS ref_host_option(
+  optionid INT NOT NULL PRIMARY KEY CHECK (optionid>=0), 
+  option VARCHAR(20) NOT NULL UNIQUE, 
+  weight FLOAT NOT NULL, 
+  description VARCHAR(256) DEFAULT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS ref_host_idtype(
+  id INT NOT NULL PRIMARY KEY CHECK (id>=0), 
+  idtype VARCHAR(20) NOT NULL UNIQUE, 
   description VARCHAR(256) DEFAULT NULL 
 );
