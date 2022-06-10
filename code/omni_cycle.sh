@@ -45,5 +45,8 @@ fi
 /usr/local/lib/omnissiah/shot_nnml.py
 /usr/local/lib/omnissiah/shot_router.py
 /usr/local/lib/omnissiah/shot_host.py
+/usr/local/lib/omnissiah/main_addr.py
 /usr/local/lib/omnissiah/main_host.py
+
+/usr/local/lib/omnissiah/hist_dump.py
 deactivate

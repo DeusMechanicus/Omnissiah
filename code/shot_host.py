@@ -70,7 +70,7 @@ def process_host_options(host_options, host_groups):
             for hoid in ids:
                 newids = ids | idsets[hoid]
                 if ids!=newids:
-                    ids = ids | idsets[hoid]
+                    idsets[id] = newids
                     intersection = True
     shosts = {str(sorted(ids, key=int)):ids for id, ids in idsets.items()}
     hosts = {}

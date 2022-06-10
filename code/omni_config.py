@@ -141,3 +141,8 @@ nnml_model_manufacturer = 'manufacturer'
 nnml_model_devicetype = 'devicetype'
 nnml_models_path = '/var/lib/omnissiah/models'
 nnml_model_filename = '{0}/{1}_{2}'
+
+#hist_dump
+hist_dumps_path = '/var/lib/omnissiah/dumps'
+hist_dump_filename = '{0}/{1}_{2}.sql.gz'
+

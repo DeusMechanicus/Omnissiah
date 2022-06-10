@@ -719,11 +719,12 @@ INSERT INTO ref_nnml_modeltype (modeltypeid, modeltype, description) VALUES (2, 
 
 INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (1, 'nnml_label', 2.0, 'nnml_ip table manual labels');
 INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (2, 'nnml_predict', 1.0, 'nnml_ip table predicted labels');
-INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (3, 'enplug', 5.0, 'src_enplug table');
-INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (4, 'activaire', 5.0, 'src_activaire table');
-INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (5, 'mist', 4.0, 'src_mist table');
-INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (6, 'ruckussz', 4.0, 'src_ruckussz table');
-INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (7, 'wap', 3.0, 'wap from src_snmp_wap table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (3, 'enplug', 6.0, 'src_enplug table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (4, 'activaire', 6.0, 'src_activaire table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (5, 'mist', 5.0, 'src_mist table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (6, 'ruckussz', 5.0, 'src_ruckussz table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (7, 'wap', 4.0, 'wap from src_snmp_wap table');
+INSERT INTO ref_host_option (optionid, option, weight, description) VALUES (8, 'router', 3.0, 'L3 devices with multiple and fake MACs');
 
 INSERT INTO ref_host_uuid (id, uuid, description) VALUES (1, 'enplug_eduid', 'Enplug edu uuid');
 INSERT INTO ref_host_uuid (id, uuid, description) VALUES (2, 'activaire_uuid', 'Activaire uuid');

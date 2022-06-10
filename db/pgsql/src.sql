@@ -611,7 +611,7 @@ CREATE TABLE IF NOT EXISTS src_if (
   vlanid INT DEFAULT NULL CHECK (vlanid>=0), 
   vlan INT NOT NULL DEFAULT 0 CHECK (vlan>=0), 
   roleid INT DEFAULT NULL CHECK (roleid>=0), 
-  connectedto BIGINT DEFAULT NULL
+  connectedto BIGINT DEFAULT NULL, 
   macs INT NOT NULL DEFAULT 0 CHECK (macs>=0),
   ifphysaddress VARCHAR(12) DEFAULT NULL, 
   ifphysaddressnum BIGINT DEFAULT NULL CHECK (ifphysaddressnum>=0), 

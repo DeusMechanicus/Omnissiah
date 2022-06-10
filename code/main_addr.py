@@ -15,7 +15,7 @@ def main():
         exitcode = 1
         program = OmniProgram(omni_config.log_path, omni_config.log_level, omni_config.log_format, omni_config.log_date_format)
         omnidb = OmniDB(omni_config.dbtype, omni_config.dbhost, omni_config.dbname,
-            omni_unpwd.db_info_user, omni_unpwd.db_info_password, log=program.log, program=program.name, ssl=omni_config.dbssl)
+            omni_unpwd.db_main_user, omni_unpwd.db_main_password, log=program.log, program=program.name, ssl=omni_config.dbssl)
         omnidb.run_program_queries()
         omnidb.close()
         exitcode = 0
