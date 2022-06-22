@@ -35,3 +35,8 @@ mist_api_password = ''
 #ruckussz
 ruckussz_api_username = ''
 ruckussz_api_password = ''
+
+#zabbix
+zbx_userpasstoken = {'ro':{'username':'omnissiah_ro', 'password':'', 'token':''},
+    'rw':{'username':'omnissiah_rw', 'password':'', 'token':''},
+    'sa':{'username':'omnissiah_sa', 'password':'', 'token':''}}

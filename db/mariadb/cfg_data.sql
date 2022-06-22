@@ -6,4 +6,8 @@ INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('max_hist_dump_r
 INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('main_host_keep_inactive', '', '90');
 INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('zbx_host_keep_inactive', '', '30');
 INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('main_host_change_delay', '', '3');
-
+INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('zbx_history_records', '', '10');
+INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('zbx_host_keep_monitored', '', '14');
+INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('zbx_host_keep_enabled', '', '21');
+INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('zbx_device_host_template', '', 'Template Omnisiah Device');
+INSERT INTO cfg_parameter (parameter, tablename, value) VALUES ('zbx_group_host_template', '', 'Template Omnisiah Group Host');

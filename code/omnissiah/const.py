@@ -50,3 +50,6 @@ nnml_manufacturers_trains = [{'epochs':128, 'batches':128, 'lr':0.0005}, {'epoch
 nnml_devicetypes_dropout = 0.05
 nnml_devicetypes_trains = [{'epochs':64, 'batches':256, 'lr':0.0005}, {'epochs':8, 'batches':0, 'lr':0.0005},
 {'epochs':32, 'batches':128, 'lr':0.0002}, {'epochs':8, 'batches':0, 'lr':0.0002}]
+
+zbx_zabbix_timeout = 600
+zbx_update_zbx_omni_map_sql = 'UPDATE zbx_omni_map SET omniid={0}, zbxid={1} WHERE mapid={2};'

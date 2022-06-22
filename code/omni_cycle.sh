@@ -47,6 +47,10 @@ fi
 /usr/local/lib/omnissiah/shot_host.py
 /usr/local/lib/omnissiah/main_addr.py
 /usr/local/lib/omnissiah/main_host.py
-
+/usr/local/lib/omnissiah/zbx_zbx2omni.py
+/usr/local/lib/omnissiah/zbx_main2zbx.py
+/usr/local/lib/omnissiah/zbx_omni2zbx.py
+/usr/local/lib/omnissiah/zbx_zbx2omni.py
+#/usr/local/lib/omnissiah/zbx_zbx2main.py
 /usr/local/lib/omnissiah/hist_dump.py
 deactivate

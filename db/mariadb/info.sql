@@ -564,3 +564,4 @@ CREATE TABLE IF NOT EXISTS info_nnml_word (
   KEY word (word), 
   CONSTRAINT srcid_inw FOREIGN KEY (srcid) REFERENCES ref_nnml_word_source (srcid) ON DELETE CASCADE ON UPDATE CASCADE 
 ) ENGINE=InnoDB;
+

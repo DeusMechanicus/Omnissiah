@@ -387,3 +387,70 @@ CREATE TABLE IF NOT EXISTS ref_host_idtype(
   idtype VARCHAR(20) NOT NULL UNIQUE, 
   description VARCHAR(256) DEFAULT NULL 
 );
+
+CREATE TABLE IF NOT EXISTS ref_zbx_omni_map (
+  mapid INT PRIMARY KEY NOT NULL CHECK (mapid>=0) , 
+  omni_table VARCHAR(50) NOT NULL UNIQUE, 
+  omni_field VARCHAR(50) NOT NULL, 
+  zbx_table VARCHAR(50) NOT NULL UNIQUE, 
+  zbx_field VARCHAR(50) NOT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS ref_site_info (
+  siteid INT PRIMARY KEY NOT NULL CHECK (siteid>=0), 
+  zbx_proxy VARCHAR(128) DEFAULT NULL 
+);
+CREATE INDEX ON ref_site_info (zbx_proxy);
+
+CREATE TABLE IF NOT EXISTS ref_zbx_group (
+  groupid INT PRIMARY KEY NOT NULL CHECK (groupid>=0), 
+  name VARCHAR(50) NOT NULL UNIQUE, 
+  prefix VARCHAR(50) NOT NULL UNIQUE, 
+  table_name VARCHAR(50) DEFAULT NULL, 
+  field_name VARCHAR(50) DEFAULT NULL, 
+  id_field VARCHAR(50) NOT NULL, 
+  parent_field VARCHAR(50) DEFAULT NULL 
+);
+CREATE INDEX ON ref_zbx_group (table_name); 
+
+CREATE TABLE IF NOT EXISTS ref_zbx_device_template (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  devicetypeid INT NOT NULL CHECK (devicetypeid>=0), 
+  template VARCHAR(128) NOT NULL, 
+  type INT NOT NULL, 
+  version INT DEFAULT NULL, 
+  bulk INT DEFAULT NULL, 
+  CONSTRAINT devicetypeid_rzdt FOREIGN KEY (devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE UNIQUE INDEX ON ref_zbx_device_template (devicetypeid);
+CREATE INDEX ON ref_zbx_device_template (template);
+
+CREATE TABLE IF NOT EXISTS ref_zbx_group_template (
+  id SERIAL NOT NULL PRIMARY KEY, 
+  groupid INT NOT NULL CHECK (groupid>=0), 
+  template VARCHAR(128) NOT NULL, 
+  CONSTRAINT groupid_rzgt FOREIGN KEY (groupid) REFERENCES ref_zbx_group (groupid) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+CREATE UNIQUE INDEX ON ref_zbx_group_template (groupid);
+CREATE INDEX ON ref_zbx_group_template (template);
+
+CREATE TABLE ref_zbx_macro (
+  macroid INT NOT NULL PRIMARY KEY CHECK (macroid>=0),
+  name VARCHAR(20) NOT NULL UNIQUE,
+  macro VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE ref_zbx_host_tag (
+  tag varchar(255) NOT NULL PRIMARY KEY,
+  source varchar(20) NOT NULL,
+  field varchar(50) NOT NULL
+);
+CREATE INDEX ON ref_zbx_host_tag (source);
+CREATE INDEX ON ref_zbx_host_tag (field);
+
+CREATE TABLE IF NOT EXISTS ref_zbx_tech_group (
+  groupid INT NOT NULL PRIMARY KEY CHECK (groupid>=0), 
+  name VARCHAR(50) NOT NULL UNIQUE, 
+  name_alias VARCHAR(50) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+);

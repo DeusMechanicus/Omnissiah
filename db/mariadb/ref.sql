@@ -381,3 +381,71 @@ CREATE TABLE IF NOT EXISTS ref_host_idtype(
   idtype VARCHAR(20) NOT NULL UNIQUE, 
   description VARCHAR(256) DEFAULT NULL 
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_zbx_omni_map (
+  mapid INT UNSIGNED PRIMARY KEY NOT NULL, 
+  omni_table VARCHAR(50) NOT NULL UNIQUE, 
+  omni_field VARCHAR(50) NOT NULL, 
+  zbx_table VARCHAR(50) NOT NULL UNIQUE, 
+  zbx_field VARCHAR(50) NOT NULL 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_site_info (
+  siteid INT UNSIGNED PRIMARY KEY NOT NULL, 
+  zbx_proxy VARCHAR(128) DEFAULT NULL, 
+  KEY zbx_proxy (zbx_proxy), 
+  CONSTRAINT siteid_rsi FOREIGN KEY (siteid) REFERENCES ref_site (siteid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_zbx_group (
+  groupid INT UNSIGNED PRIMARY KEY NOT NULL, 
+  name VARCHAR(50) NOT NULL UNIQUE, 
+  prefix VARCHAR(50) NOT NULL UNIQUE, 
+  table_name VARCHAR(50) DEFAULT NULL, 
+  field_name VARCHAR(50) DEFAULT NULL, 
+  id_field VARCHAR(50) NOT NULL, 
+  parent_field VARCHAR(50) DEFAULT NULL, 
+  KEY table_name (table_name) 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_zbx_device_template (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  devicetypeid INT UNSIGNED NOT NULL, 
+  template VARCHAR(128) NOT NULL, 
+  type INT NOT NULL, 
+  version INT DEFAULT NULL, 
+  bulk INT DEFAULT NULL, 
+  UNIQUE KEY devicetypeid (devicetypeid), 
+  KEY template (template), 
+  CONSTRAINT devicetypeid_rzdt FOREIGN KEY (devicetypeid) REFERENCES ref_devicetype (devicetypeid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_zbx_group_template (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+  groupid INT UNSIGNED NOT NULL, 
+  template VARCHAR(128) NOT NULL, 
+  UNIQUE KEY groupid (groupid), 
+  KEY template (template), 
+  CONSTRAINT groupid_rzgt FOREIGN KEY (groupid) REFERENCES ref_zbx_group (groupid) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE=InnoDB;
+
+CREATE TABLE ref_zbx_macro (
+  macroid INT UNSIGNED NOT NULL PRIMARY KEY,
+  name VARCHAR(20) NOT NULL UNIQUE,
+  macro VARCHAR(255) NOT NULL UNIQUE
+) ENGINE=InnoDB;
+
+CREATE TABLE ref_zbx_host_tag (
+  tag varchar(255) NOT NULL PRIMARY KEY,
+  source varchar(20) NOT NULL,
+  field varchar(50) NOT NULL,
+  KEY source (source),
+  KEY field (field)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ref_zbx_tech_group (
+  groupid INT UNSIGNED NOT NULL PRIMARY KEY, 
+  name VARCHAR(50) NOT NULL UNIQUE, 
+  name_alias VARCHAR(50) NOT NULL UNIQUE, 
+  description VARCHAR(256) DEFAULT NULL 
+) ENGINE=InnoDB;

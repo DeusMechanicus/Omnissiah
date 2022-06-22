@@ -146,3 +146,8 @@ nnml_model_filename = '{0}/{1}_{2}'
 hist_dumps_path = '/var/lib/omnissiah/dumps'
 hist_dump_filename = '{0}/{1}_{2}.sql.gz'
 
+#zabbix
+zabbix_url = 'https://127.0.0.1/'
+#zabbix_url = 'http://127.0.0.1/'
+zbx_item_pool_size = 10000
+zbx_omnissiah_maintenance_group = 'Omnissiah maintenance'

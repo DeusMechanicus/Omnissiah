@@ -737,3 +737,42 @@ INSERT INTO ref_host_idtype (id, idtype, description) VALUES (5, 'activaire_uuid
 INSERT INTO ref_host_idtype (id, idtype, description) VALUES (6, 'asset', 'Asset number');
 
 INSERT INTO ref_host_link (linkid, link, description) VALUES (1, 'enplug_venue', 'VenueID for enplug device');
+
+INSERT INTO ref_zbx_omni_map (mapid, omni_table, omni_field, zbx_table, zbx_field) VALUES (1, 'zbx_omni_maintenances', 'maintenanceid', 'zbx_zbx_maintenances', 'maintenanceid');
+INSERT INTO ref_zbx_omni_map (mapid, omni_table, omni_field, zbx_table, zbx_field) VALUES (2, 'zbx_omni_hstgrp', 'groupid', 'zbx_zbx_hstgrp', 'groupid');
+INSERT INTO ref_zbx_omni_map (mapid, omni_table, omni_field, zbx_table, zbx_field) VALUES (3, 'zbx_omni_hosts', 'hostid', 'zbx_zbx_hosts', 'hostid');
+INSERT INTO ref_zbx_omni_map (mapid, omni_table, omni_field, zbx_table, zbx_field) VALUES (4, 'zbx_omni_interface', 'interfaceid', 'zbx_zbx_interface', 'interfaceid');
+INSERT INTO ref_zbx_omni_map (mapid, omni_table, omni_field, zbx_table, zbx_field) VALUES (5, 'zbx_omni_hostmacro', 'hostmacroid', 'zbx_zbx_hostmacro', 'hostmacroid');
+
+INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (0, 'technical', '', 'ref_zbx_tech_group', 'name', 'groupid', NULL);
+INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (1, 'devicetype', 'Device', 'ref_devicetype', 'model', 'devicetypeid', 'parentid');
+INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (2, 'manufacturer', 'Vendor', 'ref_manufacturer', 'manufacturer', 'manufacturerid', NULL);
+INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (3, 'region', 'Region', 'ref_region', 'region', 'regionid', 'parentid');
+INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (4, 'site', 'Site', 'ref_site', 'site', 'siteid', NULL);
+INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (5, 'tenant', 'Tenant', 'ref_tenant', 'tenant', 'tenantid', NULL);
+INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (6, 'statistic', 'Statistic', 'ref_zbx_group', 'prefix', 'groupid', NULL);
+
+INSERT INTO ref_zbx_group_template (groupid, template) VALUES (1, 'Template Omnisiah Group Device');
+INSERT INTO ref_zbx_group_template (groupid, template) VALUES (2, 'Template Omnisiah Group Manufacturer');
+INSERT INTO ref_zbx_group_template (groupid, template) VALUES (3, 'Template Omnisiah Group Region');
+INSERT INTO ref_zbx_group_template (groupid, template) VALUES (4, 'Template Omnisiah Group Site');
+INSERT INTO ref_zbx_group_template (groupid, template) VALUES (5, 'Template Omnisiah Group Tenant');
+
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (1, 'groupname', '{$GROUP_NAME}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (2, 'mac', '{$MAC}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (3, 'snmp_community', '{$SNMP_COMMUNITY}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (4, 'region', '{$REGION}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (5, 'site', '{$SITE}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (6, 'vlan', '{$VLAN}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (7, 'subnet_role', '{$SUBNET_ROLE}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (8, 'idoncontroller', '{$IDONCONTROLLER}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (9, 'enplugid', '{$ENPLUGID}');
+INSERT INTO ref_zbx_macro (macroid, name, macro) VALUES (10, 'activaireid', '{$ACTIVAIREID}');
+
+INSERT INTO ref_zbx_host_tag (tag, source, field) VALUES ('site', 'macro', 'site');
+INSERT INTO ref_zbx_host_tag (tag, source, field) VALUES ('region', 'macro', 'region');
+INSERT INTO ref_zbx_host_tag (tag, source, field) VALUES ('vlan', 'macro', 'vlan');
+INSERT INTO ref_zbx_host_tag (tag, source, field) VALUES ('devicetype', 'inventory', 'type');
+INSERT INTO ref_zbx_host_tag (tag, source, field) VALUES ('vendor', 'inventory', 'vendor');
+
+INSERT INTO ref_zbx_tech_group (groupid, name, name_alias, description) VALUES (1, 'Omnissiah maintenance', 'omnissiah_maintenance', 'Group name for Omnissiah maintenance');
