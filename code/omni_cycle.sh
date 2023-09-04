@@ -1,56 +1,56 @@
 #!/bin/bash
-source omnienv/bin/activate
 
-if /usr/local/lib/omnissiah/raw_mac.py; then
-  /usr/local/lib/omnissiah/info_mac.py
+source omnienv/bin/activate
+if ./raw_mac.py; then
+  ./info_mac.py
 fi
-if /usr/local/lib/omnissiah/raw_netbox.py; then
-  if /usr/local/lib/omnissiah/info_netbox.py; then
-    /usr/local/lib/omnissiah/ref_netbox.py
-#    /usr/local/lib/omnissiah/src_netbox.py
+if ./raw_netbox.py; then
+  if ./info_netbox.py; then
+    ./ref_netbox.py
+#    ./src_netbox.py
   fi
 fi
-if /usr/local/lib/omnissiah/raw_enplug.py; then
-  /usr/local/lib/omnissiah/src_enplug.py
+if ./raw_enplug.py; then
+  ./src_enplug.py
 fi
-fi /usr/local/lib/omnissiah/raw_activaire.py; then
-  /usr/local/lib/omnissiah/src_activaire.py
+fi ./raw_activaire.py; then
+  ./src_activaire.py
 fi
-fi /usr/local/lib/omnissiah/raw_mist.py; then
-  /usr/local/lib/omnissiah/src_mist.py
+if ./raw_mist.py; then
+  ./src_mist.py
 fi
-if /usr/local/lib/omnissiah/raw_scan.py; then
-  if /usr/local/lib/omnissiah/raw_map.py; then
-    /usr/local/lib/omnissiah/raw_snmp.py
-    /usr/local/lib/omnissiah/raw_ruckussz.py
-    if /usr/local/lib/omnissiah/src_scan.py; then
-      if /usr/local/lib/omnissiah/src_snmp.py; then
-        /usr/local/lib/omnissiah/src_ruckussz.py
+if ./raw_scan.py; then
+  if ./raw_map.py; then
+    ./raw_snmp.py
+    ./raw_ruckussz.py
+    if ./src_scan.py; then
+      if ./src_snmp.py; then
+        ./src_ruckussz.py
       fi
     fi
   fi
 fi
-/usr/local/lib/omnissiah/src_addr.py
-if /usr/local/lib/omnissiah/nnml_prepare.py; then
-  if /usr/local/lib/omnissiah/nnml_label.py; then
-    /usr/local/lib/omnissiah/nnml_train.py
+./src_addr.py
+if ./nnml_prepare.py; then
+  if ./nnml_label.py; then
+    ./nnml_train.py
   fi
-  /usr/local/lib/omnissiah/nnml_predict.py
+  ./nnml_predict.py
 fi
-/usr/local/lib/omnissiah/shot_enplug.py
-/usr/local/lib/omnissiah/shot_activaire.py
-/usr/local/lib/omnissiah/shot_mist.py
-/usr/local/lib/omnissiah/shot_ruckussz.py
-/usr/local/lib/omnissiah/shot_wap.py
-/usr/local/lib/omnissiah/shot_nnml.py
-/usr/local/lib/omnissiah/shot_router.py
-/usr/local/lib/omnissiah/shot_host.py
-/usr/local/lib/omnissiah/main_addr.py
-/usr/local/lib/omnissiah/main_host.py
-/usr/local/lib/omnissiah/zbx_zbx2omni.py
-/usr/local/lib/omnissiah/zbx_main2zbx.py
-/usr/local/lib/omnissiah/zbx_omni2zbx.py
-/usr/local/lib/omnissiah/zbx_zbx2omni.py
-#/usr/local/lib/omnissiah/zbx_zbx2main.py
-/usr/local/lib/omnissiah/hist_dump.py
+./shot_enplug.py
+./shot_activaire.py
+./shot_mist.py
+./shot_ruckussz.py
+./shot_wap.py
+./shot_nnml.py
+./shot_router.py
+./shot_host.py
+./main_addr.py
+./main_host.py
+./zbx_zbx2omni.py
+./zbx_main2zbx.py
+./zbx_omni2zbx.py
+./zbx_zbx2omni.py
+#./zbx_zbx2main.py
+./hist_dump.py
 deactivate

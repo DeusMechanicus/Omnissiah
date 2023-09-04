@@ -24,7 +24,7 @@ or you can use wget:
 ```
 sudo mkdir /usr/local/src/omnissiah
 cd /usr/local/src/omnissiah
-sudo wget -O - https://github.com/DeusMechanicus/Omnissiah/archive/master.tar.gz | tar xz --strip-components=1
+sudo wget -O - https://github.com/DeusMechanicus/Omnissiah/archive/master.tar.gz | sudo tar xz --strip-components=1
 ```
 ## Installation
 
