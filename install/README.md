@@ -35,23 +35,23 @@ The configuration consists of two parts:
 * setting up programs that are used by omnissiah
 * setting up omnissiah programs
 
-### Configure programs used by omnissiah
+## Configure programs used by omnissiah
 
-#### Configure databases
+### Configure databases
 
-#### Configure mariadb
+### Configure mariadb
 
-#### Configure postgresql
+### Configure postgresql
 
-#### Configure Netbox
+### Configure Netbox
 
-#### Configure Zabbix
+### Configure Zabbix
 
-### Configuring omnissiah
+## Configuring omnissiah
 
-#### Create database
+### Create database
 
-#### Configuration files
+### Configuration files
 Omnissiah is located in the /usr/local/lib/omnissiah directory and has two configuration files. Both files are python scripts with variable values set.
 * omni_config.py - file with variables controlling the work of omnissiah scripts
 * omni_unpwd.py - file with usernames, passwords, tokens, keys and other sensitive information
