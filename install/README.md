@@ -28,9 +28,29 @@ The installation script will do the following:
 * installs the required python libraries into this virtual env
 * copies the project files and sets their permissions
 After that, the user will be asked in turn about the need to install Mariadb server, Postgresql server, netbox and Zabbix. Answering Yes(y) will install these programs. If you plan to install these programs on other servers or already have them, answer No(n) to the questions.
-The purpose of the installed ones is described in more detail in the [Omnissiah architecture](./docs/architecture.pdf)
-The installation process is described in more detail in the [documentation](./docs/install.pdf)
+The purpose of the installed ones is described in more detail in the [Omnissiah architecture](../docs/architecture.pdf)
+The installation process is described in more detail in the [documentation](../docs/install.pdf)
 ## Configure
 The configuration consists of two parts:
 * setting up programs that are used by omnissiah
 * setting up omnissiah programs
+###Configure programs used by omnissiah
+
+####Configure databases
+
+#####Configure mariadb
+
+#####Configure postgresql
+
+####Configure Netbox
+
+####Configure Zabbix
+
+###Configuring omnissiah
+
+###Create database
+
+###Configuration files
+Omnissiah is located in the /usr/local/lib/omnissiah directory and has two configuration files. Both files are python scripts with variable values set.
+* omni_config.py - file with variables controlling the work of omnissiah scripts
+* omni_unpwd.py - file with usernames, passwords, tokens, keys and other sensitive information
