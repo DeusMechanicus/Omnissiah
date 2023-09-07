@@ -27,7 +27,7 @@ cd /usr/local/src/omnissiah
 sudo wget -O - https://github.com/DeusMechanicus/Omnissiah/archive/master.tar.gz | sudo tar xz --strip-components=1
 ```
 ## Installation
-Installation is described in the corresponding [section](/install) or in the [documentation](/docs/install.pdf)
+Installation is described in the install [section](/install) or in the [documentation](/docs/install.pdf)
 
 ## Directories
 * code - project code
