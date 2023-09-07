@@ -34,17 +34,18 @@ The installation process is described in more detail in the [documentation](../d
 The configuration consists of two parts:
 * setting up programs that are used by omnissiah
 * setting up omnissiah programs
+
 ###Configure programs used by omnissiah
 
-####Configure databases
+###Configure databases
 
-#####Configure mariadb
+###Configure mariadb
 
-#####Configure postgresql
+###Configure postgresql
 
-####Configure Netbox
+###Configure Netbox
 
-####Configure Zabbix
+###Configure Zabbix
 
 ###Configuring omnissiah
 
