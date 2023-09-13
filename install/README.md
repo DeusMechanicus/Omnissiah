@@ -89,7 +89,7 @@ Read [Installation] (https://www.zabbix.com/download?zabbix=6.0&os_distribution=
 ## Configuring omnissiah
 
 ### Create database
-You need to choose which database you will use for Omnissiah. After that, create a database, tables and load records. Instructions for [mariadb](../db/mariadb) and [postgresql](../db/psql) are in their respective sections.
+You need to choose which database you will use for Omnissiah. After that, create a database, tables and load records. Instructions for [mariadb](../db/mariadb) and [postgresql](../db/pgsql) are in their respective sections.
 ### Configuration files
 Omnissiah is located in the /usr/local/lib/omnissiah directory and has two configuration files. Both files are python scripts with variable values set.
 * omni_config.py - file with variables controlling the work of omnissiah scripts
