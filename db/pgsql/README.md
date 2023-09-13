@@ -26,7 +26,7 @@ edit and run db.sh script
 ## Tables creation
 run command
 ```
-mysql -h <host> -u <username> -p<password> <database> < <filename>
+psql <database> < <filename>
 ```
 for every filename. Example for local server and omnissiah database
 ```
