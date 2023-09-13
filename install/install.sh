@@ -6,6 +6,7 @@ homepath=/var/lib/omnissiah
 logpath=/var/log/omnissiah
 
 adduser --system --home $homepath --group --disabled-login $usergroup
+usermod -aG sudo omnissiah
 chmod 750 $homepath
 mkdir $usrpath
 chown $usergroup $usrpath
