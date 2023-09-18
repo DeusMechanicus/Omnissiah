@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS shot_host_option_link (
   linkid INT UNSIGNED NOT NULL, 
   uuid VARCHAR(256) NOT NULL, 
   UNIQUE KEY optionhostlink (optionid, hostid, linkid), 
-  KEY hostlink (hostid, linkid);
+  KEY hostlink (hostid, linkid),
   KEY linkid (linkid), 
   KEY optionid (optionid), 
   KEY hostid (hostid), 

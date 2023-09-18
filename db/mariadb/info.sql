@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS info_mac (
   assignmentid INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-  assignment VARCHAR(12) NOT NULL PRIMARY KEY, 
+  assignment VARCHAR(12) NOT NULL UNIQUE, 
   registry VARCHAR(16) NOT NULL, 
   organization VARCHAR(256) NOT NULL, 
   address VARCHAR(256) DEFAULT NULL, 
@@ -541,15 +541,6 @@ CREATE TABLE IF NOT EXISTS info_nnml_osclass_osfamily (
 CREATE TABLE IF NOT EXISTS info_nnml_osclass_cpe (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
   cpe varchar(100) NOT NULL UNIQUE 
-) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS info_nnml_word_source (
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-  srcid INT UNSIGNED NOT NULL,
-  groupname VARCHAR(100) NOT NULL, 
-  UNIQUE KEY srcgroup (srcid, groupname), 
-  KEY srcid (srcid), 
-  KEY groupname (groupname) 
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS info_nnml_word (

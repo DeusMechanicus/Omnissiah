@@ -5,7 +5,7 @@ INSERT INTO ref_region (regionid, netboxid, region, region_alias, description, p
 
 INSERT INTO ref_site (siteid, netboxid, site, site_alias, description, active, regionid, groupid, tenantid, facility, time_zone, physical_address, shipping_address, latitude, longitude, contact_name, contact_phone, contact_email, importance, comments) VALUES (0, NULL, '', '', NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL);
 
-INSERT INTO ref_manufacturer manufacturerid, netboxid, manufacturer, manufacturer_alias, description) VALUES (0, NULL, '', '', NULL);
+INSERT INTO ref_manufacturer (manufacturerid, netboxid, manufacturer, manufacturer_alias, description) VALUES (0, NULL, '', '', NULL);
 INSERT INTO ref_manufacturer (manufacturerid, netboxid, manufacturer, manufacturer_alias, description) VALUES (1000, NULL, 'Undefined', 'undefined', NULL);
 INSERT INTO ref_manufacturer (manufacturerid, netboxid, manufacturer, manufacturer_alias, description) VALUES (1, NULL, 'Activaire', 'activaire', NULL);
 INSERT INTO ref_manufacturer (manufacturerid, netboxid, manufacturer, manufacturer_alias, description) VALUES (2, NULL, 'Advidia', 'advidia', NULL);
@@ -416,10 +416,10 @@ INSERT INTO ref_ipfamily (familyid, family) VALUES (2, 'IPv6');
 INSERT INTO ref_ipaddress_role (ipaddress_roleid, ipaddress_role) VALUES (1, 'Loopback');
 INSERT INTO ref_ipaddress_role (ipaddress_roleid, ipaddress_role) VALUES (2, 'Secondary');
 
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (1, 'IP prefix from ref', 'ref_ipprefix');
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (2, 'IP range from ref', 'ref_iprange');
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (3, 'IP address from ref', 'ref_ipaddress');
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (4, 'Static IP address from ref', 'ref_static_device');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (1, 'IP prefix from ref', 'ref_ipprefix');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (2, 'IP range from ref', 'ref_iprange');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (3, 'IP address from ref', 'ref_ipaddress');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (4, 'Static IP address from ref', 'ref_static_device');
 
 INSERT INTO ref_scan_ip_info (infoid, info) VALUES (1, 'snmp_community');
 INSERT INTO ref_scan_ip_info (infoid, info) VALUES (2, 'ssh_username');

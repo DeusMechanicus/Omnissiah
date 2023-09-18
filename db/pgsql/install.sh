@@ -9,6 +9,7 @@ psql omnissiah < log.sql
 psql omnissiah < pre.sql
 psql omnissiah < ref.sql
 psql omnissiah < raw.sql
+psql omnissiah < info.sql
 psql omnissiah < src.sql
 psql omnissiah < nnml.sql
 psql omnissiah < main.sql

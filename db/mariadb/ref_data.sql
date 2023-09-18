@@ -416,10 +416,10 @@ INSERT INTO ref_ipfamily (familyid, family) VALUES (2, 'IPv6');
 INSERT INTO ref_ipaddress_role (ipaddress_roleid, ipaddress_role) VALUES (1, 'Loopback');
 INSERT INTO ref_ipaddress_role (ipaddress_roleid, ipaddress_role) VALUES (2, 'Secondary');
 
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (1, 'IP prefix from ref', 'ref_ipprefix');
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (2, 'IP range from ref', 'ref_iprange');
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (3, 'IP address from ref', 'ref_ipaddress');
-INSERT INTO ref_ipaddress_source (sourceid, description, tablename) VALUES (4, 'Static IP address from ref', 'ref_static_device');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (1, 'IP prefix from ref', 'ref_ipprefix');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (2, 'IP range from ref', 'ref_iprange');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (3, 'IP address from ref', 'ref_ipaddress');
+INSERT INTO ref_ipaddress_source (sourceid, source, tablename) VALUES (4, 'Static IP address from ref', 'ref_static_device');
 
 INSERT INTO ref_scan_ip_info (infoid, info) VALUES (1, 'snmp_community');
 INSERT INTO ref_scan_ip_info (infoid, info) VALUES (2, 'ssh_username');

@@ -17,6 +17,7 @@ The files are listed in the order you should run them:
 * cfg_data.sql - filling cfg_ tables with records
 * code_data.sql - filling code_ tables with records
 * ref_data.sql - filling ref_ tables with records
+
 No database or tables are dropped in these files. If you have not a new installation, then you need to delete the old tables, the old database or use a different database.
 ## Installation
 edit and run install.sh script or run commands one by one step by step

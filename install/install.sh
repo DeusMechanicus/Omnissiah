@@ -21,6 +21,7 @@ chmod -R 640 $usrpath/*
 chmod u+x,g+x $usrpath/*.py
 
 apt install -y gcc
+apt install net-tools
 apt install -y snmp libsnmp-dev
 apt install -y mariadb-client libmariadb-dev
 apt install -y postgresql-client

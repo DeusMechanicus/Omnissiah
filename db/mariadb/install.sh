@@ -1,18 +1,28 @@
 #!/bin/bash
-mysql -h localhost -u root -pomnissiah < db.sql
+dbhost=localhost
+dbport=3306
+dbname=omnissiah
+username=omnissiah
+password=omnissiah
 
-mysql -h localhost -u root -pomnissiah < cfg.sql
-mysql -h localhost -u root -pomnissiah < code.sql
-mysql -h localhost -u root -pomnissiah < log.sql
-mysql -h localhost -u root -pomnissiah < pre.sql
-mysql -h localhost -u root -pomnissiah < ref.sql
-mysql -h localhost -u root -pomnissiah < raw.sql
-mysql -h localhost -u root -pomnissiah < src.sql
-mysql -h localhost -u root -pomnissiah < nnml.sql
-mysql -h localhost -u root -pomnissiah < main.sql
-mysql -h localhost -u root -pomnissiah < hist.sql
-mysql -h localhost -u root -pomnissiah < zbx.sql
-mysql -h localhost -u root -pomnissiah < tmp.sql
-mysql -h localhost -u root -pomnissiah < cfg_data.sql
-mysql -h localhost -u root -pomnissiah < code_data.sql
-mysql -h localhost -u root -pomnissiah < ref_data.sql
+mysql -u root < db.sql
+
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < cfg.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < code.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < log.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < ref.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < raw.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < info.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < src.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < nnml.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < shot.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < main.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < hist.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < zbx.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < tmp.sql
+
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < cfg_data.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < code_data.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < ref_data.sql
+
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < users.sql

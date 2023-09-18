@@ -533,15 +533,6 @@ CREATE TABLE IF NOT EXISTS info_nnml_osclass_cpe (
   cpe varchar(100) NOT NULL UNIQUE 
 );
 
-CREATE TABLE IF NOT EXISTS info_nnml_word_source (
-  id SERIAL NOT NULL PRIMARY KEY, 
-  srcid INT NOT NULL CHECK (srcid>=0),
-  groupname VARCHAR(100) NOT NULL 
-);
-CREATE UNIQUE INDEX ON info_nnml_word_source (srcid, groupname);
-CREATE INDEX ON info_nnml_word_source (srcid);
-CREATE INDEX ON info_nnml_word_source (groupname);
-
 CREATE TABLE IF NOT EXISTS info_nnml_word (
   id SERIAL NOT NULL PRIMARY KEY, 
   srcid INT NOT NULL CHECK (srcid>=0),
