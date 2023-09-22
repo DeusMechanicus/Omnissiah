@@ -1403,10 +1403,10 @@ INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALU
 INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 23, 'CREATE INDEX ON tmp_nnml_input (typeid);', 1);
 INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 30, 'CREATE TEMPORARY TABLE tmp_intid (id INT NOT NULL PRIMARY KEY);', 1);
 INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 40, 'CREATE TEMPORARY TABLE tmp_nnml_ip_input (id SERIAL NOT NULL PRIMARY KEY, ipid INT NOT NULL , inputid INT NOT NULL, value FLOAT NOT NULL);', 1);
-INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (702, 1, 41, 'CREATE UNIQUE INDEX ON tmp_nnml_ip_input (ipid, inputid);', 1);
-INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (702, 1, 42, 'CREATE INDEX ON tmp_nnml_ip_input (ipid);', 1);
-INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (702, 1, 43, 'CREATE INDEX ON tmp_nnml_ip_input (inputid);', 1);
-INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (702, 1, 44, 'CREATE INDEX ON tmp_nnml_ip_input (value);', 1);
+INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 41, 'CREATE UNIQUE INDEX ON tmp_nnml_ip_input (ipid, inputid);', 1);
+INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 42, 'CREATE INDEX ON tmp_nnml_ip_input (ipid);', 1);
+INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 43, 'CREATE INDEX ON tmp_nnml_ip_input (inputid);', 1);
+INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 44, 'CREATE INDEX ON tmp_nnml_ip_input (value);', 1);
 INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 50, 'CREATE TEMPORARY TABLE tmp_src_scan_script (id BIGINT NOT NULL PRIMARY KEY, portid BIGINT NOT NULL, script VARCHAR(100) NOT NULL, value VARCHAR(600) NOT NULL);', 1);
 INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 51, 'CREATE UNIQUE INDEX ON tmp_src_scan_script (portid, script);', 1);
 INSERT INTO code_program_query (programid, stage, priority, query, enabled) VALUES (701, 1, 52, 'CREATE INDEX ON tmp_src_scan_script (script, value);', 1);

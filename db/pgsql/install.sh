@@ -1,21 +1,30 @@
 #!/bin/bash
-sudo -u postgres bash
-createuser --pwomnissiah omnissiah
-createdb -O omnissiah -E Unicode -T template0 omnissiah
+dbhost=localhost
+dbport=5432
+dbname=omnissiah
+username=omnissiah
+password=omnissiah
 
-psql omnissiah < cfg.sql
-psql omnissiah < code.sql
-psql omnissiah < log.sql
-psql omnissiah < pre.sql
-psql omnissiah < ref.sql
-psql omnissiah < raw.sql
-psql omnissiah < info.sql
-psql omnissiah < src.sql
-psql omnissiah < nnml.sql
-psql omnissiah < main.sql
-psql omnissiah < hist.sql
-psql omnissiah < zbx.sql
-psql omnissiah < tmp.sql
-psql omnissiah < cfg_data.sql
-psql omnissiah < code_data.sql
-psql omnissiah < ref_data.sql
+cd /usr/local/src/omnissiah/db/pgsql
+sudo -u postgres psql < db.sql
+
+export PGPASSWORD="$password"
+
+psql -h $dbhost -p $dbport -d $dbname -U $username < cfg.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < code.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < log.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < ref.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < raw.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < info.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < src.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < nnml.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < shot.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < main.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < hist.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < zbx.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < tmp.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < cfg_data.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < code_data.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < ref_data.sql
+
+psql -h $dbhost -p $dbport -d $dbname -U $username < users.sql

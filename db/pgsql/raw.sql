@@ -558,7 +558,6 @@ CREATE INDEX ON raw_ruckussz (mac);
 CREATE INDEX ON raw_ruckussz (connectionstate); 
 CREATE INDEX ON raw_ruckussz (lastseentime); 
 
-DROP TABLE raw_mist;
 CREATE TABLE IF NOT EXISTS raw_mist (
   mistid SERIAL NOT NULL PRIMARY KEY,
   ip VARCHAR(39) DEFAULT NULL,

@@ -333,7 +333,6 @@ CREATE INDEX ON src_snmp_portif_map (ipid);
 CREATE INDEX ON src_snmp_portif_map (port);
 CREATE INDEX ON src_snmp_portif_map (ifindex);
 
-DROP TABLE src_snmp_wap;
 CREATE TABLE IF NOT EXISTS src_snmp_wap (
   wapid BIGSERIAL NOT NULL PRIMARY KEY, 
   wlcid BIGINT NOT NULL, 
@@ -441,18 +440,6 @@ CREATE INDEX ON src_snmp_lldp (switchid);
 CREATE INDEX ON src_snmp_lldp (ifindex);
 CREATE INDEX ON src_snmp_lldp (lldpremchassisidsubtype);
 CREATE INDEX ON src_snmp_lldp (lldpremportidsubtype);
-
-CREATE TABLE IF NOT EXISTS src_snmp_portif_map (
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
-  ipid BIGINT NOT NULL, 
-  port INT NOT NULL CHECK (port>=0),
-  ifindex INT NOT NULL CHECK (ifindex>=0), 
-  CONSTRAINT ipid_sspm FOREIGN KEY (ipid) REFERENCES src_scan_ip (ipid) ON DELETE CASCADE ON UPDATE CASCADE 
-);
-CREATE UNIQUE INDEX ON src_snmp_portif_map (ipid, port);
-CREATE INDEX ON src_snmp_portif_map (ipid);
-CREATE INDEX ON src_snmp_portif_map (port);
-CREATE INDEX ON src_snmp_portif_map (ifindex);
 
 CREATE TABLE IF NOT EXISTS src_ip (
   ipid BIGSERIAL NOT NULL PRIMARY KEY, 

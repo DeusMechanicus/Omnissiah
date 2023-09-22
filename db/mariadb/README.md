@@ -23,7 +23,6 @@ No database or tables are dropped in these files. If you have not a new installa
 ## Installation
 edit and run install.sh script or run commands one by one step by step
 ```
-sudo cd /usr/local/src/omnissiah/db/mariadb
 sudo bash /usr/local/src/omnissiah/db/mariadb/install.sh
 ```
 The script has four parameters. These parameters are set in the first lines of the script.
@@ -48,8 +47,7 @@ SET @username='omnissiah';
 SET @password='omnissiah';
 SET @localhost='localhost';
 ```
-This script will create the database and database user omnissiah. This user will have all rights to the omnissiah database.
-
+This script will create the database and users. This user <omnissiah> will have all rights to the omnissiah database.
 ## Creating tables and loading data
 run command
 ```
@@ -75,8 +73,8 @@ mysql -h localhost -P 3306 -u omnissiah -pomnissiah omnissiah < cfg_data.sql
 mysql -h localhost -P 3306 -u omnissiah -pomnissiah omnissiah < code_data.sql
 mysql -h localhost -P 3306 -u omnissiah -pomnissiah omnissiah < ref_data.sql
 ```
-## Creating users and assigning rights
-Each layer in Omnissiah has its own database user. The users.sql file specifies the names and passwords of these users. To create users and assign these rights, execute this file.
+## Assigning rights
+Each layer in Omnissiah has its own database user. The users.sql file specifies the names and passwords of these users. To assign these rights, execute this file.
 Example for local server and omnissiah database
 ```
 mysql -h localhost -P 3306 -u omnissiah -pomnissiah omnissiah < users.sql
