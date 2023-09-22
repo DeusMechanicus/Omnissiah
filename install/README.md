@@ -87,10 +87,16 @@ Installing and configuring Netbox is a complex process. You'd better check the [
 Installing, configuring and optimizing Zabbix is even more complex. After running install.sh Zabbix (server, proxy, agent and web interface) will already be installed. If you are using an existing Zabbix, there is no need to configure anything additional.
 Read [Installation] (https://www.zabbix.com/download?zabbix=6.0&os_distribution=debian&os_version=12&components=server_frontend_agent&db=mysql&ws=nginx) and [configuration] (https://www.zabbix.com/documentation/6.0/en/manual/quickstart) documentation on Zabbix site.
 ## Configuring omnissiah
-
 ### Create database
 You need to choose which database you will use for Omnissiah. After that, create a database, tables and load records. Instructions for [mariadb](../db/mariadb) and [postgresql](../db/pgsql) are in their respective sections.
 ### Configuration files
 Omnissiah is located in the /usr/local/lib/omnissiah directory and has two configuration files. Both files are python scripts with variable values set.
 * omni_config.py - file with variables controlling the work of omnissiah scripts
 * omni_unpwd.py - file with usernames, passwords, tokens, keys and other sensitive information
+Parameters and variables are described in detail in [Omnissiah config](../docs/config.pdf). Change these parameters if necessary to suit your installation
+# Omnissiah update
+To run the update, run the command line:
+```
+sudo bash /usr/local/src/omnissiah/install/update.sh
+```
+This script will simply copy new program files and assign rights to them. Automatic database updates will be implemented after version 1.0 is released.
