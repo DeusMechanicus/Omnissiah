@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS raw_mac (
   registry VARCHAR(16) DEFAULT NULL, 
   assignment VARCHAR(12) NOT NULL PRIMARY KEY, 
   organization VARCHAR(256) DEFAULT NULL, 
-  address VARCHAR(256) DEFAULT NULL);
+  address VARCHAR(300) DEFAULT NULL);
 
 CREATE TABLE IF NOT EXISTS raw_netbox_tenancy_tenantgroup ( 
   id BIGINT NOT NULL PRIMARY KEY, 
@@ -358,7 +358,7 @@ CREATE TABLE IF NOT EXISTS raw_netbox_ipam_ipaddress (
 );
 
 CREATE TABLE IF NOT EXISTS raw_scan_ip (
-  ipid SERIAL NOT NULL PRIMARY KEY,
+  ipid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39) NULL UNIQUE,
   refid INT NOT NULL CHECK (refid>=0),
   sourceid INT NOT NULL CHECK (sourceid>=0) 
@@ -367,7 +367,7 @@ CREATE INDEX ON raw_scan_ip (refid);
 CREATE INDEX ON raw_scan_ip (sourceid);
 
 CREATE TABLE IF NOT EXISTS raw_scan_ip_info (
-  id SERIAL NOT NULL PRIMARY KEY,
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ipid INT NOT NULL CHECK (ipid>=0),
   infoid INT NOT NULL CHECK (infoid>=0), 
   value VARCHAR(256) NOT NULL 
@@ -376,7 +376,7 @@ CREATE INDEX ON raw_scan_ip_info (ipid);
 CREATE INDEX ON raw_scan_ip_info (infoid);
 
 CREATE TABLE IF NOT EXISTS raw_scan_arp (
-  arpid SERIAL NOT NULL PRIMARY KEY,
+  arpid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39) NOT NULL,
   routerid INT NOT NULL CHECK (routerid>=0),
   mac VARCHAR(12) NOT NULL 
@@ -386,7 +386,7 @@ CREATE INDEX ON raw_scan_arp (routerid);
 CREATE INDEX ON raw_scan_arp (mac);
 
 CREATE TABLE IF NOT EXISTS raw_scan_dhcp (
-  dhcpid SERIAL NOT NULL PRIMARY KEY,
+  dhcpid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39)NOT NULL,
   routerid INT NOT NULL CHECK (routerid>=0),
   mac VARCHAR(12) DEFAULT NULL 
@@ -396,7 +396,7 @@ CREATE INDEX ON raw_scan_dhcp (routerid);
 CREATE INDEX ON raw_scan_dhcp (mac);
 
 CREATE TABLE IF NOT EXISTS raw_scan_port (
-  portid SERIAL NOT NULL PRIMARY KEY,
+  portid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   type VARCHAR(20) NOT NULL,
   port INT NOT NULL CHECK (port>=0),
   ipid INT NOT NULL CHECK (ipid>=0),
@@ -411,7 +411,7 @@ CREATE INDEX ON raw_scan_port (reason);
 CREATE INDEX ON raw_scan_port (ipid, type, port);
 
 CREATE TABLE IF NOT EXISTS raw_scan_script (
-  id SERIAL NOT NULL PRIMARY KEY,
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   portid INT NOT NULL CHECK (portid>=0),  
   script VARCHAR(100) NOT NULL, 
   value VARCHAR(16100) NOT NULL 
@@ -420,7 +420,7 @@ CREATE INDEX ON raw_scan_script (portid);
 CREATE INDEX ON raw_scan_script (script);
 
 CREATE TABLE IF NOT EXISTS raw_scan_service (
-  id SERIAL NOT NULL PRIMARY KEY,
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   portid INT NOT NULL CHECK (portid>=0),  
   product VARCHAR(100) DEFAULT NULL, 
   version VARCHAR(50) DEFAULT NULL, 
@@ -436,7 +436,7 @@ CREATE INDEX ON raw_scan_service (product);
 CREATE INDEX ON raw_scan_service (cpe);
 
 CREATE TABLE IF NOT EXISTS raw_scan_osportused (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid INT NOT NULL CHECK (ipid>=0), 
   state VARCHAR(20) NOT NULL,
   proto VARCHAR(20) NOT NULL,
@@ -445,7 +445,7 @@ CREATE TABLE IF NOT EXISTS raw_scan_osportused (
 CREATE INDEX ON raw_scan_osportused (ipid);
 
 CREATE TABLE IF NOT EXISTS raw_scan_osmatch (
-  osmatchid SERIAL NOT NULL PRIMARY KEY, 
+  osmatchid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid INT NOT NULL CHECK (ipid>=0), 
   name VARCHAR(256) NOT NULL,
   accuracy INT NOT NULL CHECK (accuracy>=0),
@@ -455,7 +455,7 @@ CREATE INDEX ON raw_scan_osmatch (ipid);
 CREATE INDEX ON raw_scan_osmatch (name);
 
 CREATE TABLE IF NOT EXISTS raw_scan_osclass (
-  osclassid SERIAL NOT NULL PRIMARY KEY, 
+  osclassid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   osmatchid INT NOT NULL CHECK (osmatchid>=0), 
   type VARCHAR(50) DEFAULT NULL, 
   vendor VARCHAR(50) DEFAULT NULL, 
@@ -467,7 +467,7 @@ CREATE TABLE IF NOT EXISTS raw_scan_osclass (
 CREATE INDEX ON raw_scan_osclass (osmatchid);
 
 CREATE TABLE IF NOT EXISTS raw_enplug (
-  enplugid SERIAL NOT NULL PRIMARY KEY, 
+  enplugid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   macaddressethernet VARCHAR(17) DEFAULT NULL, 
   macaddresswifi VARCHAR(17) DEFAULT NULL, 
   ipaddress VARCHAR(39) DEFAULT NULL, 
@@ -494,7 +494,7 @@ CREATE INDEX ON raw_enplug (ipaddress);
 CREATE INDEX ON raw_enplug (statuscode);
 
 CREATE TABLE IF NOT EXISTS raw_activaire (
-  activaireid SERIAL NOT NULL PRIMARY KEY, 
+  activaireid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   _id VARCHAR(256) DEFAULT NULL, 
   name VARCHAR(256) DEFAULT NULL, 
   macaddress VARCHAR(17) DEFAULT NULL, 
@@ -516,7 +516,7 @@ CREATE INDEX ON raw_activaire (internalipaddress);
 CREATE INDEX ON raw_activaire (devicestatus);
 
 CREATE TABLE IF NOT EXISTS raw_snmp (
-  snmpid SERIAL NOT NULL PRIMARY KEY, 
+  snmpid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid INT NOT NULL CHECK (ipid>=0), 
   oidid INT DEFAULT NULL CHECK (oidid>=0), 
   oid VARCHAR(256) NOT NULL,
@@ -533,7 +533,7 @@ CREATE INDEX ON raw_snmp (snmp_type);
 CREATE INDEX ON raw_snmp (vlan);
 
 CREATE TABLE IF NOT EXISTS raw_ruckussz (
-  wapid SERIAL NOT NULL PRIMARY KEY, 
+  wapid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ip VARCHAR(39) DEFAULT NULL, 
   wlcip VARCHAR(39) DEFAULT NULL, 
   externalip VARCHAR(39) DEFAULT NULL, 
@@ -559,7 +559,7 @@ CREATE INDEX ON raw_ruckussz (connectionstate);
 CREATE INDEX ON raw_ruckussz (lastseentime); 
 
 CREATE TABLE IF NOT EXISTS raw_mist (
-  mistid SERIAL NOT NULL PRIMARY KEY,
+  mistid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39) DEFAULT NULL,
   ext_ip VARCHAR(39) DEFAULT NULL,
   mac VARCHAR(17) DEFAULT NULL,

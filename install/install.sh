@@ -17,8 +17,11 @@ chmod 750 $logpath
 
 sudo -u $usergroup cp -r $srcpath/code/* $usrpath
 sudo -u $usergroup cp -r $srcpath/install/cfg/* $usrpath
-chmod -R 640 $usrpath/*
+chmod 640 $usrpath/*
+chmod 750 $usrpath/omnissiah
+chmod -R 640 $usrpath/omnissiah/*
 chmod u+x,g+x $usrpath/*.py
+chmod u+x,g+x $usrpath/*.sh
 
 apt install -y gcc
 apt install net-tools

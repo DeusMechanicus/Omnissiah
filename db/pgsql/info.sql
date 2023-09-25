@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS info_mac (
-  assignmentid SERIAL NOT NULL PRIMARY KEY, 
+  assignmentid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   assignment VARCHAR(12) NOT NULL UNIQUE, 
   registry VARCHAR(16) NOT NULL, 
   organization VARCHAR(256) NOT NULL, 
-  address VARCHAR(256) DEFAULT NULL, 
+  address VARCHAR(300) DEFAULT NULL, 
   assignment_len SMALLINT NOT NULL CHECK (assignment_len>=0), 
   first_mac CHAR(12) NOT NULL, 
   last_mac CHAR(12) NOT NULL, 
@@ -465,7 +465,7 @@ CREATE INDEX ON info_netbox_ipam_ipaddress (tenant_id);
 CREATE INDEX ON info_netbox_ipam_ipaddress (status);
 
 CREATE TABLE IF NOT EXISTS info_nnml_script_exists (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   type VARCHAR(20) NOT NULL, 
   port INT NOT NULL CHECK (port>=0),
   script VARCHAR(100) NOT NULL 
@@ -476,12 +476,12 @@ CREATE INDEX ON info_nnml_script_exists (port);
 CREATE INDEX ON info_nnml_script_exists (script); 
 
 CREATE TABLE IF NOT EXISTS info_nnml_osmatch_exists (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   name varchar(256) NOT NULL UNIQUE 
 );
 
 CREATE TABLE IF NOT EXISTS info_nnml_service_product (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   type VARCHAR(20) NOT NULL, 
   port INT NOT NULL CHECK (port>=0),
   product varchar(100) NOT NULL 
@@ -492,7 +492,7 @@ CREATE INDEX ON info_nnml_service_product (port);
 CREATE INDEX ON info_nnml_service_product (product);
 
 CREATE TABLE IF NOT EXISTS info_nnml_service_extrainfo (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   type VARCHAR(20) NOT NULL, 
   port INT NOT NULL CHECK (port>=0),
   extrainfo varchar(256) NOT NULL 
@@ -503,7 +503,7 @@ CREATE INDEX ON info_nnml_service_extrainfo (port);
 CREATE INDEX ON info_nnml_service_extrainfo (extrainfo);
 
 CREATE TABLE IF NOT EXISTS info_nnml_service_cpe (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   type VARCHAR(20) NOT NULL, 
   port INT NOT NULL CHECK (port>=0),
   cpe varchar(100) NOT NULL 
@@ -514,27 +514,27 @@ CREATE INDEX ON info_nnml_service_cpe (port);
 CREATE INDEX ON info_nnml_service_cpe (cpe);
 
 CREATE TABLE IF NOT EXISTS info_nnml_osclass_type (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   type varchar(50) NOT NULL UNIQUE 
 );
 
 CREATE TABLE IF NOT EXISTS info_nnml_osclass_vendor (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   vendor varchar(50) NOT NULL UNIQUE 
 );
 
 CREATE TABLE IF NOT EXISTS info_nnml_osclass_osfamily (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   osfamily varchar(50) NOT NULL UNIQUE 
 );
 
 CREATE TABLE IF NOT EXISTS info_nnml_osclass_cpe (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   cpe varchar(100) NOT NULL UNIQUE 
 );
 
 CREATE TABLE IF NOT EXISTS info_nnml_word (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   srcid INT NOT NULL CHECK (srcid>=0),
   groupname VARCHAR(100) NOT NULL, 
   word VARCHAR(256) NOT NULL, 

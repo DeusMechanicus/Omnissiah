@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS code_program_launch (
   CONSTRAINT programid_cpl FOREIGN KEY (programid) REFERENCES code_program (programid) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE IF NOT EXISTS code_program_query ( 
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY  PRIMARY KEY, 
   programid INT NOT NULL CHECK (programid>=0), 
   stage INT NOT NULL CHECK (stage>=0), 
   priority INT NOT NULL CHECK (priority>=0), 

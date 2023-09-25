@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS ref_nnml_script_exists_table (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   type VARCHAR(20) NOT NULL, 
   port INT NOT NULL CHECK (port>=0),
   script VARCHAR(100) NOT NULL 
 );
 CREATE TABLE IF NOT EXISTS ref_tenantgroup ( 
-  tenantgroupid SERIAL NOT NULL PRIMARY KEY, 
+  tenantgroupid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
   tenantgroup VARCHAR(100) NOT NULL UNIQUE, 
   tenantgroup_alias VARCHAR(100) NOT NULL UNIQUE, 
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS ref_tenantgroup (
 );
 
 CREATE TABLE IF NOT EXISTS ref_tenant ( 
-  tenantid SERIAL NOT NULL PRIMARY KEY, 
+  tenantid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
   tenant VARCHAR(100) DEFAULT NULL UNIQUE, 
   tenant_alias VARCHAR(100) DEFAULT NULL UNIQUE, 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS ref_tenant (
 );
 
 CREATE TABLE IF NOT EXISTS ref_sitegroup ( 
-  sitegroupid SERIAL NOT NULL PRIMARY KEY, 
+  sitegroupid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
   sitegroup VARCHAR(100) DEFAULT NULL UNIQUE, 
   sitegroup_alias VARCHAR(100) DEFAULT NULL UNIQUE, 
@@ -144,7 +144,7 @@ CREATE INDEX ON ref_wlc_type (wlc_devicetypeid);
 CREATE INDEX ON ref_wlc_type (wap_devicetypeid);
 
 CREATE TABLE IF NOT EXISTS ref_vrf ( 
-  vrfid SERIAL NOT NULL PRIMARY KEY, 
+  vrfid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
   vrf VARCHAR(100) NOT NULL UNIQUE, 
   description VARCHAR(200) DEFAULT NULL, 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS ref_vrf (
 CREATE INDEX ON ref_vrf (enforce_unique);
 
 CREATE TABLE IF NOT EXISTS ref_subnet_role ( 
-  subnet_roleid SERIAL NOT NULL PRIMARY KEY, 
+  subnet_roleid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE,   
   subnet_role VARCHAR(100) NOT NULL UNIQUE, 
   subnet_role_alias VARCHAR(100) NOT NULL UNIQUE, 
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS ref_subnet_role (
 );
 
 CREATE TABLE IF NOT EXISTS ref_vlangroup ( 
-  vlangroupid SERIAL NOT NULL PRIMARY KEY, 
+  vlangroupid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE,   
   vlangroup VARCHAR(100) NOT NULL UNIQUE, 
   vlangroup_alias VARCHAR(100) NOT NULL UNIQUE, 
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS ref_vlangroup (
 );
 
 CREATE TABLE IF NOT EXISTS ref_vlan ( 
-  vlanid SERIAL NOT NULL PRIMARY KEY, 
+  vlanid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE,   
   vlan VARCHAR(100) NOT NULL, 
   description VARCHAR(200) DEFAULT NULL, 
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS ref_ipfamily (
 );
 
 CREATE TABLE IF NOT EXISTS ref_ipprefix ( 
-  ipprefixid SERIAL NOT NULL PRIMARY KEY, 
+  ipprefixid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
   description VARCHAR(200) DEFAULT NULL, 
   familyid INT NOT NULL CHECK (familyid>=0), 
@@ -233,7 +233,7 @@ CREATE INDEX ON ref_ipprefix (startipnum, endipnum);
 CREATE INDEX ON ref_ipprefix (siteid, startipnum, endipnum);
 
 CREATE TABLE IF NOT EXISTS ref_iprange ( 
-  iprangeid SERIAL NOT NULL PRIMARY KEY, 
+  iprangeid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
   description VARCHAR(200) DEFAULT NULL, 
   familyid INT NOT NULL CHECK (familyid>=0), 
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS ref_ipaddress_role (
 );
 
 CREATE TABLE IF NOT EXISTS ref_ipaddress ( 
-  ipaddressid SERIAL NOT NULL PRIMARY KEY, 
+  ipaddressid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   netboxid BIGINT DEFAULT NULL UNIQUE, 
   description VARCHAR(200) DEFAULT NULL, 
   familyid INT NOT NULL CHECK (familyid>=0), 
@@ -310,14 +310,14 @@ CREATE TABLE IF NOT EXISTS ref_scan_snmp_oid (
 );
 
 CREATE TABLE IF NOT EXISTS ref_static_device (
-  deviceid SERIAL NOT NULL PRIMARY KEY, 
+  deviceid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ip VARCHAR(39) NOT NULL UNIQUE, 
   active SMALLINT NOT NULL DEFAULT 1, 
   snmp_community VARCHAR(256) DEFAULT NULL 
 );
 
 CREATE TABLE IF NOT EXISTS ref_mac_manufacturer_map (
-  mapid SERIAL NOT NULL PRIMARY KEY, 
+  mapid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   organization VARCHAR(256) NOT NULL UNIQUE, 
   manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
   CONSTRAINT manufacturerid_rmmm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
@@ -350,7 +350,7 @@ CREATE TABLE IF NOT EXISTS ref_nnml_word_source (
 );
 
 CREATE TABLE IF NOT EXISTS ref_osclass_manufacturer_map (
-  mapid SERIAL NOT NULL PRIMARY KEY, 
+  mapid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   vendor VARCHAR(50) NOT NULL UNIQUE, 
   manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
   CONSTRAINT manufacturerid_romm FOREIGN KEY (manufacturerid) REFERENCES ref_manufacturer (manufacturerid) ON DELETE CASCADE ON UPDATE CASCADE 
@@ -414,7 +414,7 @@ CREATE TABLE IF NOT EXISTS ref_zbx_group (
 CREATE INDEX ON ref_zbx_group (table_name); 
 
 CREATE TABLE IF NOT EXISTS ref_zbx_device_template (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   devicetypeid INT NOT NULL CHECK (devicetypeid>=0), 
   template VARCHAR(128) NOT NULL, 
   type INT NOT NULL, 
@@ -426,7 +426,7 @@ CREATE UNIQUE INDEX ON ref_zbx_device_template (devicetypeid);
 CREATE INDEX ON ref_zbx_device_template (template);
 
 CREATE TABLE IF NOT EXISTS ref_zbx_group_template (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   groupid INT NOT NULL CHECK (groupid>=0), 
   template VARCHAR(128) NOT NULL, 
   CONSTRAINT groupid_rzgt FOREIGN KEY (groupid) REFERENCES ref_zbx_group (groupid) ON DELETE CASCADE ON UPDATE CASCADE 

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS src_enplug_venue (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   venueid VARCHAR(256) NOT NULL UNIQUE,
   venuename VARCHAR(256) NOT NULL,
   venue_timezone VARCHAR(100) NOT NULL 
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS src_enplug_venue (
 CREATE INDEX ON src_enplug_venue (venuename);
   
 CREATE TABLE IF NOT EXISTS src_enplug_edu (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   eduid VARCHAR(256) NOT NULL UNIQUE, 
   venueid VARCHAR(256) NOT NULL, 
   eduname VARCHAR(256) NOT NULL, 
@@ -32,7 +32,7 @@ CREATE INDEX ON src_enplug_edu (ip_public);
 CREATE INDEX ON src_enplug_edu (status_code);
 
 CREATE TABLE IF NOT EXISTS src_activaire (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   activaireid VARCHAR(256) NOT NULL UNIQUE, 
   activairename VARCHAR(256) NOT NULL, 
   mac VARCHAR(12) DEFAULT NULL,
@@ -53,7 +53,7 @@ CREATE INDEX ON src_activaire (ip);
 CREATE INDEX ON src_activaire (ip_public);
 
 CREATE TABLE IF NOT EXISTS src_scan_ip (
-  ipid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ipid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ip VARCHAR(39) NOT NULL UNIQUE, 
   refid INT NOT NULL CHECK (refid>=0),  
   sourceid INT NOT NULL, 
@@ -66,7 +66,7 @@ CREATE INDEX ON src_scan_ip (ispublic);
 
 
 CREATE TABLE IF NOT EXISTS src_scan_arp (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY,
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39) NOT NULL,
   routerid BIGINT NOT NULL,
   mac VARCHAR(12) NOT NULL,
@@ -78,7 +78,7 @@ CREATE INDEX ON src_scan_arp (routerid);
 CREATE INDEX ON src_scan_arp (mac);
 
 CREATE TABLE IF NOT EXISTS src_scan_dhcp (
-  dhcpid BIGSERIAL NOT NULL PRIMARY KEY,
+  dhcpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39) NOT NULL,
   routerid BIGINT NOT NULL,
   mac VARCHAR(12) NOT NULL,
@@ -90,7 +90,7 @@ CREATE INDEX ON src_scan_dhcp (routerid);
 CREATE INDEX ON src_scan_dhcp (mac);
 
 CREATE TABLE IF NOT EXISTS src_scan_ip_info (
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL,
   infoid INT NOT NULL CHECK (infoid>=1),
   value VARCHAR(256) NOT NULL, 
@@ -102,7 +102,7 @@ CREATE INDEX ON src_scan_ip_info (ipid);
 CREATE INDEX ON src_scan_ip_info (infoid);
 
 CREATE TABLE IF NOT EXISTS src_scan_port (
-  portid BIGSERIAL NOT NULL PRIMARY KEY, 
+  portid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL,
   type VARCHAR(20) NOT NULL, 
   port INT NOT NULL CHECK (port>=0),
@@ -154,7 +154,7 @@ CREATE INDEX ON src_scan_service (product);
 CREATE INDEX ON src_scan_service (cpe);
 
 CREATE TABLE IF NOT EXISTS src_scan_script (
-  id BIGSERIAL NOT NULL PRIMARY KEY,
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   portid BIGINT NOT NULL, 
   script VARCHAR(100) NOT NULL, 
   value VARCHAR(16100) NOT NULL, 
@@ -165,7 +165,7 @@ CREATE INDEX ON src_scan_script (portid);
 CREATE INDEX ON src_scan_script (script);
 
 CREATE TABLE IF NOT EXISTS src_snmp (
-  snmpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  snmpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL, 
   oidid INT DEFAULT NULL, 
   oid VARCHAR(256) NOT NULL,
@@ -184,7 +184,7 @@ CREATE INDEX ON src_snmp (snmp_type);
 CREATE INDEX ON src_snmp (vlan);
   
 CREATE TABLE IF NOT EXISTS src_snmp_arp (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY,
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39) NOT NULL,
   routerid BIGINT NOT NULL,
   mac VARCHAR(12) NOT NULL,
@@ -196,7 +196,7 @@ CREATE INDEX ON src_snmp_arp (routerid);
 CREATE INDEX ON src_snmp_arp (mac);
 
 CREATE TABLE IF NOT EXISTS src_snmp_mac (
-  macid BIGSERIAL NOT NULL PRIMARY KEY,
+  macid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   mac VARCHAR(12) NOT NULL,
   switchid BIGINT NOT NULL,
   port INT NOT NULL CHECK (port>=0), 
@@ -210,7 +210,7 @@ CREATE INDEX ON src_snmp_mac (port);
 CREATE INDEX ON src_snmp_mac (vlan);
 
 CREATE TABLE IF NOT EXISTS src_snmp_dhcp (
-  dhcpid BIGSERIAL NOT NULL PRIMARY KEY,
+  dhcpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   ip VARCHAR(39) NOT NULL,
   routerid BIGINT NOT NULL,
   mac VARCHAR(12) NOT NULL,
@@ -222,7 +222,7 @@ CREATE INDEX ON src_snmp_dhcp (routerid);
 CREATE INDEX ON src_snmp_dhcp (mac);
 
 CREATE TABLE IF NOT EXISTS src_snmp_vlan (
-  vlanid BIGSERIAL NOT NULL PRIMARY KEY,
+  vlanid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   switchid BIGINT NOT NULL,
   vlan INT NOT NULL DEFAULT 0 CHECK (vlan>=0), 
   active SMALLINT NOT NULL DEFAULT 1, 
@@ -234,7 +234,7 @@ CREATE INDEX ON src_snmp_vlan (vlan);
 CREATE INDEX ON src_snmp_vlan (active);
 
 CREATE TABLE IF NOT EXISTS src_snmp_if (
-  ifid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ifid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL, 
   ifindexid INT NOT NULL CHECK (ifindexid>=0), 
   ifindex INT NOT NULL CHECK (ifindex>=0), 
@@ -276,7 +276,7 @@ CREATE TABLE IF NOT EXISTS src_snmp_system (
 CREATE INDEX ON src_snmp_system (sysname);
 
 CREATE TABLE IF NOT EXISTS src_snmp_sysor (
-  orid BIGSERIAL NOT NULL PRIMARY KEY,  
+  orid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,  
   ipid BIGINT NOT NULL, 
   orindex INT NOT NULL CHECK (orindex>=0), 
   sysorid VARCHAR(100) DEFAULT NULL, 
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS src_snmp_router (
 CREATE INDEX ON src_snmp_router (ipforwarding);
 
 CREATE TABLE IF NOT EXISTS src_snmp_ipaddr (
-  ipid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ipid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   routerid BIGINT NOT NULL, 
   ip VARCHAR(39) NOT NULL, 
   ifindex INT DEFAULT NULL CHECK (ifindex>=0), 
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS src_snmp_wlc (
 CREATE INDEX ON src_snmp_wlc (wlcid);
 
 CREATE TABLE IF NOT EXISTS src_snmp_portif_map (
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL, 
   port INT NOT NULL CHECK (port>=0),
   ifindex INT NOT NULL CHECK (ifindex>=0), 
@@ -334,7 +334,7 @@ CREATE INDEX ON src_snmp_portif_map (port);
 CREATE INDEX ON src_snmp_portif_map (ifindex);
 
 CREATE TABLE IF NOT EXISTS src_snmp_wap (
-  wapid BIGSERIAL NOT NULL PRIMARY KEY, 
+  wapid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   wlcid BIGINT NOT NULL, 
   mac VARCHAR(12) NOT NULL, 
   ip VARCHAR(39) DEFAULT NULL, 
@@ -347,7 +347,7 @@ CREATE INDEX ON src_snmp_wap (mac);
 CREATE INDEX ON src_snmp_wap (ip);
 
 CREATE TABLE IF NOT EXISTS src_mist (
-  mistid BIGSERIAL NOT NULL PRIMARY KEY,
+  mistid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   mac VARCHAR(17) NOT NULL UNIQUE,
   ip VARCHAR(39) DEFAULT NULL,
   ext_ip VARCHAR(39) DEFAULT NULL,
@@ -375,7 +375,7 @@ CREATE TABLE IF NOT EXISTS src_ruckussz_wlc (
 );
 
 CREATE TABLE IF NOT EXISTS src_ruckussz_wap (
-  wapid BIGSERIAL NOT NULL PRIMARY KEY, 
+  wapid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   wlcid BIGINT NOT NULL, 
   mac VARCHAR(12) NOT NULL, 
   ip VARCHAR(39) DEFAULT NULL,
@@ -402,7 +402,7 @@ CREATE INDEX ON src_ruckussz_wap (externalip);
 CREATE INDEX ON src_ruckussz_wap (connectionstate);
 
 CREATE TABLE IF NOT EXISTS src_snmp_cdp (
-  cdpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  cdpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   switchid BIGINT NOT NULL, 
   ifindex INT NOT NULL, 
   cdpcacheaddresstype INT DEFAULT NULL, 
@@ -423,7 +423,7 @@ CREATE INDEX ON src_snmp_cdp (cdpcachedeviceport);
 CREATE INDEX ON src_snmp_cdp (cdpcacheplatform);
 
 CREATE TABLE IF NOT EXISTS src_snmp_lldp (
-  lldpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  lldpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   switchid BIGINT NOT NULL, 
   ifindex INT NOT NULL, 
   lldpremchassisidsubtype INT DEFAULT NULL, 
@@ -442,7 +442,7 @@ CREATE INDEX ON src_snmp_lldp (lldpremchassisidsubtype);
 CREATE INDEX ON src_snmp_lldp (lldpremportidsubtype);
 
 CREATE TABLE IF NOT EXISTS src_ip (
-  ipid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ipid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ip VARCHAR(39) NOT NULL UNIQUE, 
   refid INT NOT NULL CHECK (refid>=0),  
   sourceid INT NOT NULL, 
@@ -480,7 +480,7 @@ CREATE INDEX ON src_ip (macnum);
 CREATE INDEX ON src_ip (macvendorid);
 
 CREATE TABLE IF NOT EXISTS src_arp_device (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   device VARCHAR(39) NOT NULL, 
   ip VARCHAR(39) NOT NULL, 
   ipnum BIGINT NOT NULL CHECK (ipnum>=0), 
@@ -511,7 +511,7 @@ CREATE INDEX ON src_arp_device (ifindex);
 CREATE INDEX ON src_arp_device (ispublic);
 
 CREATE TABLE IF NOT EXISTS src_arp_site (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   siteid INT NOT NULL DEFAULT 0 CHECK (siteid>=0), 
   ip VARCHAR(39) NOT NULL, 
   ipnum BIGINT NOT NULL CHECK (ipnum>=0), 
@@ -538,7 +538,7 @@ CREATE INDEX ON src_arp_site (siteid);
 CREATE INDEX ON src_arp_site (ispublic);
 
 CREATE TABLE IF NOT EXISTS src_arp (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ip VARCHAR(39) NOT NULL UNIQUE, 
   ipnum BIGINT NOT NULL CHECK (ipnum>=0), 
   mac VARCHAR(12) NOT NULL, 
@@ -563,7 +563,7 @@ CREATE INDEX ON src_arp (roleid);
 CREATE INDEX ON src_arp (ispublic);
 
 CREATE TABLE IF NOT EXISTS src_vlan_device (
-  vlid BIGSERIAL NOT NULL PRIMARY KEY,
+  vlid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   device VARCHAR(39) NOT NULL, 
   vlan INT NOT NULL DEFAULT 0 CHECK (vlan>=0), 
   active SMALLINT NOT NULL DEFAULT 1, 
@@ -583,7 +583,7 @@ CREATE INDEX ON src_vlan_device (vlanid);
 CREATE INDEX ON src_vlan_device (roleid);
 
 CREATE TABLE IF NOT EXISTS src_if (
-  ifid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ifid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   device VARCHAR(39) NOT NULL, 
   ifindex INT NOT NULL CHECK (ifindex>=0), 
   ifdescr VARCHAR(256) DEFAULT NULL,
@@ -630,7 +630,7 @@ CREATE INDEX ON src_if (ifphysaddressnum);
 CREATE INDEX ON src_if (macvendorid);
 
 CREATE TABLE IF NOT EXISTS src_mac_device (
-  macid BIGSERIAL NOT NULL PRIMARY KEY,
+  macid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   device VARCHAR(39) NOT NULL, 
   mac VARCHAR(12) NOT NULL,
   macnum BIGINT NOT NULL CHECK (macnum>=0), 
@@ -658,7 +658,7 @@ CREATE INDEX ON src_mac_device (roleid);
 CREATE INDEX ON src_mac_device (vendorid);
 
 CREATE TABLE IF NOT EXISTS src_vlan_site (
-  vlid BIGSERIAL NOT NULL PRIMARY KEY,
+  vlid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   siteid INT NOT NULL DEFAULT 0 CHECK (siteid>=0), 
   vlan INT NOT NULL DEFAULT 0 CHECK (vlan>=0), 
   roleid INT DEFAULT NULL CHECK (roleid>=0), 
@@ -671,7 +671,7 @@ CREATE INDEX ON src_vlan_site (siteid);
 CREATE INDEX ON src_vlan_site (roleid);
 
 CREATE TABLE IF NOT EXISTS src_vlan (
-  vlid BIGSERIAL NOT NULL PRIMARY KEY,
+  vlid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   vlan INT NOT NULL UNIQUE CHECK (vlan>=0), 
   roleid INT DEFAULT NULL CHECK (roleid>=0), 
   CONSTRAINT roleid_sv FOREIGN KEY (roleid) REFERENCES ref_subnet_role (subnet_roleid) ON DELETE SET NULL ON UPDATE CASCADE 
@@ -679,7 +679,7 @@ CREATE TABLE IF NOT EXISTS src_vlan (
 CREATE INDEX ON src_vlan (roleid);
 
 CREATE TABLE IF NOT EXISTS src_mac_site (
-  macid BIGSERIAL NOT NULL PRIMARY KEY,
+  macid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   device VARCHAR(39) NOT NULL, 
   mac VARCHAR(12) NOT NULL,
   macnum BIGINT NOT NULL CHECK (macnum>=0), 
@@ -707,7 +707,7 @@ CREATE INDEX ON src_mac_site (roleid);
 CREATE INDEX ON src_mac_site (vendorid);
 
 CREATE TABLE IF NOT EXISTS src_mac (
-  macid BIGSERIAL NOT NULL PRIMARY KEY,
+  macid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   device VARCHAR(39) NOT NULL, 
   mac VARCHAR(12) NOT NULL,
   macnum BIGINT NOT NULL CHECK (macnum>=0), 
@@ -731,7 +731,7 @@ CREATE INDEX ON src_mac (roleid);
 CREATE INDEX ON src_mac (vendorid);
 
 CREATE TABLE IF NOT EXISTS src_ip_info (
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL,
   infoid INT NOT NULL CHECK (infoid>=0),
   value VARCHAR(256) NOT NULL, 

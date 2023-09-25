@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS info_mac (
   assignment VARCHAR(12) NOT NULL UNIQUE, 
   registry VARCHAR(16) NOT NULL, 
   organization VARCHAR(256) NOT NULL, 
-  address VARCHAR(256) DEFAULT NULL, 
+  address VARCHAR(300) DEFAULT NULL, 
   assignment_len SMALLINT UNSIGNED NOT NULL,
   first_mac CHAR(12) NOT NULL, 
   last_mac CHAR(12) NOT NULL, 

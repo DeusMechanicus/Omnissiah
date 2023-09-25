@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS zbx_zbx_hstgrp (
 );
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_hosts_templates (
-  hosttemplateid BIGSERIAL PRIMARY KEY NOT NULL, 
+  hosttemplateid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   templateid BIGINT NOT NULL CHECK (templateid>=0), 
   CONSTRAINT hostid_zzht FOREIGN KEY (hostid) REFERENCES zbx_zbx_hosts (hostid) ON DELETE CASCADE ON UPDATE CASCADE, 
@@ -62,7 +62,7 @@ CREATE INDEX ON zbx_zbx_hosts_templates (hostid);
 CREATE INDEX ON zbx_zbx_hosts_templates (templateid);
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_hosts_groups (
-  hostgroupid BIGSERIAL PRIMARY KEY NOT NULL, 
+  hostgroupid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   groupid BIGINT NOT NULL CHECK (groupid>=0), 
   CONSTRAINT hostid_zzhg FOREIGN KEY (hostid) REFERENCES zbx_zbx_hosts (hostid) ON DELETE CASCADE ON UPDATE CASCADE, 
@@ -120,7 +120,7 @@ CREATE INDEX ON zbx_zbx_hostmacro (hostid);
 CREATE INDEX ON zbx_zbx_hostmacro (macro);
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_host_tag (
-  hosttagid BIGSERIAL PRIMARY KEY NOT NULL, 
+  hosttagid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   tag VARCHAR(255) NOT NULL DEFAULT '', 
   value VARCHAR(255) NOT NULL DEFAULT '', 
@@ -303,7 +303,7 @@ CREATE INDEX ON zbx_zbx_triggers (value, lastchange);
 CREATE INDEX ON zbx_zbx_triggers (hostid);
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_history (
-historyid BIGSERIAL NOT NULL PRIMARY KEY, 
+historyid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
 itemid BIGINT NOT NULL CHECK (itemid>=0), 
 clock INT NOT NULL DEFAULT 0, 
 value DOUBLE PRECISION NOT NULL DEFAULT 0, 
@@ -314,7 +314,7 @@ CREATE UNIQUE INDEX ON zbx_zbx_history (itemid, clock, ns);
 CREATE INDEX ON zbx_zbx_history (itemid); 
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_history_uint (
-historyid BIGSERIAL NOT NULL PRIMARY KEY, 
+historyid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
 itemid BIGINT NOT NULL CHECK (itemid>=0), 
 clock INT NOT NULL DEFAULT 0, 
 value BIGINT NOT NULL DEFAULT 0 CHECK (value>=0), 
@@ -325,7 +325,7 @@ CREATE UNIQUE INDEX ON zbx_zbx_history_uint (itemid, clock, ns);
 CREATE INDEX ON zbx_zbx_history_uint (itemid); 
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_history_str (
-historyid BIGSERIAL NOT NULL PRIMARY KEY, 
+historyid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
 itemid BIGINT NOT NULL CHECK (itemid>=0), 
 clock INT NOT NULL DEFAULT 0, 
 value VARCHAR(255) NOT NULL DEFAULT '', 
@@ -336,7 +336,7 @@ CREATE UNIQUE INDEX ON zbx_zbx_history_str (itemid, clock, ns);
 CREATE INDEX ON zbx_zbx_history_str (itemid); 
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_history_text (
-historyid BIGSERIAL NOT NULL PRIMARY KEY, 
+historyid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
 itemid BIGINT NOT NULL CHECK (itemid>=0), 
 clock INT NOT NULL DEFAULT 0, 
 value TEXT NOT NULL, 
@@ -347,7 +347,7 @@ CREATE UNIQUE INDEX ON zbx_zbx_history_text (itemid, clock, ns);
 CREATE INDEX ON zbx_zbx_history_text (itemid); 
 
 CREATE TABLE IF NOT EXISTS zbx_zbx_history_log (
-historyid BIGSERIAL NOT NULL PRIMARY KEY, 
+historyid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
 itemid BIGINT NOT NULL CHECK (itemid>=0), 
 clock INT NOT NULL DEFAULT 0, 
 value TEXT NOT NULL, 
@@ -358,7 +358,7 @@ CREATE UNIQUE INDEX ON zbx_zbx_history_log (itemid, clock, ns);
 CREATE INDEX ON zbx_zbx_history_log (itemid); 
 
 CREATE TABLE IF NOT EXISTS zbx_omni_maintenances (
-  maintenanceid BIGSERIAL PRIMARY KEY NOT NULL CHECK (maintenanceid>=0), 
+  maintenanceid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   name VARCHAR(128) NOT NULL UNIQUE, 
   maintenance_type INT NOT NULL DEFAULT 0, 
   active_since INT NOT NULL DEFAULT 0, 
@@ -367,7 +367,7 @@ CREATE TABLE IF NOT EXISTS zbx_omni_maintenances (
 CREATE INDEX ON zbx_omni_maintenances (active_since, active_till);
   
 CREATE TABLE IF NOT EXISTS zbx_omni_hstgrp (
-  groupid BIGSERIAL PRIMARY KEY NOT NULL CHECK (groupid>=0), 
+  groupid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   name VARCHAR(255) NOT NULL UNIQUE, 
   internal INT NOT NULL DEFAULT 0, 
   flags INT NOT NULL DEFAULT 0,
@@ -380,7 +380,7 @@ CREATE INDEX ON zbx_omni_hstgrp (typeid);
 CREATE INDEX ON zbx_omni_hstgrp (srcid);
 
 CREATE TABLE IF NOT EXISTS zbx_omni_hosts (
-  hostid BIGSERIAL PRIMARY KEY NOT NULL CHECK (hostid>=0), 
+  hostid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   proxy_hostid BIGINT DEFAULT NULL CHECK (proxy_hostid>=0), 
   host VARCHAR(128) NOT NULL UNIQUE, 
   status INT NOT NULL, 
@@ -412,7 +412,7 @@ CREATE INDEX ON zbx_omni_hosts (name);
 CREATE INDEX ON zbx_omni_hosts (maintenanceid);
 
 CREATE TABLE IF NOT EXISTS zbx_omni_hosts_templates (
-  hosttemplateid BIGSERIAL PRIMARY KEY NOT NULL CHECK (hosttemplateid>=0), 
+  hosttemplateid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   templateid BIGINT NOT NULL CHECK (templateid>=0), 
   CONSTRAINT hostid_zoht FOREIGN KEY (hostid) REFERENCES zbx_omni_hosts (hostid) ON DELETE CASCADE ON UPDATE CASCADE, 
@@ -423,7 +423,7 @@ CREATE INDEX ON zbx_omni_hosts_templates (hostid);
 CREATE INDEX ON zbx_omni_hosts_templates (templateid);
 
 CREATE TABLE IF NOT EXISTS zbx_omni_hosts_groups (
-  hostgroupid BIGSERIAL PRIMARY KEY NOT NULL CHECK (hostgroupid>=0), 
+  hostgroupid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   groupid BIGINT NOT NULL CHECK (groupid>=0), 
   CONSTRAINT hostid_zohg FOREIGN KEY (hostid) REFERENCES zbx_omni_hosts (hostid) ON DELETE CASCADE ON UPDATE CASCADE, 
@@ -434,7 +434,7 @@ CREATE INDEX ON zbx_omni_hosts_groups (hostid);
 CREATE INDEX ON zbx_omni_hosts_groups (groupid); 
 
 CREATE TABLE IF NOT EXISTS zbx_omni_interface (
-  interfaceid BIGSERIAL PRIMARY KEY NOT NULL CHECK (interfaceid>=0), 
+  interfaceid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   main INT NOT NULL DEFAULT 0, 
   type INT NOT NULL DEFAULT 1, 
@@ -468,7 +468,7 @@ CREATE INDEX ON zbx_omni_interface (main);
 CREATE INDEX ON zbx_omni_interface (available); 
 
 CREATE TABLE IF NOT EXISTS zbx_omni_hostmacro (
-  hostmacroid BIGSERIAL PRIMARY KEY NOT NULL CHECK (hostmacroid>=0), 
+  hostmacroid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   macro VARCHAR(255) NOT NULL DEFAULT '', 
   value VARCHAR(2048) DEFAULT NULL, 
@@ -481,7 +481,7 @@ CREATE INDEX ON zbx_omni_hostmacro (hostid);
 CREATE INDEX ON zbx_omni_hostmacro (macro); 
 
 CREATE TABLE IF NOT EXISTS zbx_omni_host_tag (
-  hosttagid BIGSERIAL PRIMARY KEY NOT NULL CHECK (hosttagid>=0), 
+  hosttagid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL CHECK (hostid>=0), 
   tag VARCHAR(255) NOT NULL DEFAULT '', 
   value VARCHAR(255) NOT NULL DEFAULT '', 
@@ -569,7 +569,7 @@ CREATE TABLE IF NOT EXISTS zbx_omni_host_inventory (
 );
 
 CREATE TABLE IF NOT EXISTS zbx_omni_map (
-  mapid BIGSERIAL PRIMARY KEY NOT NULL, 
+  mapid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   typeid INT NOT NULL CHECK (typeid>=0),
   omniid BIGINT DEFAULT NULL CHECK (omniid>=0), 
   zbxid BIGINT DEFAULT NULL CHECK (zbxid>=0), 

@@ -1,5 +1,4 @@
-INSERT INTO ref_vrf (netboxid, vrf, description, enforce_unique) VALUES (NULL, '', NULL, NULL);
-UPDATE ref_vrf SET vrfid=0 WHERE vrfid=(SELECT MAX(vrfid) FROM ref_vrf);
+INSERT INTO ref_vrf (vrfid, netboxid, vrf, description, enforce_unique) OVERRIDING SYSTEM VALUE VALUES (0, NULL, '', NULL, NULL);
 
 INSERT INTO ref_region (regionid, netboxid, region, region_alias, description, parentid) VALUES (0, NULL, '', '', NULL, NULL);
 
@@ -464,7 +463,7 @@ INSERT INTO ref_scan_snmp_oid (oidid, command, prescan, name, oid) VALUES (28, '
 INSERT INTO ref_scan_snmp_oid (oidid, command, prescan, name, oid) VALUES (29, 'walk', 0, 'ipAddrTable', '.1.3.6.1.2.1.4.20');
 INSERT INTO ref_scan_snmp_oid (oidid, command, prescan, name, oid) VALUES (33, 'walk', 0, 'dot1qVlanStatus', '.1.3.6.1.2.1.17.7.1.4.2.1.6');
 
-INSERT INTO ref_static_device (deviceid, ip, active, snmp_community) VALUES (1, '52.9.8.62', 1, NULL);
+INSERT INTO ref_static_device (deviceid, ip, active, snmp_community) OVERRIDING SYSTEM VALUE VALUES (1, '52.9.8.62', 1, NULL);
 
 INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name, manufacturerid, wlc_devicetypeid, wap_devicetypeid) VALUES (1, 'mist', 'MIST Controller', 35, 1506, 519);
 INSERT INTO ref_wlc_type (wlcid, wlc_type, wlc_name, manufacturerid, wlc_devicetypeid, wap_devicetypeid) VALUES (2, 'cisco_wlc', 'Cisco WLC', 17, 552, 517);

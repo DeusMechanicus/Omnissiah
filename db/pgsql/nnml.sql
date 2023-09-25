@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS nnml_ip (
-  ipid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ipid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ip VARCHAR(39) NOT NULL UNIQUE, 
   mac VARCHAR(12) DEFAULT NULL, 
   macvendorid VARCHAR(12) DEFAULT NULL, 
@@ -37,7 +37,7 @@ CREATE INDEX ON nnml_ip (predict_manufacturerid_prob);
 CREATE INDEX ON nnml_ip (predict_devicetypeid_prob);
 
 CREATE TABLE IF NOT EXISTS nnml_input (
-  inputid SERIAL NOT NULL PRIMARY KEY, 
+  inputid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   input_typeid INT NOT NULL CHECK (input_typeid>=0), 
   typeid INT NOT NULL DEFAULT 0, 
   CONSTRAINT input_typeid_ni FOREIGN KEY (input_typeid) REFERENCES ref_nnml_input_type (typeid) ON DELETE CASCADE ON UPDATE CASCADE
@@ -47,7 +47,7 @@ CREATE INDEX ON nnml_input (input_typeid);
 CREATE INDEX ON nnml_input (typeid);
 
 CREATE TABLE IF NOT EXISTS nnml_ip_input (
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL , 
   inputid INT NOT NULL, 
   value FLOAT NOT NULL DEFAULT 1.0, 
@@ -59,12 +59,12 @@ CREATE INDEX ON nnml_ip_input (ipid);
 CREATE INDEX ON nnml_ip_input (inputid);
 
 CREATE TABLE IF NOT EXISTS nnml_train (
-  trainid SERIAL NOT NULL PRIMARY KEY, 
+  trainid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   created TIMESTAMP NOT NULL DEFAULT NOW() UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS nnml_train_ip (
-  ipid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ipid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   trainid INT NOT NULL, 
   ip VARCHAR(39) NOT NULL, 
   mac VARCHAR(12) DEFAULT NULL, 
@@ -97,7 +97,7 @@ CREATE INDEX ON nnml_train_ip (devicetypeid);
 CREATE INDEX ON nnml_train_ip (ipprefixid);
 
 CREATE TABLE IF NOT EXISTS nnml_train_input (
-  inputid SERIAL NOT NULL PRIMARY KEY, 
+  inputid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   input_typeid INT NOT NULL CHECK (input_typeid>=0), 
   typeid INT NOT NULL DEFAULT 0, 
   CONSTRAINT input_typeid_tni FOREIGN KEY (input_typeid) REFERENCES ref_nnml_input_type (typeid) ON DELETE CASCADE ON UPDATE CASCADE
@@ -107,7 +107,7 @@ CREATE INDEX ON nnml_train_input (input_typeid);
 CREATE INDEX ON nnml_train_input (typeid);
 
 CREATE TABLE IF NOT EXISTS nnml_train_ip_input (
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ipid BIGINT NOT NULL, 
   inputid INT NOT NULL, 
   value FLOAT NOT NULL DEFAULT 1.0, 
@@ -119,7 +119,7 @@ CREATE INDEX ON nnml_train_ip_input (ipid);
 CREATE INDEX ON nnml_train_ip_input (inputid);
 
 CREATE TABLE IF NOT EXISTS nnml_model (
-  modelid SERIAL NOT NULL PRIMARY KEY, 
+  modelid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   created TIMESTAMP NOT NULL DEFAULT NOW() UNIQUE,
   modeltypeid INT NOT NULL CHECK (modeltypeid>=0), 
   model_filename VARCHAR(256) NOT NULL,
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS nnml_model (
 CREATE INDEX ON nnml_model (modeltypeid);
 
 CREATE TABLE IF NOT EXISTS nnml_model_devicetype_map (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   modelid INT NOT NULL, 
   outputnum INT NOT NULL CHECK (outputnum>=0),
   devicetypeid INT NOT NULL CHECK (devicetypeid>=0), 
@@ -142,7 +142,7 @@ CREATE INDEX ON nnml_model_devicetype_map (outputnum);
 CREATE INDEX ON nnml_model_devicetype_map (devicetypeid);
 
 CREATE TABLE IF NOT EXISTS nnml_model_manufacturer_map (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   modelid INT NOT NULL, 
   outputnum INT NOT NULL CHECK (outputnum>=0),
   manufacturerid INT NOT NULL CHECK (manufacturerid>=0), 
@@ -156,7 +156,7 @@ CREATE INDEX ON nnml_model_manufacturer_map (outputnum);
 CREATE INDEX ON nnml_model_manufacturer_map (manufacturerid);
 
 CREATE TABLE IF NOT EXISTS nnml_model_input_map (
-  id SERIAL NOT NULL PRIMARY KEY, 
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   modelid INT NOT NULL, 
   inputnum INT NOT NULL CHECK (inputnum>=0),
   input_typeid INT NOT NULL CHECK (input_typeid>=0), 

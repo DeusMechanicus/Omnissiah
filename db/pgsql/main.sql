@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS main_host ( 
-  hostid BIGSERIAL NOT NULL PRIMARY KEY, 
+  hostid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostuuid VARCHAR(256) NOT NULL, 
   idtype INT NOT NULL CHECK (idtype>=0), 
   ip VARCHAR(39) DEFAULT NULL, 
@@ -48,7 +48,7 @@ CREATE INDEX ON main_host (change_delay);
 CREATE INDEX ON main_host (siteid);
 
 CREATE TABLE IF NOT EXISTS main_host_uuid ( 
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL, 
   uuid_type INT NOT NULL CHECK (uuid_type>=0), 
   uuid VARCHAR(256) NOT NULL, 
@@ -61,7 +61,7 @@ CREATE INDEX ON main_host_uuid (hostid);
 CREATE INDEX ON main_host_uuid (uuid);
 
 CREATE TABLE IF NOT EXISTS main_host_link ( 
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL, 
   linkid INT NOT NULL CHECK (linkid>=0), 
   uuid VARCHAR(256) NOT NULL, 
@@ -74,7 +74,7 @@ CREATE INDEX ON main_host_link (hostid);
 CREATE INDEX ON main_host_link (uuid);
 
 CREATE TABLE IF NOT EXISTS main_if (
-  ifid BIGSERIAL NOT NULL PRIMARY KEY, 
+  ifid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   device VARCHAR(39) NOT NULL, 
   ifindex INT NOT NULL CHECK (ifindex>=0), 
   ifdescr VARCHAR(256) DEFAULT NULL,
@@ -126,7 +126,7 @@ CREATE INDEX ON main_if (active);
 CREATE INDEX ON main_if (last_active);
 
 CREATE TABLE IF NOT EXISTS main_arp_device (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   device VARCHAR(39) NOT NULL, 
   ip VARCHAR(39) NOT NULL, 
   ipnum BIGINT NOT NULL CHECK (ipnum>=0), 
@@ -162,7 +162,7 @@ CREATE INDEX ON main_arp_device (active);
 CREATE INDEX ON main_arp_device (last_active);
 
 CREATE TABLE IF NOT EXISTS main_arp_site (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   siteid INT NOT NULL DEFAULT 0 CHECK (siteid>=0), 
   ip VARCHAR(39) NOT NULL, 
   ipnum BIGINT NOT NULL CHECK (ipnum>=0), 
@@ -194,7 +194,7 @@ CREATE INDEX ON main_arp_site (active);
 CREATE INDEX ON main_arp_site (last_active);
 
 CREATE TABLE IF NOT EXISTS main_arp (
-  arpid BIGSERIAL NOT NULL PRIMARY KEY, 
+  arpid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   ip VARCHAR(39) NOT NULL UNIQUE, 
   ipnum BIGINT NOT NULL CHECK (ipnum>=0), 
   mac VARCHAR(12) NOT NULL, 
@@ -224,7 +224,7 @@ CREATE INDEX ON main_arp (active);
 CREATE INDEX ON main_arp (last_active);
 
 CREATE TABLE IF NOT EXISTS main_mac_device (
-  macid BIGSERIAL NOT NULL PRIMARY KEY,
+  macid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   device VARCHAR(39) NOT NULL, 
   mac VARCHAR(12) NOT NULL,
   macnum BIGINT NOT NULL CHECK (macnum>=0), 
@@ -257,7 +257,7 @@ CREATE INDEX ON main_mac_device (active);
 CREATE INDEX ON main_mac_device (last_active);
 
 CREATE TABLE IF NOT EXISTS main_mac_site (
-  macid BIGSERIAL NOT NULL PRIMARY KEY,
+  macid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   device VARCHAR(39) NOT NULL, 
   mac VARCHAR(12) NOT NULL,
   macnum BIGINT NOT NULL CHECK (macnum>=0), 
@@ -290,7 +290,7 @@ CREATE INDEX ON main_mac_site (active);
 CREATE INDEX ON main_mac_site (last_active);
 
 CREATE TABLE IF NOT EXISTS main_mac (
-  macid BIGSERIAL NOT NULL PRIMARY KEY,
+  macid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   device VARCHAR(39) NOT NULL, 
   mac VARCHAR(12) NOT NULL,
   macnum BIGINT NOT NULL CHECK (macnum>=0), 

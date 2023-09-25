@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS shot_host_option ( 
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   optionid INT NOT NULL CHECK (optionid>=0), 
   hostuuid VARCHAR(256) NOT NULL, 
   idtype INT NOT NULL CHECK (idtype>=0), 
@@ -43,7 +43,7 @@ CREATE INDEX ON shot_host_option (roleid);
 CREATE INDEX ON shot_host_option (macvendorid);
 
 CREATE TABLE IF NOT EXISTS shot_host_option_uuid ( 
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL, 
   optionid INT NOT NULL CHECK (optionid>=0), 
   uuid_type INT NOT NULL CHECK (uuid_type>=0), 
@@ -60,7 +60,7 @@ CREATE INDEX ON shot_host_option_uuid (hostid);
 CREATE INDEX ON shot_host_option_uuid (uuid);
 
 CREATE TABLE IF NOT EXISTS shot_host_option_link ( 
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL, 
   optionid INT NOT NULL CHECK (optionid>=0), 
   linkid INT NOT NULL CHECK (linkid>=0), 
@@ -77,7 +77,7 @@ CREATE INDEX ON shot_host_option_link (hostid);
 CREATE INDEX ON shot_host_option_link (uuid);
 
 CREATE TABLE IF NOT EXISTS shot_host ( 
-  hostid BIGSERIAL NOT NULL PRIMARY KEY, 
+  hostid BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostuuid VARCHAR(256) NOT NULL, 
   idtype INT NOT NULL CHECK (idtype>=0), 
   ip VARCHAR(39) DEFAULT NULL, 
@@ -115,7 +115,7 @@ CREATE INDEX ON shot_host (roleid);
 CREATE INDEX ON shot_host (macvendorid);
 
 CREATE TABLE IF NOT EXISTS shot_host_uuid ( 
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL, 
   uuid_type INT NOT NULL CHECK (uuid_type>=0), 
   uuid VARCHAR(256) NOT NULL, 
@@ -128,7 +128,7 @@ CREATE INDEX ON shot_host_uuid (hostid);
 CREATE INDEX ON shot_host_uuid (uuid);
 
 CREATE TABLE IF NOT EXISTS shot_host_link ( 
-  id BIGSERIAL NOT NULL PRIMARY KEY, 
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   hostid BIGINT NOT NULL, 
   linkid INT NOT NULL CHECK (linkid>=0), 
   uuid VARCHAR(256) NOT NULL, 
