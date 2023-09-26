@@ -62,13 +62,13 @@ netbox_tables = {
     'primary_ip6.id':'primary_ip6_id', 'cluster.id':'cluster_id', 'virtual_chassis.id':'virtual_chassis_id',
     'vc_position':'vc_position', 'vc_priority':'vc_priority', 'comments':'comments', 'local_context_data':'local_context_data',
     'custom_fields':'custom_fields'}, 'dbtable':'raw_netbox_dcim_device'},
-'dcim_interface':{'fields':{'id':'id', 'name':'name', 'description':'description', 'created':'created',
-    'last_updated':'last_updated', 'device.id':'device_id', 'type':'type', 'enabled':'enabled', 'parent.id':'parent_id',
-    'bridge.id':'bridge_id', 'lag.id':'lag_id', 'mtu':'mtu', 'mac_address':'mac_address', 'wwn':'wwn', 'mgmt_only':'mgmt_only', 'mode':'mode',
-    'rf_role':'rf_role', 'rf_channel':'rf_channel', 'rf_channel_frequency':'rf_channel_frequency', 'rf_channel_width':'rf_channel_width',
-    'tx_power':'tx_power', 'untagged_vlan.id':'untagged_vlan_id', 'mark_connected':'mark_connected', 'label':'label',
-    'cable.id':'cable_id', 'wireless_link.id':'wireless_link_id', 'link_peer':'link_peer', 'link_peer_type':'link_peer_type',
-    'custom_fields':'custom_fields'}, 'dbtable':'raw_netbox_dcim_interface'},
+#'dcim_interface':{'fields':{'id':'id', 'name':'name', 'description':'description', 'created':'created',
+#    'last_updated':'last_updated', 'device.id':'device_id', 'type':'type', 'enabled':'enabled', 'parent.id':'parent_id',
+#    'bridge.id':'bridge_id', 'lag.id':'lag_id', 'mtu':'mtu', 'mac_address':'mac_address', 'wwn':'wwn', 'mgmt_only':'mgmt_only', 'mode':'mode',
+#    'rf_role':'rf_role', 'rf_channel':'rf_channel', 'rf_channel_frequency':'rf_channel_frequency', 'rf_channel_width':'rf_channel_width',
+#    'tx_power':'tx_power', 'untagged_vlan.id':'untagged_vlan_id', 'mark_connected':'mark_connected', 'label':'label',
+#    'cable.id':'cable_id', 'wireless_link.id':'wireless_link_id', 'link_peer':'link_peer', 'link_peer_type':'link_peer_type',
+#    'custom_fields':'custom_fields'}, 'dbtable':'raw_netbox_dcim_interface'},
 'ipam_vrf':{'fields':{'id':'id', 'name':'name', 'description':'description', 'created':'created',
     'last_updated':'last_updated', 'rd':'rd', 'tenant.id':'tenant_id', 'enforce_unique':'enforce_unique',
     'custom_fields':'custom_fields'}, 'dbtable':'raw_netbox_ipam_vrf'},
@@ -99,30 +99,18 @@ insert_raw_netbox_sql = {'mariadb':'INSERT IGNORE INTO {0} ({1}) VALUES ({2});',
 
 
 def getall(netbox):
-    data = {}
-    data['tenancy_tenantgroup'] = netbox.tenancy.tenant_groups.all()
-    data['tenancy_tenant'] = netbox.tenancy.tenants.all()
-    data['dcim_sitegroup'] = netbox.dcim.site_groups.all()
-    data['dcim_region'] = netbox.dcim.regions.all()
-    data['dcim_site'] = netbox.dcim.sites.all()
-    data['dcim_location'] = netbox.dcim.locations.all()
-    data['dcim_rackrole'] = netbox.dcim.rack_roles.all()
-    data['dcim_rack'] = netbox.dcim.racks.all()
-    data['dcim_manufacturer'] = netbox.dcim.manufacturers.all()
-    data['dcim_devicerole'] = netbox.dcim.device_roles.all()
-    data['dcim_platform'] = netbox.dcim.platforms.all()
-    data['dcim_devicetype'] = netbox.dcim.device_types.all()
-    data['dcim_virtualchassis'] = netbox.dcim.virtual_chassis.all()
-    data['dcim_device'] = netbox.dcim.devices.all()
-    data['dcim_interface'] = netbox.dcim.interfaces.all()
-    data['ipam_vrf'] = netbox.ipam.vrfs.all()
-    data['ipam_role'] = netbox.ipam.roles.all()
-    data['ipam_vlangroup'] = netbox.ipam.vlan_groups.all()
-    data['ipam_vlan'] = netbox.ipam.vlans.all()
-    data['ipam_prefix'] = netbox.ipam.prefixes.all()
-    data['ipam_iprange'] = netbox.ipam.ip_ranges.all()
-    data['ipam_ipaddress'] = netbox.ipam.ip_addresses.all()
-    return data
+    return {'tenancy_tenantgroup':netbox.tenancy.tenant_groups.all(), 'tenancy_tenant':netbox.tenancy.tenants.all(),
+        'dcim_sitegroup':netbox.dcim.site_groups.all(), 'dcim_region':netbox.dcim.regions.all(),
+        'dcim_site':netbox.dcim.sites.all(), 'dcim_location':netbox.dcim.locations.all(),
+        'dcim_rackrole':netbox.dcim.rack_roles.all(), 'dcim_rack':netbox.dcim.racks.all(),
+        'dcim_manufacturer':netbox.dcim.manufacturers.all(), 'dcim_devicerole':netbox.dcim.device_roles.all(),
+        'dcim_platform':netbox.dcim.platforms.all(), 'dcim_devicetype':netbox.dcim.device_types.all(),
+        'dcim_virtualchassis':netbox.dcim.virtual_chassis.all(), 'dcim_device':netbox.dcim.devices.all(),
+#        'dcim_interface':getone(netbox.dcim.interfaces.all),
+        'ipam_vrf':netbox.ipam.vrfs.all(),
+        'ipam_role':netbox.ipam.roles.all(), 'ipam_vlangroup':netbox.ipam.vlan_groups.all(),
+        'ipam_vlan':netbox.ipam.vlans.all(), 'ipam_prefix':netbox.ipam.prefixes.all(),
+        'ipam_iprange':netbox.ipam.ip_ranges.all(), 'ipam_ipaddress':netbox.ipam.ip_addresses.all()}
 
 def save_netbox(db, netbox_data, dbtype, log):
     cur = db.cursor()
@@ -133,16 +121,23 @@ def save_netbox(db, netbox_data, dbtype, log):
             ','.join(['%s']*len(netbox_tables[table]['fields'])))
         values = []
         recnum = 0
-        for record in netbox_data[table]:
+        try:
+            netbox_list = list(netbox_data[table])
+        except:
+            netbox_list = []
+        for record in netbox_list:
             vals = []
             for field in netbox_tables[table]['fields']:
-                if '.' in field:
-                    flds = field.split('.')
-                    v = getattr(record, flds[0])
-                    if v is not None:
-                        v = getattr(v, flds[1])
-                else:
-                    v = getattr(record, field)
+                try:
+                    if '.' in field:
+                        flds = field.split('.')
+                        v = getattr(record, flds[0])
+                        if v is not None:
+                            v = getattr(v, flds[1])
+                    else:
+                        v = getattr(record, field)
+                except:
+                    v = None
                 if not (v is None or isinstance(v, str) or isinstance(v, int) or isinstance(v,float)):
                     v = str(v)
                 vals.append(v)
@@ -163,7 +158,7 @@ def main():
         program = OmniProgram(omni_config.log_path, omni_config.log_level, omni_config.log_format, omni_config.log_date_format)
         omnidb = OmniDB(omni_config.dbtype, omni_config.dbhost, omni_config.dbname,
             omni_unpwd.db_raw_user, omni_unpwd.db_raw_password, log=program.log, program=program.name, ssl=omni_config.dbssl)
-        netbox = api(omni_config.netbox_url, token=omni_unpwd.netbox_token)
+        netbox = api(omni_config.netbox_url, token=omni_unpwd.netbox_token, threading=True)
         omnidb.run_program_queries(stage=1)
         netbox_data = getall(netbox)
         save_netbox(omnidb, netbox_data, omni_config.dbtype, program.log)

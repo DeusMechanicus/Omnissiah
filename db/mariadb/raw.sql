@@ -173,8 +173,8 @@ CREATE TABLE IF NOT EXISTS raw_netbox_dcim_devicetype (
   is_full_depth BOOLEAN DEFAULT NULL, 
   subdevice_role VARCHAR(50) DEFAULT NULL, 
   airflow VARCHAR(50) DEFAULT NULL, 
-  front_image VARCHAR(100) DEFAULT NULL, 
-  rear_image VARCHAR(100) DEFAULT NULL, 
+  front_image VARCHAR(256) DEFAULT NULL, 
+  rear_image VARCHAR(256) DEFAULT NULL, 
   comments TEXT DEFAULT NULL, 
   custom_fields VARCHAR(1024) DEFAULT NULL 
 ) ENGINE=InnoDB;
@@ -317,7 +317,7 @@ CREATE TABLE IF NOT EXISTS raw_netbox_ipam_prefix (
   role_id BIGINT DEFAULT NULL, 
   is_pool BOOLEAN DEFAULT NULL, 
   mark_utilized BOOLEAN DEFAULT NULL, 
-  level INT NOT NULL DEFAULT 0, 
+  level INT DEFAULT NULL, 
   custom_fields VARCHAR(1024) DEFAULT NULL 
 ) ENGINE=InnoDB;
 
