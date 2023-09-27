@@ -29,8 +29,7 @@ enplug_bearer = ''
 activaire_api_key = ''
 
 #mist
-mist_api_username = ''
-mist_api_password = ''
+mist_api_token = ''
 
 #ruckussz
 ruckussz_api_username = ''

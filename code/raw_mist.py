@@ -29,10 +29,8 @@ def main():
         omnidb = OmniDB(omni_config.dbtype, omni_config.dbhost, omni_config.dbname,
             omni_unpwd.db_raw_user, omni_unpwd.db_raw_password, log=program.log, program=program.name, ssl=omni_config.dbssl)
         omnidb.run_program_queries(stage=1)
-        mistapi = MistAPI(omni_unpwd.mist_api_username, omni_unpwd.mist_api_password, program.log)
-        mistapi.login()
+        mistapi = MistAPI(omni_unpwd.mist_api_token, program.log)
         waps = get_mist_waps(mistapi, program.log)
-        mistapi.logout()
         omnidb.insert_list_of_dicts(raw_mist_table, list_of_dicts_to_single_layer(waps), program.log)
         omnidb.run_program_queries(stage=2)
         omnidb.close()

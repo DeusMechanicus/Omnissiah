@@ -11,19 +11,17 @@ activaire_api_headers = {'authorizationToken':''}
 
 mist_login_url = 'https://{0}/api/v1/login'
 mist_logout_url = 'https://{0}/api/v1/logout'
-mist_timeout_connection = 5
-mist_timeout_getpost = 30
-mist_sessionid_cookie = 'sessionid'
-mist_csrftoken_cookie = 'csrftoken'
-mist_login_headers = {'Content-Type':'application/json;charset=UTF-8','Accept':'application/json'}
-mist_login_body = '{{"email":"{0}","password":"{1}"}}'
-mist_cookie_headers = 'sessionid={0}; csrftoken={1}'
+mist_timeout_connection = 10
+mist_timeout_getpost = 60
+mist_authorization_header = 'Token {0}'
 mist_self_url = 'https://{0}/api/v1/self'
 mist_inventory_url = 'https://{0}/api/v1/orgs/{1}/inventory'
 mist_sites_url = 'https://{0}/api/v1/orgs/{1}/sites'
 mist_clients_url = 'https://{0}/api/v1/sites/{1}/stats/clients'
 mist_host = 'api.mist.com'
 mist_devices_url = 'https://{0}/api/v1/sites/{1}/stats/devices'
+mist_get_repeat = 3
+mist_get_pause = 1.0
 
 ruckussz_login_url = 'https://{0}:8443/wsg/api/public/v6_1/session'
 ruckussz_wap_url = 'https://{0}:8443/wsg/api/public/v6_1/aps?listSize={1}'
