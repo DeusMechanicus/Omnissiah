@@ -97,6 +97,7 @@ CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'zbx_%'", CONC
 
 CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'raw_%'", CONCAT("WHERE username='", @info_username, "'"), @localhost);
 CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'raw_%'", CONCAT("WHERE username='", @src_username, "'"), @localhost);
+CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'info_%'", CONCAT("WHERE username='", @src_username, "'"), @localhost);
 CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'info_%'", CONCAT("WHERE username='", @ref_username, "'"), @localhost);
 CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'info_%'", CONCAT("WHERE username='", @nnml_username, "'"), @localhost);
 CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'src_%'", CONCAT("WHERE username='", @nnml_username, "'"), @localhost);

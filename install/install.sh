@@ -2,26 +2,37 @@
 usergroup=omnissiah
 srcpath=/usr/local/src/omnissiah
 usrpath=/usr/local/lib/omnissiah
+sharepath=/usr/local/share/omnissiah
 homepath=/var/lib/omnissiah
 logpath=/var/log/omnissiah
 
 adduser --system --home $homepath --group --disabled-login $usergroup
 usermod -aG sudo omnissiah
+echo $usergroup ALL = NOPASSWD: /usr/bin/nmap >>/etc/sudoers
+echo $usergroup ALL = NOPASSWD: $usrpath/raw_scan.py >>/etc/sudoers
 chmod 750 $homepath
 mkdir $usrpath
 chown $usergroup $usrpath
 chmod 750 $usrpath
+mkdir $sharepath
+chown $usergroup $sharepath
+chmod 750 $sharepath
 mkdir $logpath
 chown $usergroup $logpath
 chmod 750 $logpath
+mkdir $homepath/models
+chown $usergroup $homepath/models
+chmod 750 $homepath/models
 
 sudo -u $usergroup cp -r $srcpath/code/* $usrpath
 sudo -u $usergroup cp -r $srcpath/install/cfg/* $usrpath
+sudo -u $usergroup cp -r $srcpath/install/share/* $sharepath
 chmod 640 $usrpath/*
 chmod 750 $usrpath/omnissiah
 chmod -R 640 $usrpath/omnissiah/*
 chmod u+x,g+x $usrpath/*.py
 chmod u+x,g+x $usrpath/*.sh
+chmod 640 $sharepath/*
 
 apt install -y gcc
 apt install net-tools
@@ -31,6 +42,7 @@ apt install -y postgresql-client
 apt install -y python3-pip
 apt install -y python3-venv
 apt install -y nmap
+apt install -y telnet
 cp $srcpath/share/nmap/*.lua /usr/share/nmap/nselib
 cp $srcpath/share/nmap/*.nse /usr/share/nmap/scripts
 
@@ -49,6 +61,7 @@ pip3 install easysnmp
 pip3 install python-nmap
 pip3 install mariadb
 pip3 install psycopg2-binary
+pip3 install numpy
 pip3 install torch
 deactivate
 

@@ -21,13 +21,13 @@ from omnissiah.util import split_dict, split_list, ip_from_oid, hex_from_octets
 sourceid_prefix = 1
 sourceid_range = 2
 sourceid_address = 3
-select_ipprefix_sql = 'SELECT ref_ipprefix.ipprefixid, ref_ipprefix.startip, ref_ipprefix.netnum, ref_subnet_role.subnet_role_alias, ref_ipprefix.vlanid FROM ref_ipprefix \
-INNER JOIN ref_site ON ref_ipprefix.siteid=ref_site.siteid LEFT JOIN ref_vlan ON ref_ipprefix.vlanid=ref_vlan.vlanid \
+select_ipprefix_sql = 'SELECT ref_ipprefix.ipprefixid, ref_ipprefix.startip, ref_ipprefix.netnum, ref_subnet_role.subnet_role_alias, ref_ipprefix.vlanid, ref_vlan.description \
+FROM ref_ipprefix INNER JOIN ref_site ON ref_ipprefix.siteid=ref_site.siteid LEFT JOIN ref_vlan ON ref_ipprefix.vlanid=ref_vlan.vlanid \
 LEFT JOIN ref_subnet_role ON (ref_ipprefix.roleid IS NOT NULL AND ref_ipprefix.roleid=ref_subnet_role.subnet_roleid) OR \
 (ref_ipprefix.roleid IS NULL AND ref_vlan.roleid=ref_subnet_role.subnet_roleid) \
-WHERE ref_ipprefix.active=1 AND ref_site.active=1 AND (ref_ipprefix.vlanid IS NULL OR ref_vlan.active=1){0};'
+WHERE ref_ipprefix.active=1 AND ref_site.active=1 AND (ref_ipprefix.vlanid IS NULL OR ref_vlan.active=1) {0};'
 select_iprange_sql = 'SELECT ref_iprange.iprangeid, ref_iprange.startip, ref_iprange.endip, ref_subnet_role.subnet_role_alias FROM ref_iprange \
-LEFT JOIN ref_subnet_role ON ref_iprange.roleid=ref_subnet_role.subnet_roleid WHERE ref_iprange.active=1{0};'
+LEFT JOIN ref_subnet_role ON ref_iprange.roleid=ref_subnet_role.subnet_roleid WHERE ref_iprange.active=1 {0};'
 insert_scans_sql = 'INSERT INTO raw_scan_ip (ip, sourceid, refid) VALUES (%s, %s, %s);'
 insert_scan_infos_sql = "INSERT INTO raw_scan_ip_info(ipid, infoid, value) SELECT raw_scan_ip.ipid, ref_scan_ip_info.infoid, '{0}' FROM raw_scan_ip \
 INNER JOIN ref_scan_ip_info ON ref_scan_ip_info.info='{1}' WHERE raw_scan_ip.ip='{2}';"
@@ -51,11 +51,11 @@ UNION SELECT ip FROM raw_scan_dhcp WHERE ip<>'0.0.0.0') AS ipmac WHERE ipmac.ip 
 def select_ips(db, log):
     result={'prefix':[], 'range':[], 'address':[]}
     cur = db.cursor()
-    cur.execute(select_ipprefix_sql.format(omni_config.scan_subnet_role_filter))
+    cur.execute(select_ipprefix_sql.format(omni_config.scan_subnet_ipprefix_filter))
     records = cur.fetchall()
     result['prefix'] = [ {'id':r[0], 'subnet':r[1], 'netnum':r[2], 'role':r[3], 'vlanid':r[4]} for r in records ]
     log.info(msg_loaded_records.format('prefixes', len(result['prefix'])))
-    cur.execute(select_iprange_sql.format(omni_config.scan_subnet_role_filter))
+    cur.execute(select_iprange_sql.format(omni_config.scan_subnet_iprange_filter))
     records = cur.fetchall()
     result['range'] = [ {'id':r[0], 'startip':r[1], 'endip':r[2], 'role':r[3]} for r in records ]
     log.info(msg_loaded_records.format('ranges', len(result['range'])))
@@ -391,13 +391,13 @@ def save_walks(db, ips, walks, log):
                 for value in walk:
                     ip = ip_from_oid(value.oid)
                     mac = hex_from_octets(value.value)
-                    if ip:
+                    if ip and len(mac)==12:
                         arplist.append((ip, ips[routerip]['ipid'], mac))
             elif oid in omni_const.dhcp_oids:
                 for value in walk:
                     ip = ip_from_oid(value.oid)
                     mac = hex_from_octets(value.value)
-                    if ip:
+                    if ip and len(mac)==12:
                         dhcplist.append((ip, ips[routerip]['ipid'], mac))
     if arplist:
         cur.executemany(insert_scans_arp_sql, arplist)

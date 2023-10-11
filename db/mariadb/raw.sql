@@ -359,7 +359,7 @@ CREATE TABLE IF NOT EXISTS raw_netbox_ipam_ipaddress (
 
 CREATE TABLE IF NOT EXISTS raw_scan_ip (
   ipid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  ip VARCHAR(39) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE,
+  ip VARCHAR(39) NOT NULL UNIQUE,
   refid INT UNSIGNED NOT NULL,
   sourceid INT UNSIGNED NOT NULL,
   KEY refid (refid),
@@ -377,9 +377,9 @@ CREATE TABLE IF NOT EXISTS raw_scan_ip_info (
 
 CREATE TABLE IF NOT EXISTS raw_scan_arp (
   arpid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  ip VARCHAR(39) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  ip VARCHAR(39) NOT NULL,
   routerid INT UNSIGNED NOT NULL,
-  mac VARCHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  mac VARCHAR(12) NOT NULL,
   KEY ip (ip),
   KEY routerid (routerid),
   KEY mac (mac)
@@ -387,9 +387,9 @@ CREATE TABLE IF NOT EXISTS raw_scan_arp (
 
 CREATE TABLE IF NOT EXISTS raw_scan_dhcp (
   dhcpid INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  ip VARCHAR(39) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  ip VARCHAR(39) NOT NULL,
   routerid INT UNSIGNED NOT NULL,
-  mac VARCHAR(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  mac VARCHAR(12) DEFAULT NULL,
   KEY ip (ip),
   KEY routerid (routerid),
   KEY mac (mac)

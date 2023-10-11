@@ -67,6 +67,7 @@ BEGIN
 
   CALL grant_tables_rights('ALL PRIVILEGES', dbname, 'AND table_name LIKE ''raw_%''', 'WHERE username=''' || info_username || '''');
   CALL grant_tables_rights('SELECT', dbname, 'AND table_name LIKE ''raw_%''', 'WHERE username=''' || src_username || '''');
+  CALL grant_tables_rights('SELECT', dbname, 'AND table_name LIKE ''info_%''', 'WHERE username=''' || src_username || '''');
   CALL grant_tables_rights('SELECT', dbname, 'AND table_name LIKE ''info_%''', 'WHERE username=''' || ref_username || '''');
   CALL grant_tables_rights('ALL PRIVILEGES', dbname, 'AND table_name LIKE ''info_%''', 'WHERE username=''' || nnml_username || '''');
   CALL grant_tables_rights('SELECT', dbname, 'AND table_name LIKE ''src_%''', 'WHERE username=''' || nnml_username || '''');

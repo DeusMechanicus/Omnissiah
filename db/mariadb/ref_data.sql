@@ -752,6 +752,8 @@ INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_fie
 INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (5, 'tenant', 'Tenant', 'ref_tenant', 'tenant', 'tenantid', NULL);
 INSERT INTO ref_zbx_group (groupid, name, prefix, table_name, field_name, id_field, parent_field) VALUES (6, 'statistic', 'Statistic', 'ref_zbx_group', 'prefix', 'groupid', NULL);
 
+INSERT INTO ref_zbx_device_template (devicetypeid, template, type, version, bulk) VALUES (0, 'Template Omnissiah Device', 2, 2, 1);
+
 INSERT INTO ref_zbx_group_template (groupid, template) VALUES (1, 'Template Omnisiah Group Device');
 INSERT INTO ref_zbx_group_template (groupid, template) VALUES (2, 'Template Omnisiah Group Manufacturer');
 INSERT INTO ref_zbx_group_template (groupid, template) VALUES (3, 'Template Omnisiah Group Region');

@@ -19,7 +19,9 @@ dbssl = True
 netbox_url = 'http://127.0.0.1:8001/'
 
 #scan
-scan_subnet_role_filter = " AND ((ref_subnet_role.subnet_role_alias IS NULL AND netnum>=22) OR ref_subnet_role.subnet_role_alias NOT IN ('wireless_client', 'wire_client', 'user'))"
+scan_subnet_ipprefix_filter = "AND ref_ipprefix.netnum>=22 AND (ref_subnet_role.subnet_role_alias IS NULL OR ref_subnet_role.subnet_role_alias NOT IN ('wireless_client', 'wire_client', 'user')) AND \
+(ref_ipprefix.vlanid IS NULL OR ref_vlan.description IS NULL OR (LOWER(ref_vlan.description) NOT LIKE '%guest%' AND LOWER(ref_vlan.description) NOT LIKE '%member%' AND LOWER(ref_vlan.description) NOT LIKE '%client%' ))"
+scan_subnet_iprange_filter = "AND ref_iprange.netnum>=22 AND (ref_subnet_role.subnet_role_alias IS NULL OR ref_subnet_role.subnet_role_alias NOT IN ('wireless_client', 'wire_client', 'user'))"
 scan_processes_num = None
 scan_rangeip_scope_size = 256
 nmap_scan_list = [{'threadsnum':70, 'arguments':'-n -T4 --host-timeout 60s -PE --disable-arp-ping -sn', 'timeout':240, 'info':None},

@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS src_snmp_system (
   sysdescr VARCHAR(256) DEFAULT NULL, 
   sysobjectid VARCHAR(100) DEFAULT NULL, 
   sysuptime BIGINT DEFAULT NULL CHECK (sysuptime>=0), 
-  syscontact VARCHAR(100) DEFAULT NULL, 
+  syscontact VARCHAR(256) DEFAULT NULL, 
   sysname VARCHAR(100) DEFAULT NULL, 
   syslocation VARCHAR(256) DEFAULT NULL, 
   sysservices INT DEFAULT NULL CHECK (sysservices>=0), 

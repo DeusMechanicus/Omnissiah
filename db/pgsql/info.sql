@@ -480,6 +480,15 @@ CREATE TABLE IF NOT EXISTS info_nnml_osmatch_exists (
   name varchar(256) NOT NULL UNIQUE 
 );
 
+CREATE TABLE IF NOT EXISTS info_nnml_script_value_exists (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+  script VARCHAR(100) NOT NULL, 
+  value varchar(700) NOT NULL 
+);
+CREATE UNIQUE INDEX ON info_nnml_script_value_exists (script, value);
+CREATE INDEX ON info_nnml_script_value_exists (script);
+CREATE INDEX ON info_nnml_script_value_exists (value);
+
 CREATE TABLE IF NOT EXISTS info_nnml_service_product (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
   type VARCHAR(20) NOT NULL, 
