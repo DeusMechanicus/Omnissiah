@@ -107,6 +107,10 @@ CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'src_%'", CONCAT("WHER
 CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'shot_%'", CONCAT("WHERE username='", @main_username, "'"), @localhost);
 CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'main_%'", CONCAT("WHERE username='", @zbx_username, "'"), @localhost);
 
+PREPARE stmt FROM CONCAT('GRANT SELECT, INSERT, UPDATE ON ', @dbname, ".ref_site_info TO '", @zbx_username, "'@'", @localhost, "';");
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
 PREPARE stmt FROM CONCAT('DROP PROCEDURE IF EXISTS ', @dbname, '.grant_rights;');
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;

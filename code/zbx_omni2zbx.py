@@ -371,9 +371,7 @@ def run_actions(zapi, db, actions, dbdata, log):
                     rmap = dbdata.maps.hstgrp.omni.get(hostgroup['groupid'], None)
                     if rmap:
                         if rmap['zbxid']:
-                            group = dbdata.keys.hstgrp.zbx['groupid'].get(rmap['zbxid'], None)
-                            if group:
-                                groups.append(group)
+                            groups.append({'groupid':rmap['zbxid']})
                 tags = dbdata.keys.host_tag.omni['hostid'].get(omniid, [])
                 inventory = dbdata.keys.host_inventory.omni['hostid'].get(omniid, {})
                 interfaces = action['interfaces']

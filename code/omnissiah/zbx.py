@@ -1,21 +1,21 @@
 import warnings
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
+import logging
 
 from munch import Munch
 from pyzabbix import ZabbixAPI
 from .const import zbx_zabbix_timeout, zbx_update_zbx_omni_map_sql
 
 class ZbxAPI(ZabbixAPI):
-    def __init__(self, url, userpasstoken, log, mode='ro', user=None, pwd=None, tkn=None, timeout=zbx_zabbix_timeout):
+    def __init__(self, url, userpasstoken, log, mode='ro', tkn=None, timeout=zbx_zabbix_timeout):
         self.log = log
         token = tkn or userpasstoken[mode]['token']
+        log = logging.getLogger('pyzabbix')
+        log.propagate = False
+        log.setLevel(logging.ERROR)
         super(ZbxAPI, self).__init__(url, timeout=timeout, detect_version=False)
         self.session.verify = False
-        if token:
-            self.login(api_token=token)
-        else:
-            self.login(user or userpasstoken[mode]['username'], pwd or userpasstoken[mode]['password'])
-
+        self.login(api_token=token)
 
     def prepare_interface(self, interface, zbx_hostid=None, zbx_interfaceid=None):
         zbxif = {'main':interface['main'], 'type':interface['type'], 'useip':interface['useip'], 'ip':interface['ip'], 'dns':interface['dns'], 'port':interface['port']}

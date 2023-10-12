@@ -87,6 +87,8 @@ BEGIN
   CALL set_ownership(dbname, 'AND table_name LIKE ''zbx_%''', zbx_username);
   CALL set_ownership(dbname, 'AND table_name LIKE ''hist_%''', hist_username);
 
+  EXECUTE 'GRANT SELECT, INSERT, UPDATE ON ref_site_info TO ' || zbx_username || ';';
+  
 END; $$;
 
 DROP PROCEDURE IF EXISTS grant_tables_rights;

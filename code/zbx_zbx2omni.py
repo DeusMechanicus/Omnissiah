@@ -250,15 +250,15 @@ def delete_old_history(db, log):
 
 
 def main():
-#    try:
+    try:
         exitcode = 1
         program = OmniProgram(omni_config.log_path, omni_config.log_level, omni_config.log_format, omni_config.log_date_format)
         zapi = ZbxAPI(omni_config.zabbix_url, omni_unpwd.zbx_userpasstoken, program.log, mode='ro')
         proxies = zapi.proxy.get(output=proxies_output)
         maintenances = zapi.maintenance.get(output=maintenances_output)
         hstgrps = zapi.hostgroup.get(output=hstgrp_output)
-        hosts = zapi.host.get(output=hosts_output, templated_hosts=1, selectGroups=1, selectParentTemplates=1, selectInterfaces=1,
-            selectMacros=macros_output, selectTags='extend', selectInventory='extend', selectTriggers=triggers_output)
+        hosts = zapi.host.get(output=hosts_output, templated_hosts=1, selectGroups=1, selectParentTemplates=1, selectMacros=macros_output,
+            selectTags='extend', selectInventory='extend', selectTriggers=triggers_output)
         interfaces = zapi.hostinterface.get()
         items = zapi.item.get(output=items_output)
         histories = get_history(zapi, items)
@@ -271,9 +271,9 @@ def main():
         delete_old_history(omnidb, program.log)
         omnidb.close()
         exitcode = 0
-#    except:
-#        program.log.exception('Fatal error')
-#    finally:
+    except:
+        program.log.exception('Fatal error')
+    finally:
         return exitcode
 
 if __name__ == "__main__":

@@ -36,6 +36,6 @@ ruckussz_api_username = ''
 ruckussz_api_password = ''
 
 #zabbix
-zbx_userpasstoken = {'ro':{'username':'omnissiah_ro', 'password':'', 'token':''},
-    'rw':{'username':'omnissiah_rw', 'password':'', 'token':''},
-    'sa':{'username':'omnissiah_sa', 'password':'', 'token':''}}
+zbx_userpasstoken = {'ro':{'token':''},
+    'rw':{'token':''},
+    'sa':{'token':''}}
