@@ -1,5 +1,4 @@
-# Omnissiah
-**The project is under development, it is not currently possible to use it.**
+# Omnissiah V0.1
 > *The ultimate goal of the Cult Mechanicus is to understand and fully comprehend the glory of the Machine God. The communal and personal attempt at this form of enlightenment is known as the Quest for Knowledge. The Cult believes that all knowledge already exists in the universe, and it is primarily a matter of time before it can be gathered together to complete the Quest.*
 
 This project was born out of a real working system that is responsible for monitoring a large network of more than one hundred thousand devices. Zabbix is used as a monitoring system, but this project is not about Zabbix, or rather, not only about Zabbix.\
@@ -36,4 +35,4 @@ Installation is described in the install [section](/install) or in the [document
 * install - preparation and installation
 * share - data for other applications in use
 ## Documentation
-The documentation and manuals are located in the docs directory.
+The documentation and manuals are located in the [docs](/docs/) directory.
