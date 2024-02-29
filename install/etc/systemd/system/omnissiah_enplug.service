@@ -1,0 +1,14 @@
+[Unit]
+Description=Enplug devices polling daemon for Omnissiah API
+After=network.target
+
+[Service]
+User=omnissiah
+Group=omnissiah
+WorkingDirectory=/var/lib/omnissiah/
+ExecStart=/bin/bash -c 'cd /usr/local/lib/omnissiah && source omnienv/bin/activate && python3 api_enplug.py'
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Omnissiah API daemon
+After=network.target
+
+[Service]
+User=omnissiah
+Group=omnissiah
+WorkingDirectory=/var/lib/omnissiah/
+ExecStart=/bin/bash -c 'cd /usr/local/lib/omnissiah && source omnienv/bin/activate && uvicorn api_v1:api --host 127.0.0.1 --port 8000 --workers 4'
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
