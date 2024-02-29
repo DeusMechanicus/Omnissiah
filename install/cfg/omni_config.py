@@ -7,6 +7,7 @@ log_level = logging.INFO
 #log_level = logging.DEBUG
 log_format = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'
 log_date_format = '%Y%m%d:%H%M%S'
+lib_path = '/var/lib/omnissiah'
 
 #database
 dbtype = 'mariadb'
@@ -149,7 +150,49 @@ hist_dumps_path = '/var/lib/omnissiah/dumps'
 hist_dump_filename = '{0}/{1}_{2}.sql.gz'
 
 #zabbix
-zabbix_url = 'https://127.0.0.1/'
-#zabbix_url = 'http://127.0.0.1/'
+#zabbix_url = 'https://127.0.0.1/'
+zabbix_url = 'http://127.0.0.1/'
 zbx_item_pool_size = 10000
 zbx_omnissiah_maintenance_group = 'Omnissiah maintenance'
+
+#nnml_gpt
+nnml_openai_gpt_timeout = 30
+nnml_openai_gpt_model = 'gpt-4'
+
+#api
+api_redis_prefix_delimiter = ':'
+api_zabbix_connections = 5
+api_redis_host = '127.0.0.1'
+api_redis_port = 6379
+api_redis_protocol = 3
+api_device_redis_db = 2
+api_zabbix_redis_db = 3
+
+def_api_polling_interval = 240
+def_api_ttl = 3600
+
+#api enplug
+api_enplug_polling_interval = 30
+api_enplug_ttl = def_api_ttl
+api_enplug_prefix = 'enplug'
+
+#api activaire
+api_activaire_polling_interval = def_api_polling_interval
+api_activaire_ttl = def_api_ttl
+api_activaire_prefix = 'activaire'
+
+#api zabbix
+api_zabbix_polling_interval = 540
+api_zabbix_ttl = def_api_ttl
+#api_zabbix_prefix = {'host_id':'hosts'+api_redis_prefix_delimiter+'hostid', 'host_host':'hosts'+api_redis_prefix_delimiter+'host',
+#'group_id':'groups'+api_redis_prefix_delimiter+'groupid', 'group_name':'groups'+api_redis_prefix_delimiter+'name'}
+api_zabbix_limits = {'hosts':1000, 'groups':1000}
+
+#api_onvif
+api_onvif_wsdl_path = '/usr/local/lib/omnissiah/omnienv/lib/python3.11/site-packages/onvif/wsdl/'
+api_onvif_unpass_per_cycle = 3
+api_onvif_polling_interval = 500
+api_onvif_ttl = def_api_ttl
+api_onvif_prefix = 'onvif'
+api_onvif_cpus = 4
+api_onvif_coroutines = 50

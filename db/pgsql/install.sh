@@ -14,6 +14,7 @@ psql -h $dbhost -p $dbport -d $dbname -U $username < cfg.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < code.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < log.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < ref.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < sec.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < raw.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < info.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < src.sql
@@ -26,5 +27,6 @@ psql -h $dbhost -p $dbport -d $dbname -U $username < tmp.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < cfg_data.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < code_data.sql
 psql -h $dbhost -p $dbport -d $dbname -U $username < ref_data.sql
+psql -h $dbhost -p $dbport -d $dbname -U $username < sec_data.sql
 
 psql -h $dbhost -p $dbport -d $dbname -U $username < users.sql

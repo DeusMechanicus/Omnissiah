@@ -9,6 +9,9 @@ SET @ref_username='ref';
 SET @shot_username='shot';
 SET @src_username='src';
 SET @zbx_username='zbx';
+SET @sec_username='sec';
+
+SET @api_onvif_username='api_onvif';
 
 SET @dbname=DATABASE();
 
@@ -24,7 +27,7 @@ CREATE TEMPORARY TABLE tmp_install_tables (
   tablename VARCHAR(256) NOT NULL PRIMARY KEY 
 ) ENGINE=InnoDB;
 
-PREPARE stmt FROM CONCAT("INSERT INTO tmp_install_username (username) VALUES ('", @hist_username, "'), ('", @info_username, "'), ('", @main_username, "'), ('", @nnml_username, "'), ('", @raw_username, "'), ('", @ref_username, "'), ('", @shot_username, "'), ('", @src_username, "'), ('", @zbx_username, "');");
+PREPARE stmt FROM CONCAT("INSERT INTO tmp_install_username (username) VALUES ('", @hist_username, "'), ('", @info_username, "'), ('", @main_username, "'), ('", @nnml_username, "'), ('", @raw_username, "'), ('", @ref_username, "'), ('", @sec_username, "'), ('", @shot_username, "'), ('", @src_username, "'), ('", @zbx_username, "'), ('", @api_onvif_username, "');");
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
@@ -87,6 +90,7 @@ DEALLOCATE PREPARE stmt;
 
 CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'ref_%'", CONCAT("WHERE username<>'", @ref_username, "'"), @localhost);
 CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'ref_%'", CONCAT("WHERE username='", @ref_username, "'"), @localhost);
+CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'sec_%'", CONCAT("WHERE username='", @sec_username, "'"), @localhost);
 CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'raw_%'", CONCAT("WHERE username='", @raw_username, "'"), @localhost);
 CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'info_%'", CONCAT("WHERE username='", @info_username, "'"), @localhost);
 CALL grant_rights('ALL PRIVILEGES', @dbname, "AND TABLE_NAME LIKE 'src_%'", CONCAT("WHERE username='", @src_username, "'"), @localhost);
@@ -110,6 +114,17 @@ CALL grant_rights('SELECT', @dbname, "AND TABLE_NAME LIKE 'main_%'", CONCAT("WHE
 PREPARE stmt FROM CONCAT('GRANT SELECT, INSERT, UPDATE ON ', @dbname, ".ref_site_info TO '", @zbx_username, "'@'", @localhost, "';");
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
+
+PREPARE stmt FROM CONCAT('GRANT SELECT, INSERT, UPDATE ON ', @dbname, ".sec_camera_unpwd TO '", @api_onvif_username, "'@'", @localhost, "';");
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+PREPARE stmt FROM CONCAT('GRANT SELECT ON ', @dbname, ".ref_ipprefix TO '", @api_onvif_username, "'@'", @localhost, "';");
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+PREPARE stmt FROM CONCAT('GRANT SELECT ON ', @dbname, ".sec_onvif_unpwd TO '", @api_onvif_username, "'@'", @localhost, "';");
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
 
 PREPARE stmt FROM CONCAT('DROP PROCEDURE IF EXISTS ', @dbname, '.grant_rights;');
 EXECUTE stmt;

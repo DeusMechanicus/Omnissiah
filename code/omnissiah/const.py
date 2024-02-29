@@ -11,7 +11,7 @@ activaire_api_headers = {'authorizationToken':''}
 
 mist_login_url = 'https://{0}/api/v1/login'
 mist_logout_url = 'https://{0}/api/v1/logout'
-mist_timeout_connection = 10
+mist_timeout_connection =10
 mist_timeout_getpost = 60
 mist_authorization_header = 'Token {0}'
 mist_self_url = 'https://{0}/api/v1/self'

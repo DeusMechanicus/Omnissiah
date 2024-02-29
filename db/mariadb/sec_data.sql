@@ -1,0 +1,11 @@
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES ('admin', NULL, NULL, 2);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES ('root', NULL, NULL, 1);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES ('service', NULL, NULL, 0);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES (NULL, 'admin', NULL, 9);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES (NULL, '12345', NULL, 8);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES (NULL, '', NULL, 7);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES (NULL, 'root', NULL, 6);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES (NULL, 'pass', NULL, 5);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES (NULL, 'service', NULL, 4);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES ('admin', '12345', NULL, 99);
+INSERT INTO sec_onvif_unpwd (username, password, ipprefixid, priority) VALUES ('admin', 'admin', NULL, 98);

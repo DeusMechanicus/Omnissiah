@@ -17,6 +17,8 @@ db_main_user = 'main'
 db_main_password = 'main'
 db_zbx_user = 'zbx'
 db_zbx_password = 'zbx'
+db_sec_user = 'sec'
+db_sec_password = 'sec'
 
 #netbox
 netbox_token = ''
@@ -39,3 +41,10 @@ ruckussz_api_password = ''
 zbx_userpasstoken = {'ro':{'token':''},
     'rw':{'token':''},
     'sa':{'token':''}}
+
+#openai
+openai_gpt_api_token = ''
+
+#api_onvif
+db_api_onvif_user = 'api_onvif'
+db_api_onvif_password = 'api_onvif'

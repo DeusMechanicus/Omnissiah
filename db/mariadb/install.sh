@@ -13,6 +13,7 @@ mysql -h $dbhost -P $dbport -u $username -p$password $dbname < cfg.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < code.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < log.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < ref.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < sec.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < raw.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < info.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < src.sql
@@ -25,5 +26,6 @@ mysql -h $dbhost -P $dbport -u $username -p$password $dbname < tmp.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < cfg_data.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < code_data.sql
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < ref_data.sql
+mysql -h $dbhost -P $dbport -u $username -p$password $dbname < sec_data.sql
 
 mysql -h $dbhost -P $dbport -u $username -p$password $dbname < users.sql

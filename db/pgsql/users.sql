@@ -40,16 +40,18 @@ DECLARE
   nnml_username VARCHAR := 'nnml';
   raw_username VARCHAR := 'raw';
   ref_username VARCHAR := 'ref';
+  sec_username VARCHAR := 'sec';
   shot_username VARCHAR := 'shot';
   src_username VARCHAR := 'src';
   zbx_username VARCHAR := 'zbx';
+  api_onvif_username VARCHAR := 'api_onvif';
   dbname VARCHAR;
 BEGIN 
   SELECT current_database() INTO dbname;
   CREATE TEMPORARY TABLE IF NOT EXISTS tmp_install_username (username VARCHAR(256) NOT NULL PRIMARY KEY);
   CREATE TEMPORARY TABLE IF NOT EXISTS tmp_install_users (username VARCHAR(256) NOT NULL PRIMARY KEY);
   CREATE TEMPORARY TABLE IF NOT EXISTS tmp_install_tables (tablename VARCHAR(256) NOT NULL PRIMARY KEY);
-  INSERT INTO tmp_install_username (username) VALUES (hist_username), (info_username), (main_username), (nnml_username), (raw_username), (ref_username), (shot_username), (src_username), (zbx_username);
+  INSERT INTO tmp_install_username (username) VALUES (hist_username), (info_username), (main_username), (nnml_username), (raw_username), (ref_username), (sec_username), (shot_username), (src_username), (zbx_username), (api_onvif_username);
   CALL grant_tables_rights('SELECT', dbname, 'AND table_name IN (''cfg_parameter'', ''code_program'', ''code_program_query'', ''code_action'');', '');
   CALL grant_tables_rights('INSERT', dbname, 'AND table_name=''log_program''', '');
   CALL grant_tables_rights('SELECT', dbname, '', 'WHERE username=''' || hist_username || '''');
@@ -57,6 +59,7 @@ BEGIN
 
   CALL grant_tables_rights('SELECT', dbname, 'AND table_name LIKE ''ref_%''', 'WHERE username<>''' || ref_username || '''');
   CALL grant_tables_rights('ALL PRIVILEGES', dbname, 'AND table_name LIKE ''ref_%''', 'WHERE username=''' || ref_username || '''');
+  CALL grant_tables_rights('ALL PRIVILEGES', dbname, 'AND table_name LIKE ''sec_%''', 'WHERE username=''' || sec_username || '''');
   CALL grant_tables_rights('ALL PRIVILEGES', dbname, 'AND table_name LIKE ''raw_%''', 'WHERE username=''' || raw_username || '''');
   CALL grant_tables_rights('ALL PRIVILEGES', dbname, 'AND table_name LIKE ''info_%''', 'WHERE username=''' || info_username || '''');
   CALL grant_tables_rights('ALL PRIVILEGES', dbname, 'AND table_name LIKE ''src_%''', 'WHERE username=''' || src_username || '''');
@@ -79,6 +82,7 @@ BEGIN
 
   CALL set_ownership(dbname, 'AND table_name LIKE ''raw_%''', raw_username);
   CALL set_ownership(dbname, 'AND table_name LIKE ''ref_%''', ref_username);
+  CALL set_ownership(dbname, 'AND table_name LIKE ''sec_%''', sec_username);
   CALL set_ownership(dbname, 'AND table_name LIKE ''info_%''', info_username);
   CALL set_ownership(dbname, 'AND table_name LIKE ''src_%''', src_username);
   CALL set_ownership(dbname, 'AND table_name LIKE ''nnml_%''', nnml_username);
@@ -88,6 +92,9 @@ BEGIN
   CALL set_ownership(dbname, 'AND table_name LIKE ''hist_%''', hist_username);
 
   EXECUTE 'GRANT SELECT, INSERT, UPDATE ON ref_site_info TO ' || zbx_username || ';';
+  EXECUTE 'GRANT SELECT, INSERT, UPDATE ON sec_camera_unpwd TO ' || api_onvif_username || ';';
+  EXECUTE 'GRANT SELECT ON ref_ipprefix TO ' || api_onvif_username || ';';
+  EXECUTE 'GRANT SELECT ON sec_onvif_unpwd TO ' || api_onvif_username || ';';
   
 END; $$;
 

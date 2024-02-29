@@ -1,3 +1,5 @@
+import json
+
 def split_dict(d, n):
     n = min(n, len(d))
     if n:
@@ -67,4 +69,23 @@ def union_list_of_sets(l):
                 else:
                     j += 1
             i += 1
+    return result
+
+def safe_json_serialize(obj):
+    default = lambda o: f"<<non-serializable: {type(o).__qualname__}>>"
+    return json.dumps(obj, default=default, ensure_ascii=False)
+
+def remove_duplicate(l, fields):
+    result = []
+    keys = []
+    for r in l:
+        key = { f:r[f] for f in fields }
+        isfound = False
+        for k in keys:
+            if k == key:
+                isfound = True
+                break
+        if not isfound:
+            keys.append(key)
+            result.append(r)
     return result
