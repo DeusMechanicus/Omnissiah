@@ -35,21 +35,23 @@ chmod u+x,g+x $usrpath/*.sh
 chmod 640 $sharepath/*
 
 apt install -y gcc
-apt install net-tools
+apt install -y net-tools
 apt install -y snmp libsnmp-dev
 apt install -y mariadb-client libmariadb-dev
 apt install -y postgresql-client
+apt install -y python3-dev
 apt install -y python3-pip
 apt install -y python3-venv
+apt install -y openssl
 apt install -y nmap
 apt install -y telnet
 cp $srcpath/share/nmap/*.lua /usr/share/nmap/nselib
 cp $srcpath/share/nmap/*.nse /usr/share/nmap/scripts
 
 cd $usrpath
-sudo -u $usergroup mkdir omnienv
-python3 -m venv omnienv
-source omnienv/bin/activate
+sudo -u $usergroup mkdir venv
+python3 -m venv venv
+source venv/bin/activate
 pip3 install wheel
 pip3 install requests
 pip3 install setproctitle

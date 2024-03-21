@@ -9,7 +9,7 @@ This product requires Linux. We use Debian 12. But there should be no problem wi
 ## Preparation
 If you are planning to use git then you need to install git client (if it's not already installed). In the case of Debian, this is done with the following command:
 ```
-sudo apt-get -y install git
+sudo apt-get -y install git wget
 ```
 ## Downloading
 You can download the source code of the project or the virtual machine image. The virtual machine image can be downloaded here - (URL with download options will be here)\

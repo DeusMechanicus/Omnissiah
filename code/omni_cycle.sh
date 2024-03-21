@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source omnienv/bin/activate
+source venv/bin/activate
 if ./raw_mac.py; then
   ./info_mac.py
 fi
