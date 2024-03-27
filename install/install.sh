@@ -67,6 +67,11 @@ pip3 install numpy
 pip3 install torch
 deactivate
 
+cp $srcpath/install/etc/systemd/system/* /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable omnissiah_api
+systemctl enable omnissiah_zabbix
+
 read -p "Do you need to install Mariadb server? (yes/No) " yn
 case $yn in 
     yes | y | Yes | YES | Y ) apt install -y mariadb-server;;
