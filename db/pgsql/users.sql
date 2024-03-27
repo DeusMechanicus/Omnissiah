@@ -100,3 +100,5 @@ END; $$;
 
 DROP PROCEDURE IF EXISTS grant_tables_rights;
 DROP PROCEDURE IF EXISTS set_ownership;
+
+ALTER USER omnissiah WITH NOSUPERUSER;

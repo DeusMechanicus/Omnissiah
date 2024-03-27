@@ -15,6 +15,10 @@ PREPARE stmt FROM CONCAT('GRANT ALL PRIVILEGES ON ', @dbname, ".* TO '", @userna
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
+PREPARE stmt FROM CONCAT('GRANT GRANT OPTION ON ', @dbname, ".* TO '", @username, "'@'", @localhost, "';");;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
 PREPARE stmt FROM CONCAT("GRANT CREATE TEMPORARY TABLES ON *.* TO '", @username, "'@'", @localhost, "';");
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;

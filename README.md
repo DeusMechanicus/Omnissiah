@@ -7,6 +7,11 @@ The resulting database is valuable in itself. But the ultimate goal is to automa
 ## Requirements
 This product requires Linux. We use Debian 12. But there should be no problem with other distributions either. MariaDB and PostgreSQL may be used as a database. All programs are written in python or shell. They require python 3.9 or later to work.
 ## Preparation
+Update Linux first:
+```
+sudo apt-get -y update
+sudo apt-get -y upgrade
+```
 If you are planning to use git then you need to install git client (if it's not already installed). In the case of Debian, this is done with the following command:
 ```
 sudo apt-get -y install git wget
