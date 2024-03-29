@@ -97,6 +97,19 @@ netbox_tables = {
 insert_raw_netbox_sql = {'mariadb':'INSERT IGNORE INTO {0} ({1}) VALUES ({2});',
     'pgsql':'INSERT INTO {0} ({1}) VALUES ({2}) ON CONFLICT DO NOTHING;'}
 
+def get_ipam_vlangroups(netbox):
+    vlangroups = []
+    offset = 0
+    while True:
+        try:
+            vlangroup = list(netbox.ipam.vlan_groups.all(limit=1, offset=offset))
+            if not vlangroup:
+                break
+            vlangroups.extend(vlangroup)
+        except:
+            pass
+        offset += 1
+    return vlangroups
 
 def getall(netbox):
     return {'tenancy_tenantgroup':netbox.tenancy.tenant_groups.all(), 'tenancy_tenant':netbox.tenancy.tenants.all(),
@@ -108,7 +121,7 @@ def getall(netbox):
         'dcim_virtualchassis':netbox.dcim.virtual_chassis.all(), 'dcim_device':netbox.dcim.devices.all(),
 #        'dcim_interface':getone(netbox.dcim.interfaces.all),
         'ipam_vrf':netbox.ipam.vrfs.all(),
-        'ipam_role':netbox.ipam.roles.all(), 'ipam_vlangroup':netbox.ipam.vlan_groups.all(),
+        'ipam_role':netbox.ipam.roles.all(), 'ipam_vlangroup':get_ipam_vlangroups(netbox),
         'ipam_vlan':netbox.ipam.vlans.all(), 'ipam_prefix':netbox.ipam.prefixes.all(),
         'ipam_iprange':netbox.ipam.ip_ranges.all(), 'ipam_ipaddress':netbox.ipam.ip_addresses.all()}
 

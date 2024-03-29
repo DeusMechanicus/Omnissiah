@@ -123,7 +123,6 @@ class OmniDB:
                 if self.log.level==logging.DEBUG:
                     self.log_program(action_query_started, query[1])
                 for i in range(query[4]):
-                    print(sql)
                     cur.execute(sql)
                     self.commit()
                 if self.log.level==logging.DEBUG:
