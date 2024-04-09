@@ -65,6 +65,12 @@ pip3 install mariadb
 pip3 install psycopg2-binary
 pip3 install numpy
 pip3 install torch
+pip3 install python-daemon
+pip3 install aiomultiprocess
+pip3 install redis
+pip3 install uvicorn
+pip3 install fastapi
+pip3 install onvif-zeep-async
 deactivate
 
 cp $srcpath/install/etc/systemd/system/* /etc/systemd/system/

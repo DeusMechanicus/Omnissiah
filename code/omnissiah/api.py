@@ -249,9 +249,12 @@ class ONVIF_API_Daemon(API_Daemon_async):
         self.save_values_redis(values['redis'])
 
     async def single_run(self):
-        zapi = ZbxAPI(self.zabbix_url, self.zbx_userpasstoken, self.log, mode=self.zbx_mode)
-        groupid = zapi.hostgroup.get(output=['groupid'], filter={'name':[self.zbx_camera_group]})[0]['groupid']
-        hosts = zapi.host.get(output=['hostid', 'status', 'maintenance_status'], selectInterfaces=['ip'], groupids=groupid)
+        try:
+            zapi = ZbxAPI(self.zabbix_url, self.zbx_userpasstoken, self.log, mode=self.zbx_mode)
+            groupid = zapi.hostgroup.get(output=['groupid'], filter={'name':[self.zbx_camera_group]})[0]['groupid']
+            hosts = zapi.host.get(output=['hostid', 'status', 'maintenance_status'], selectInterfaces=['ip'], groupids=groupid)
+        except:
+            hosts = []
         zbx_cameras = { h['interfaces'][0]['ip']:None for h in hosts if h['status']=='0' }
         ips = { ip for ip in self.cameras if ip not in zbx_cameras }
         for ip in ips:
