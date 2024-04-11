@@ -23,6 +23,9 @@ chmod 750 $logpath
 mkdir $homepath/models
 chown $usergroup $homepath/models
 chmod 750 $homepath/models
+mkdir $homepath/dumps
+chown $usergroup $homepath/dumps
+chmod 750 $homepath/dumps
 
 sudo -u $usergroup cp -r $srcpath/code/* $usrpath
 sudo -u $usergroup cp -r $srcpath/install/cfg/* $usrpath
