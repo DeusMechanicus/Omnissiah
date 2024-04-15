@@ -51,16 +51,18 @@ class RuckusSZAPI:
     def get_waps(self):
         waps = []
         headers = self.build_headers(self.sessionid)
-        r = requests.get(self.wap_url.format(self.ip, 0), verify=False, headers=headers,
+        r = requests.get(self.wap_url.format(self.ip, '0', '0'), verify=False, headers=headers,
             timeout=(self.timeout_connection, self.timeout_getpost))
         if r.status_code == 200:
             data = json.loads(r.text)
-            nwap = data['totalCount']
-            r = requests.get(self.wap_url.format(self.ip, nwap+1), verify=False, headers=headers,
-                timeout=(self.timeout_connection, self.timeout_getpost))
-            if r.status_code == 200:
-                return json.loads(r.text)['list']
-        return []
+            nwap = int(data['totalCount'])
+            for i in range(0, nwap, 1000):
+                r = requests.get(self.wap_url.format(self.ip, '1000', str(i)), verify=False, headers=headers,
+                    timeout=(self.timeout_connection, self.timeout_getpost))
+                if r.status_code == 200:
+                    data = json.loads(r.text)
+                    waps.extend(data['list'])
+        return waps
 
     def get_wap_operational(self, mac):
         r = requests.get(self.wap_oper_url.format(self.ip, mac), verify=False, headers=self.build_headers(self.sessionid),

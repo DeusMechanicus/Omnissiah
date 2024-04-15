@@ -24,7 +24,7 @@ mist_get_repeat = 3
 mist_get_pause = 1.0
 
 ruckussz_login_url = 'https://{0}:8443/wsg/api/public/v6_1/session'
-ruckussz_wap_url = 'https://{0}:8443/wsg/api/public/v6_1/aps?listSize={1}'
+ruckussz_wap_url = 'https://{0}:8443/wsg/api/public/v6_1/aps?listSize={1}&index={2}'
 ruckussz_client_url = 'https://{0}:8443/wsg/api/public/v6_1/aps/{1}/operational/client?listSize=1000'
 ruckussz_wap_oper_url = 'https://{0}:8443/wsg/api/public/v6_1/aps/{1}/operational/summary'
 ruckussz_timeout_connection = 10
